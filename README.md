@@ -77,3 +77,6 @@ If you have any requests or suggestion for the project please let me know via [G
 ## Contributing Code?
 
 If you would like to have some of your code included; whether a new feature, a cleaned up feature, a bugfix, or whatever. Please open up a [Pull Request][pulls]!
+
+[issues]: https://github.com/rroylance/phaser-npm-webpack-typescript-starter-project/issues
+[pulls]: https://github.com/rroylance/phaser-npm-webpack-typescript-starter-project/pulls
