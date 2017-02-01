@@ -1,0 +1,11 @@
+# IntelliJ
+.idea
+
+# Node.js
+node_modules
+
+# Game
+dist
+
+# OSX
+.DS_Store
