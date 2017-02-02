@@ -1,6 +1,6 @@
 {
   "name": "phaser-npm-webpack-typescript-starter-project",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "watch": {
     "build:dev": {
       "patterns": [
@@ -12,17 +12,11 @@
     }
   },
   "scripts": {
-    "mkdir:dist": "mkdirp dist",
-    "clean:js:dev": "del-cli dist/game.js dist/game.js.map",
-    "clean:js:dist": "del-cli dist/game.min.js",
-    "clean:assets": "del-cli dist/assets/**",
-    "clean:html": "del-cli dist/**/*.html",
     "lint": "tslint src/**/*.ts",
-    "copy:assets": "npm run mkdir:dist && npm run clean:assets && ncp assets dist/assets",
-    "pack:dev": "npm run clean:html && webpack --config webpack.dev.config.js --progress --colors && npm run clean:js:dist",
-    "pack:dist": "npm run clean:html && webpack --config webpack.dist.config.js --progress --colors && npm run clean:js:dev",
-    "build:dev": "echo-cli 'Building DEV ...' && npm run lint && npm run copy:assets && npm run pack:dev && echo-cli 'Build Complete ✔'",
-    "build:dist": "echo-cli 'Building DIST ...' && npm run lint && npm run copy:assets && npm run pack:dist && echo-cli 'Build Complete ✔'",
+    "pack:dev": "webpack --config webpack.dev.config.js --progress --colors",
+    "pack:dist": "webpack --config webpack.dist.config.js --progress --colors",
+    "build:dev": "echo-cli 'Building DEV ...' && npm run lint && npm run pack:dev && echo-cli 'Build Complete ✔'",
+    "build:dist": "echo-cli 'Building DIST ...' && npm run lint && npm run pack:dist && echo-cli 'Build Complete ✔'",
     "watch": "npm-watch",
     "live-server": "live-server --open=dist --port=9000 --watch=dist/**/*.js --ignore=dist/**/*.js.map"
   },
@@ -37,18 +31,18 @@
   "homepage": "https://github.com/rroylance/phaser-npm-webpack-typescript-starter-project#readme",
   "devDependencies": {
     "@types/node": "7.0.4",
-    "del-cli": "0.2.1",
+    "clean-webpack-plugin": "0.1.15",
+    "copy-webpack-plugin": "4.0.1",
     "echo-cli": "1.0.8",
     "git-revision-webpack-plugin": "2.4.1",
     "html-webpack-plugin": "2.28.0",
     "live-server": "1.2.0",
-    "mkdirp": "0.5.1",
-    "ncp": "2.0.0",
     "npm-watch": "0.1.8",
     "phaser-ce": "2.7.3",
     "ts-loader": "2.0.0",
     "tslint": "4.4.2",
     "typescript": "2.1.5",
-    "webpack": "2.2.1"
+    "webpack": "2.2.1",
+    "webpack-dev-server": "1.16.3"
   }
 }

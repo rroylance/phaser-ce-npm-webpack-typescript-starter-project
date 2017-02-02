@@ -2,6 +2,8 @@ var webpack = require('webpack');
 var path = require('path');
 var GitRevisionPlugin = require('git-revision-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
+var CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
     entry: './src/app.ts',
@@ -18,9 +20,16 @@ module.exports = {
             'DEBUG': true,
             'GIT_REVISION': JSON.stringify(new GitRevisionPlugin().commithash())
         }),
+        new CleanWebpackPlugin([
+            'dist'
+        ]),
         new HtmlWebpackPlugin({
             title: 'Phaser NPM Webpack TypeScript Starter Project!'
-        })
+        }),
+        new CopyWebpackPlugin([{
+            from: './assets',
+            to: './assets'
+        }])
     ],
     module: {
         noParse: [
