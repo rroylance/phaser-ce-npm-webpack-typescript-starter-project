@@ -1,6 +1,7 @@
 var webpack = require('webpack');
 var path = require('path');
 var GitRevisionPlugin = require('git-revision-webpack-plugin');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: './src/app.ts',
@@ -16,6 +17,9 @@ module.exports = {
         new webpack.DefinePlugin({
             'DEBUG': true,
             'GIT_REVISION': JSON.stringify(new GitRevisionPlugin().commithash())
+        }),
+        new HtmlWebpackPlugin({
+            title: 'Phaser NPM Webpack TypeScript Starter Project!'
         })
     ],
     module: {
