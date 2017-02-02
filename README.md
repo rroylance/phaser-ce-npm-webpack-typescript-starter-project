@@ -34,7 +34,9 @@ Run:
 
 ```npm run watch```
 
-This will start a watch process, so you can change the source and the process will recompile and refresh the browser. Any changes to any files in assets/ or src/ will trigger the game to be recompiled which will cause the game to be reloaded in the browser to show your changes.
+This will start a watch process, so you can change the source or assets (anything in src/ or assets/) and the process will trigger a compilation of the game.
+
+###### Note: If you have run the development sever (step 5) this re-compilation will trigger a refresh in the browser as well.
 
 ## 5. Run the development server:
 
