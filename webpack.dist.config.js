@@ -11,6 +11,7 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
         filename: 'game.min.js'
     },
+    devtool: 'source-map',
     resolve: {
         extensions: ['.ts', '.js']
     },
@@ -36,6 +37,17 @@ module.exports = {
             to: './assets'
         }])
     ],
+    devServer: {
+        contentBase: path.join(__dirname, "dist"),
+        compress: true,
+        port: 9000,
+        inline: true,
+        watchOptions: {
+            aggregateTimeout: 300,
+            poll: true,
+            ignored: /node_modules/
+        }
+    },
     module: {
         noParse: [
             /phaser-ce/

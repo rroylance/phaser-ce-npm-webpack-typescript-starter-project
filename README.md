@@ -15,7 +15,7 @@ Run:
 
 ```git clone https://github.com/rroylance/phaser-npm-webpack-typescript-starter-project.git```
 
-## 2. Install node.js and npm:
+## 2. Install node.js and npm (npm is included and installed with node.js):
 
 https://nodejs.org/en/
 
@@ -28,25 +28,19 @@ Run:
 
 ```npm install```
 
-## 4. Run the watch process:
+## 4. Run the dev server:
 
-Run:
+Run to use the dev build while developing:
 
-```npm run watch```
+```npm run server:dev```
 
-This will start a watch process, so you can change the source or assets (anything in src/ or assets/) and the process will trigger a compilation of the game.
+Run to use the dist build while developing 
 
-###### Note: If you have run the development sever (step 5) this re-compilation will trigger a refresh in the browser as well.
+```npm run server:dist```
 
-## 5. Run the development server:
+###### The only real reason I can think of to use the dist server is if the minification process is breaking something in your game and you need to test using the minified version, or something you excluded with the DEBUG flag shouldn't have been excluded.
 
-Run:
-
-```npm run live-server```
-
-This will run a server so you can run the game in a browser.
-
-Open your browser and enter localhost:9000/dist/ into the address bar (if it didn't open automatically/you closed the tab or window).
+This will run a server that serves your built game straight to the browser and will be built and reloaded automatically anytime a change is detected.
 
 ## Build for testing/developing/debugging:
 

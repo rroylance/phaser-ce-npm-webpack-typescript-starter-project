@@ -9,6 +9,9 @@ export default class Boot extends Phaser.State {
         // Do anything here that you need to be setup immediately, before the game actually starts doing anything.
         // Orientation forcing, disabling multitouch, pause on focus lost... for example
 
+        this.game.scale.pageAlignHorizontally = true;
+        this.game.scale.pageAlignVertically = true;
+
         if (this.game.device.desktop) {
             // Any desktop specific stuff here
         } else {
