@@ -10,7 +10,7 @@ export default class Preloader extends Phaser.State {
         this.preloadFrameSprite = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'preload_frame');
         this.preloadFrameSprite.anchor.setTo(0.5);
 
-        this.game.load.image('phaser_logo', 'assets/images/phaser_logo.png');
+        this.game.load.image('background', 'assets/images/background.png');
 
         this.game.load.setPreloadSprite(this.preloadBarSprite);
     }

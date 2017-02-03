@@ -1,3 +1,5 @@
+import * as Utils from '../utils/utils';
+
 export default class Boot extends Phaser.State {
     public preload(): void {
         // Load any assets you need for your preloader state here.
@@ -7,8 +9,14 @@ export default class Boot extends Phaser.State {
 
     public create(): void {
         // Do anything here that you need to be setup immediately, before the game actually starts doing anything.
-        // Orientation forcing, disabling multitouch, pause on focus lost... for example
 
+        // Uncomment the following to disable multitouch
+        //this.input.maxPointers = 1;
+
+        let screenMetrics: Utils.ScreenMetrics = Utils.ScreenUtils.screenMetrics;
+
+        this.game.scale.scaleMode = Phaser.ScaleManager.USER_SCALE;
+        this.game.scale.setUserScale(screenMetrics.scaleX, screenMetrics.scaleY);
         this.game.scale.pageAlignHorizontally = true;
         this.game.scale.pageAlignVertically = true;
 
@@ -16,6 +24,10 @@ export default class Boot extends Phaser.State {
             // Any desktop specific stuff here
         } else {
             // Any mobile specific stuff here
+
+            // Comment the following and uncomment the line after that to force portrait mode instead of landscape
+            this.game.scale.forceOrientation(true, false);
+            //this.game.scale.forceOrientation(false, true);
         }
 
         // Use DEBUG to wrap code that should only be included in a DEBUG build of the game

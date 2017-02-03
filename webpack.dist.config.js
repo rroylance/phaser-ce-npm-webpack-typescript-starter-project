@@ -30,7 +30,8 @@ module.exports = {
             screw_ie8: true
         }),
         new HtmlWebpackPlugin({
-            title: 'Phaser NPM Webpack TypeScript Starter Project!'
+            title: 'Phaser NPM Webpack TypeScript Starter Project!',
+            template: './templates/index.ejs'
         }),
         new CopyWebpackPlugin([{
             from: './assets',

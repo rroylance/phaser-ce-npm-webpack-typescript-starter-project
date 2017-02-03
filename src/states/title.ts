@@ -2,7 +2,7 @@ export default class Title extends Phaser.State {
     private logoSprite: Phaser.Sprite = null;
 
     public preload(): void {
-        this.logoSprite = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'phaser_logo');
+        this.logoSprite = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'background');
         this.logoSprite.anchor.setTo(0.5);
     }
 

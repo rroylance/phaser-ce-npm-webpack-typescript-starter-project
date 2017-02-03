@@ -23,7 +23,8 @@ module.exports = {
             'dist'
         ]),
         new HtmlWebpackPlugin({
-            title: 'Phaser NPM Webpack TypeScript Starter Project!'
+            title: 'DEV MODE: Phaser NPM Webpack TypeScript Starter Project!',
+            template: './templates/index.ejs'
         }),
         new CopyWebpackPlugin([{
             from: './assets',

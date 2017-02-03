@@ -5,6 +5,7 @@
 import Boot from './states/boot';
 import Preloader from './states/preloader';
 import Title from './states/title';
+import * as Utils from './utils/utils';
 
 class App extends Phaser.Game {
     constructor(config: Phaser.IGameConfig) {
@@ -19,9 +20,11 @@ class App extends Phaser.Game {
 }
 
 window.onload = () => {
+    let screenMetrics: Utils.ScreenMetrics = Utils.ScreenUtils.calculateScreenMetrics(800, 500);
+
     let gameConfig: Phaser.IGameConfig = {
-        width: window.innerWidth,
-        height: window.innerHeight,
+        width: screenMetrics.gameWidth,
+        height: screenMetrics.gameHeight,
         renderer: Phaser.AUTO,
         parent: '',
         resolution: 1
