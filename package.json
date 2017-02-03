@@ -1,12 +1,11 @@
 {
   "name": "phaser-npm-webpack-typescript-starter-project",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "scripts": {
-    "lint": "tslint src/**/*.ts",
-    "pack:dev": "webpack --config webpack.dev.config.js --progress --colors",
-    "pack:dist": "webpack --config webpack.dist.config.js --progress --colors",
-    "build:dev": "echo-cli 'Building DEV ...' && npm run lint && npm run pack:dev && echo-cli 'Build Complete ✔'",
-    "build:dist": "echo-cli 'Building DIST ...' && npm run lint && npm run pack:dist && echo-cli 'Build Complete ✔'",
+    "webpack:dev": "webpack --config webpack.dev.config.js --progress --colors",
+    "webpack:dist": "webpack --config webpack.dist.config.js --progress --colors",
+    "build:dev": "echo-cli 'Building DEV ...' && npm run webpack:dev && echo-cli 'Build Complete ✔'",
+    "build:dist": "echo-cli 'Building DIST ...' && npm run webpack:dist && echo-cli 'Build Complete ✔'",
     "server:dev": "webpack-dev-server --config webpack.dev.config.js --open",
     "server:dist": "webpack-dev-server --config webpack.dist.config.js --open"
   },
@@ -29,6 +28,7 @@
     "phaser-ce": "2.7.3",
     "ts-loader": "2.0.0",
     "tslint": "4.4.2",
+    "tslint-loader": "3.3.0",
     "typescript": "2.1.5",
     "webfontloader": "1.6.27",
     "webpack": "2.2.1",

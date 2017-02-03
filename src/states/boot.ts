@@ -11,7 +11,7 @@ export default class Boot extends Phaser.State {
         // Do anything here that you need to be setup immediately, before the game actually starts doing anything.
 
         // Uncomment the following to disable multitouch
-        //this.input.maxPointers = 1;
+        // this.input.maxPointers = 1;
 
         let screenMetrics: Utils.ScreenMetrics = Utils.ScreenUtils.screenMetrics;
 
@@ -27,7 +27,7 @@ export default class Boot extends Phaser.State {
 
             // Comment the following and uncomment the line after that to force portrait mode instead of landscape
             this.game.scale.forceOrientation(true, false);
-            //this.game.scale.forceOrientation(false, true);
+            // this.game.scale.forceOrientation(false, true);
         }
 
         // Use DEBUG to wrap code that should only be included in a DEBUG build of the game

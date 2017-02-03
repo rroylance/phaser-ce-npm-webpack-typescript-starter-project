@@ -46,7 +46,8 @@ module.exports = {
         noParse: [
             /phaser-ce/
         ],
-        loaders: [
+        rules: [
+            { test: /\.ts$/, enforce: 'pre', loader: 'tslint-loader' },
             { test: /\.ts$/, loader: 'ts-loader' }
         ]
     }
