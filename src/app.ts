@@ -2,12 +2,12 @@
 (global as any).PIXI = require('../node_modules/phaser-ce/build/custom/pixi.js');
 (global as any).Phaser = require('../node_modules/phaser-ce/build/custom/phaser-split.js');
 
+import * as WebFontLoader from 'webfontloader';
+
 import Boot from './states/boot';
 import Preloader from './states/preloader';
 import Title from './states/title';
 import * as Utils from './utils/utils';
-
-import WebFontLoader = require('webfontloader');
 
 class App extends Phaser.Game {
     constructor(config: Phaser.IGameConfig) {
