@@ -40,8 +40,8 @@ export class ScreenUtils {
         // Just to give some explanation as to the numbers and colors in the included background;
         // The GREEN is the safe area and will be displayed fully on any device and is based on 16:10 aspect ratio, build your actual gameplay here
         // The YELLOW is the extra area that will be visible on devices with a 3:2 aspect ratio (iPhone 4S and below)
-        // The RED is the extra area that will be visible on devices with a 4:3 aspect ratio (iPads)
-        // The BLUE is the extra area that will be visible on devices with a 16:9 aspect ratio (iPhone 5 and above) (this is probably the most common ratio overall...)
+        // The BLUE is the extra area that will be visible on devices with a 4:3 aspect ratio (iPads)
+        // The RED is the extra area that will be visible on devices with a 16:9 aspect ratio (iPhone 5 and above) (this is probably the most common ratio overall...)
         // The GREY area will most likely never be seen, unless some device has a really odd aspect ratio (and with Android, I wouldn't be surprised if there is a few out there)
 
         this.screenMetrics = new ScreenMetrics();
@@ -63,19 +63,18 @@ export class ScreenUtils {
         // Calculate the max width and max height if not provided; ratios are based off iPad (4:3) and iPhone 5+ (16:9) as the extremes in both width and height
         if (!maxGameWidth || !maxGameHeight) {
             if (orientation === ScreenOrientation.LANDSCAPE) {
-                this.screenMetrics.maxGameWidth = Math.round(this.screenMetrics.defaultGameWidth * (888 / 800));
-                this.screenMetrics.maxGameHeight = Math.round(this.screenMetrics.defaultGameHeight * (600 / 500));
+                this.screenMetrics.maxGameWidth = Math.round(this.screenMetrics.defaultGameWidth * (MAX_GAME_WIDTH / DEFAULT_GAME_WIDTH));
+                this.screenMetrics.maxGameHeight = Math.round(this.screenMetrics.defaultGameHeight * (MAX_GAME_HEIGHT / DEFAULT_GAME_HEIGHT));
             } else {
-                this.screenMetrics.maxGameWidth = Math.round(this.screenMetrics.defaultGameWidth * (600 / 500));
-                this.screenMetrics.maxGameHeight = Math.round(this.screenMetrics.defaultGameHeight * (888 / 800));
+                this.screenMetrics.maxGameWidth = Math.round(this.screenMetrics.defaultGameWidth * (MAX_GAME_HEIGHT / DEFAULT_GAME_HEIGHT));
+                this.screenMetrics.maxGameHeight = Math.round(this.screenMetrics.defaultGameHeight * (MAX_GAME_WIDTH / DEFAULT_GAME_WIDTH));
             }
         } else {
             this.screenMetrics.maxGameWidth = maxGameWidth;
             this.screenMetrics.maxGameHeight = maxGameHeight;
         }
 
-        // Calculate game width and height based off the default aspect ratio of 16:10 (800x500)
-        let defaultAspectRatio: number = ((orientation === ScreenOrientation.LANDSCAPE) ? (800 / 500) : (500 / 800));
+        let defaultAspectRatio: number = ((orientation === ScreenOrientation.LANDSCAPE) ? (DEFAULT_GAME_WIDTH / DEFAULT_GAME_HEIGHT) : (DEFAULT_GAME_HEIGHT / DEFAULT_GAME_WIDTH));
         let windowAspectRatio: number = (this.screenMetrics.windowWidth / this.screenMetrics.windowHeight);
 
         if (windowAspectRatio > defaultAspectRatio) {

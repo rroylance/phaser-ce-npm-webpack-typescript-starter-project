@@ -1,13 +1,15 @@
 {
   "name": "phaser-npm-webpack-typescript-starter-project",
-  "version": "1.1.3",
+  "version": "1.2.0",
   "scripts": {
     "webpack:dev": "webpack --config webpack.dev.config.js --progress --colors",
     "webpack:dist": "webpack --config webpack.dist.config.js --progress --colors",
     "build:dev": "echo-cli 'Building DEV ...' && npm run webpack:dev && echo-cli 'Build Complete ✔'",
     "build:dist": "echo-cli 'Building DIST ...' && npm run webpack:dist && echo-cli 'Build Complete ✔'",
     "server:dev": "webpack-dev-server --config webpack.dev.config.js --open",
-    "server:dist": "webpack-dev-server --config webpack.dist.config.js --open"
+    "server:dist": "webpack-dev-server --config webpack.dist.config.js --open",
+    "setupGameSize": "node ./scripts/setupGameSize.js",
+    "postinstall": "npm run setupGameSize"
   },
   "repository": {
     "type": "git",
@@ -21,11 +23,14 @@
   "devDependencies": {
     "@types/node": "7.0.4",
     "clean-webpack-plugin": "0.1.15",
+    "commander": "2.9.0",
     "copy-webpack-plugin": "4.0.1",
     "echo-cli": "1.0.8",
     "git-revision-webpack-plugin": "2.4.1",
     "html-webpack-plugin": "2.28.0",
     "phaser-ce": "2.7.3",
+    "pngjs-image": "0.11.7",
+    "shelljs": "0.7.6",
     "ts-loader": "2.0.0",
     "tslint": "4.4.2",
     "tslint-loader": "3.3.0",

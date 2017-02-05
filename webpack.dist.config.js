@@ -18,7 +18,11 @@ module.exports = {
     plugins: [
         new webpack.DefinePlugin({
             'DEBUG': false,
-            'GIT_REVISION': JSON.stringify(new GitRevisionPlugin().commithash())
+            'GIT_REVISION': JSON.stringify(new GitRevisionPlugin().commithash()),
+            'DEFAULT_GAME_WIDTH': /*[[DEFAULT_GAME_WIDTH*/800/*DEFAULT_GAME_WIDTH]]*/,
+            'DEFAULT_GAME_HEIGHT': /*[[DEFAULT_GAME_HEIGHT*/500/*DEFAULT_GAME_HEIGHT]]*/,
+            'MAX_GAME_WIDTH': /*[[MAX_GAME_WIDTH*/888/*MAX_GAME_WIDTH]]*/,
+            'MAX_GAME_HEIGHT': /*[[MAX_GAME_HEIGHT*/600/*MAX_GAME_HEIGHT]]*/
         }),
         new CleanWebpackPlugin([
             'dist'

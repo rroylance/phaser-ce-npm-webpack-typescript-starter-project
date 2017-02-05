@@ -9,3 +9,6 @@ dist
 
 # OSX
 .DS_Store
+
+# Visual Studio
+.vs

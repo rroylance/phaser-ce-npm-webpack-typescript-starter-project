@@ -31,8 +31,21 @@ export default class Boot extends Phaser.State {
         }
 
         // Use DEBUG to wrap code that should only be included in a DEBUG build of the game
-        // Use GIT_REVISION as an identifier when testing builds
-        console.log('DEBUG: ' + DEBUG, 'GIT_REVISION: ' + GIT_REVISION);
+        console.log('DEBUG: ' + DEBUG +
+            // Use GIT_REVISION as an identifier when testing builds
+            '\nGIT_REVISION: ' + GIT_REVISION +
+            // DEFAULT_GAME_WIDTH is the safe area width of the game
+            '\nDEFAULT_GAME_WIDTH: ' + DEFAULT_GAME_WIDTH +
+            // DEFAULT_GAME_HEIGHT is the safe area height of the game
+            '\nDEFAULT_GAME_HEIGHT: ' + DEFAULT_GAME_HEIGHT +
+            // MAX_GAME_WIDTH is the max width of the game
+            '\nMAX_GAME_WIDTH: ' + MAX_GAME_WIDTH +
+            // MAX_GAME_HEIGHT is the max height of the game
+            '\nMAX_GAME_HEIGHT: ' + MAX_GAME_HEIGHT +
+            // game.width is the actual width of the game
+            '\ngame.width: ' + this.game.width +
+            // game.height is the actual height of the game
+            '\ngame.height: ' + this.game.height);
 
         this.game.state.start('preloader');
     }
