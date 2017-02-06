@@ -1,6 +1,6 @@
-(global as any).p2 = require('../node_modules/phaser-ce/build/custom/p2.js');
-(global as any).PIXI = require('../node_modules/phaser-ce/build/custom/pixi.js');
-(global as any).Phaser = require('../node_modules/phaser-ce/build/custom/phaser-split.js');
+(global as any).p2 = require('p2');
+(global as any).PIXI = require('pixi');
+(global as any).Phaser = require('phaser');
 
 import * as WebFontLoader from 'webfontloader';
 

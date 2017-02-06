@@ -6,13 +6,18 @@ var CopyWebpackPlugin = require('copy-webpack-plugin');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
-    entry: './src/app.ts',
+    entry: path.join(__dirname, 'src/app.ts'),
     output: {
-        path: path.resolve(__dirname, 'dist'),
+        path: path.join(__dirname, 'dist'),
         filename: 'game.js'
     },
     resolve: {
-        extensions: ['.ts', '.js']
+        extensions: ['.ts', '.js'],
+        alias: {
+            'pixi': path.join(__dirname, 'node_modules/phaser-ce/build/custom/pixi.js'),
+            'phaser': path.join(__dirname, 'node_modules/phaser-ce/build/custom/phaser-split.js'),
+            'p2': path.join(__dirname, 'node_modules/phaser-ce/build/custom/p2.js')
+        }
     },
     plugins: [
         new webpack.DefinePlugin({
@@ -24,19 +29,19 @@ module.exports = {
             'MAX_GAME_HEIGHT': /*[[MAX_GAME_HEIGHT*/600/*MAX_GAME_HEIGHT]]*/
         }),
         new CleanWebpackPlugin([
-            'dist'
+            path.join(__dirname, 'dist')
         ]),
         new HtmlWebpackPlugin({
             title: 'DEV MODE: Phaser NPM Webpack TypeScript Starter Project!',
-            template: './templates/index.ejs'
+            template: path.join(__dirname, 'templates/index.ejs')
         }),
         new CopyWebpackPlugin([{
-            from: './assets',
-            to: './assets'
+            from: path.join(__dirname, 'assets'),
+            to: 'assets'
         }])
     ],
     devServer: {
-        contentBase: path.join(__dirname, "dist"),
+        contentBase: path.join(__dirname, 'dist'),
         compress: true,
         port: 9000,
         inline: true,
