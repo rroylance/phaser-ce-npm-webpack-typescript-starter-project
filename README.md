@@ -31,7 +31,13 @@
 # Setup
 To use this you’ll need to install a few things before you have a working copy of the project. But once you have node.js installed it only takes a few seconds and a couple commands to get going.
 
-## 1. Clone this repo:
+## 1. Download or Clone this repo:
+
+##### 1.1 Download
+
+Download the latest zip/tar.gz from [GitHub Releases][releases], extract it to where you want your project to be.
+
+##### 1.2 Clone
 
 Navigate into your workspace directory.
 
@@ -118,3 +124,4 @@ If you would like to have some of your code included; whether a new feature, a c
 
 [issues]: https://github.com/rroylance/phaser-npm-webpack-typescript-starter-project/issues
 [pulls]: https://github.com/rroylance/phaser-npm-webpack-typescript-starter-project/pulls
+[releases]: https://github.com/rroylance/phaser-npm-webpack-typescript-starter-project/releases
