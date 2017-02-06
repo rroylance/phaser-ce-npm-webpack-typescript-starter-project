@@ -1,6 +1,6 @@
 var PNGImage = require('pngjs-image');
 var commander = require('commander');
-require('shelljs/global');
+var shell = require('shelljs');
 
 var defaultWidth = 800;
 var defaultHeight = 500;
@@ -76,14 +76,16 @@ image.fillRect(0, maxHeightDifferenceHalf + baseHeight, maxWidthDifferenceHalf, 
 image.fillRect(maxWidthDifferenceHalf + baseWidth, 0, maxWidthDifferenceHalf, maxHeightDifferenceHalf, greyColor);
 image.fillRect(maxWidthDifferenceHalf + baseWidth, maxHeightDifferenceHalf + baseHeight, maxWidthDifferenceHalf, maxHeightDifferenceHalf, greyColor);
 
-ls('webpack.*.config.js').forEach(function (file) {
-    sed('-i', /\/\*\[\[DEFAULT_GAME_WIDTH\*\/[0-9]*\/\*DEFAULT_GAME_WIDTH\]\]\*\//, '/*[[DEFAULT_GAME_WIDTH*/' + baseWidth + '/*DEFAULT_GAME_WIDTH]]*/', file);
-    sed('-i', /\/\*\[\[DEFAULT_GAME_HEIGHT\*\/[0-9]*\/\*DEFAULT_GAME_HEIGHT\]\]\*\//, '/*[[DEFAULT_GAME_HEIGHT*/' + baseHeight + '/*DEFAULT_GAME_HEIGHT]]*/', file);
-    sed('-i', /\/\*\[\[MAX_GAME_WIDTH\*\/[0-9]*\/\*MAX_GAME_WIDTH\]\]\*\//, '/*[[MAX_GAME_WIDTH*/' + maxWidth + '/*MAX_GAME_WIDTH]]*/', file);
-    sed('-i', /\/\*\[\[MAX_GAME_HEIGHT\*\/[0-9]*\/\*MAX_GAME_HEIGHT\]\]\*\//, '/*[[MAX_GAME_HEIGHT*/' + maxHeight + '/*MAX_GAME_HEIGHT]]*/', file);
+shell.ls('webpack.*.config.js').forEach(function (file) {
+    shell.sed('-i', /\/\*\[\[DEFAULT_GAME_WIDTH\*\/[0-9]*\/\*DEFAULT_GAME_WIDTH\]\]\*\//, '/*[[DEFAULT_GAME_WIDTH*/' + baseWidth + '/*DEFAULT_GAME_WIDTH]]*/', file);
+    shell.sed('-i', /\/\*\[\[DEFAULT_GAME_HEIGHT\*\/[0-9]*\/\*DEFAULT_GAME_HEIGHT\]\]\*\//, '/*[[DEFAULT_GAME_HEIGHT*/' + baseHeight + '/*DEFAULT_GAME_HEIGHT]]*/', file);
+    shell.sed('-i', /\/\*\[\[MAX_GAME_WIDTH\*\/[0-9]*\/\*MAX_GAME_WIDTH\]\]\*\//, '/*[[MAX_GAME_WIDTH*/' + maxWidth + '/*MAX_GAME_WIDTH]]*/', file);
+    shell.sed('-i', /\/\*\[\[MAX_GAME_HEIGHT\*\/[0-9]*\/\*MAX_GAME_HEIGHT\]\]\*\//, '/*[[MAX_GAME_HEIGHT*/' + maxHeight + '/*MAX_GAME_HEIGHT]]*/', file);
 });
 
 if (!commander.noPng) {
+    shell.mkdir('-p', 'assets/images/');
+
     image.writeImage('./assets/images/background_template.png', function (error) {
         if (error) {
             throw error;
