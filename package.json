@@ -9,7 +9,7 @@
     "server:dev": "webpack-dev-server --config webpack.dev.config.js --open",
     "server:dist": "webpack-dev-server --config webpack.dist.config.js --open",
     "setupGameSize": "node ./scripts/setupGameSize.js",
-    "generateAssetsClass": "node ./scripts/generateAssetsClass.js",
+    "assets": "node ./scripts/generateAssetsClass.js",
     "postinstall": "npm run setupGameSize"
   },
   "repository": {

@@ -28,12 +28,19 @@ var loaderTypes = {
     atlas: {},
     audio: {},
     audiosprite: {},
-    data: {}
+    font: {},
+    json: {},
+    xml: {},
+    text: {},
+    misc: {}
 }
 
 var audioExtensions = ['aac', 'flac', 'mp3', 'mp4', 'ogg', 'wav', 'webm'];
-var imageExtensions = ['bmp', 'gif', 'jpg', 'jpeg', 'png', 'webp', 'svg'];
-var dataExtensions = ['json'];
+var imageExtensions = ['bmp', 'gif', 'jpg', 'jpeg', 'png', 'webp'];
+var fontExtensions = ['eot', 'otf', 'svg', 'ttf', 'woff', 'woff2'];
+var jsonExtensions = ['json'];
+var xmlExtensions = ['xml'];
+var textExtensions = ['txt'];
 
 shell.ls('assets/**/*.*').forEach(function (file) {
     var filePath = file.replace('assets/', '').split('.');
@@ -43,35 +50,46 @@ shell.ls('assets/**/*.*').forEach(function (file) {
 });
 
 for (var i in gameAssets) {
-    var audioType = findExtension(gameAssets[i], audioExtensions);
     var imageType = findExtension(gameAssets[i], imageExtensions);
-    var dataType = findExtension(gameAssets[i], dataExtensions);
+    var audioType = findExtension(gameAssets[i], audioExtensions);
+    var fontType = findExtension(gameAssets[i], fontExtensions);
+    var jsonType = findExtension(gameAssets[i], jsonExtensions);
+    var xmlType = findExtension(gameAssets[i], xmlExtensions);
+    var textType = findExtension(gameAssets[i], textExtensions);
 
-    if (audioType) {
-        if (dataType) {
+    if (fontType) {
+        //loaderTypes.font[i] = gameAssets[i];
+    } else if (audioType) {
+        if (jsonType) {
             loaderTypes.audiosprite[i] = gameAssets[i];
         } else {
             loaderTypes.audio[i] = gameAssets[i];
         }
     } else if (imageType) {
-        if (dataType) {
+        if (jsonType || xmlType) {
             loaderTypes.atlas[i] = gameAssets[i];
         } else {
             loaderTypes.image[i] = gameAssets[i];
         }
-    } else if (dataType) {
-        loaderTypes.data[i] = gameAssets[i];
+    } else if (jsonType) {
+        loaderTypes.json[i] = gameAssets[i];
+    } else if (xmlType) {
+        loaderTypes.xml[i] = gameAssets[i];
+    } else if (textType) {
+        loaderTypes.text[i] = gameAssets[i];
+    } else {
+        loaderTypes.misc[i] = gameAssets[i];
     }
 }
-
-//shell.ShellString(JSON.stringify(loaderTypes)).to('assets.json');
 
 var assetsClassFile = 'src/assets.ts';
 shell.rm('-f', assetsClassFile);
 
-shell.ShellString('export namespace Images {').toEnd(assetsClassFile);
+shell.ShellString('/* AUTO GENERATED FILE. DO NOT MODIFY. YOU WILL LOSE YOUR CHANGES ON BUILD. */\n\n').to(assetsClassFile);
+
+shell.ShellString('export namespace Images {\n    class IExistSoTheBuildDoesntFailWithAnEmptyNamespace {}').toEnd(assetsClassFile);
 for (var i in loaderTypes.image) {
-    shell.ShellString('\n    export class ' + toPascalCase(i) + ' {').toEnd(assetsClassFile);
+    shell.ShellString('\n\n    export class ' + toPascalCase(i) + ' {').toEnd(assetsClassFile);
     shell.ShellString('\n        static getName(): string { return \'' + i.split('/').pop() + '\'; };\n').toEnd(assetsClassFile);
 
     for (var t in loaderTypes.image[i]) {
@@ -82,22 +100,33 @@ for (var i in loaderTypes.image) {
 }
 shell.ShellString('\n}\n\n').toEnd(assetsClassFile);
 
-shell.ShellString('export namespace Atlases {').toEnd(assetsClassFile);
+shell.ShellString('export namespace Atlases {\n    class IExistSoTheBuildDoesntFailWithAnEmptyNamespace {}').toEnd(assetsClassFile);
 for (var i in loaderTypes.atlas) {
-    shell.ShellString('\n    export class ' + toPascalCase(i) + ' {').toEnd(assetsClassFile);
+    shell.ShellString('\n\n    export class ' + toPascalCase(i) + ' {').toEnd(assetsClassFile);
     shell.ShellString('\n        static getName(): string { return \'' + i.split('/').pop() + '\'; };\n').toEnd(assetsClassFile);
 
     for (var t in loaderTypes.atlas[i]) {
-        shell.ShellString('\n        static get' + loaderTypes.atlas[i][t].toUpperCase() + '(): string { return \'assets/' + i + '.' + loaderTypes.atlas[i][t] + '\'; };').toEnd(assetsClassFile);
+        var type = '';
+
+        if (jsonExtensions.indexOf(loaderTypes.atlas[i][t]) !== -1) {
+            if (shell.grep(/"frames":\s*(\[)/g, ('assets/' + i + '.' + loaderTypes.atlas[i][t])).length > 1) {
+                type = 'Array';
+            } else if (shell.grep(/"frames":\s*(\{)/g, ('assets/' + i + '.' + loaderTypes.atlas[i][t])).length > 1) {
+                type = 'Hash';
+            }
+        } else if (xmlExtensions.indexOf(loaderTypes.atlas[i][t]) !== -1) {
+            type = 'XML';
+        }
+        shell.ShellString('\n        static get' + loaderTypes.atlas[i][t].toUpperCase() + type + '(): string { return \'assets/' + i + '.' + loaderTypes.atlas[i][t] + '\'; };').toEnd(assetsClassFile);
     }
 
     shell.ShellString('\n    }').toEnd(assetsClassFile);
 }
 shell.ShellString('\n}\n\n').toEnd(assetsClassFile);
 
-shell.ShellString('export namespace Audio {').toEnd(assetsClassFile);
+shell.ShellString('export namespace Audio {\n    class IExistSoTheBuildDoesntFailWithAnEmptyNamespace {}').toEnd(assetsClassFile);
 for (var i in loaderTypes.audio) {
-    shell.ShellString('\n    export class ' + toPascalCase(i) + ' {').toEnd(assetsClassFile);
+    shell.ShellString('\n\n    export class ' + toPascalCase(i) + ' {').toEnd(assetsClassFile);
     shell.ShellString('\n        static getName(): string { return \'' + i.split('/').pop() + '\'; };\n').toEnd(assetsClassFile);
 
     for (var t in loaderTypes.audio[i]) {
@@ -108,9 +137,9 @@ for (var i in loaderTypes.audio) {
 }
 shell.ShellString('\n}\n\n').toEnd(assetsClassFile);
 
-shell.ShellString('export namespace Audiosprites {').toEnd(assetsClassFile);
+shell.ShellString('export namespace Audiosprites {\n    class IExistSoTheBuildDoesntFailWithAnEmptyNamespace {}').toEnd(assetsClassFile);
 for (var i in loaderTypes.audiosprite) {
-    shell.ShellString('\n    export class ' + toPascalCase(i) + ' {').toEnd(assetsClassFile);
+    shell.ShellString('\n\n    export class ' + toPascalCase(i) + ' {').toEnd(assetsClassFile);
     shell.ShellString('\n        static getName(): string { return \'' + i.split('/').pop() + '\'; };\n').toEnd(assetsClassFile);
 
     for (var t in loaderTypes.audiosprite[i]) {
@@ -121,15 +150,70 @@ for (var i in loaderTypes.audiosprite) {
 }
 shell.ShellString('\n}\n\n').toEnd(assetsClassFile);
 
-shell.ShellString('export namespace Data {').toEnd(assetsClassFile);
-for (var i in loaderTypes.data) {
-    shell.ShellString('\n    export class ' + toPascalCase(i) + ' {').toEnd(assetsClassFile);
+/* Local Fonts not currently supported, use webfonts (set which fonts you want in app.ts) if you can for now.
+
+shell.ShellString('export namespace Fonts {\n    class IExistSoTheBuildDoesntFailWithAnEmptyNamespace {}').toEnd(assetsClassFile);
+for (var i in loaderTypes.font) {
+    shell.ShellString('\n\n    export class ' + toPascalCase(i) + ' {').toEnd(assetsClassFile);
     shell.ShellString('\n        static getName(): string { return \'' + i.split('/').pop() + '\'; };\n').toEnd(assetsClassFile);
 
-    for (var t in loaderTypes.data[i]) {
-        shell.ShellString('\n        static get' + loaderTypes.data[i][t].toUpperCase() + '(): string { return \'assets/' + i + '.' + loaderTypes.data[i][t] + '\'; };').toEnd(assetsClassFile);
+    for (var t in loaderTypes.font[i]) {
+        shell.ShellString('\n        static get' + loaderTypes.font[i][t].toUpperCase() + '(): string { return \'assets/' + i + '.' + loaderTypes.font[i][t] + '\'; };').toEnd(assetsClassFile);
     }
 
     shell.ShellString('\n    }').toEnd(assetsClassFile);
 }
 shell.ShellString('\n}\n\n').toEnd(assetsClassFile);
+*/
+
+shell.ShellString('export namespace JSON {\n    class IExistSoTheBuildDoesntFailWithAnEmptyNamespace {}').toEnd(assetsClassFile);
+for (var i in loaderTypes.json) {
+    shell.ShellString('\n\n    export class ' + toPascalCase(i) + ' {').toEnd(assetsClassFile);
+    shell.ShellString('\n        static getName(): string { return \'' + i.split('/').pop() + '\'; };\n').toEnd(assetsClassFile);
+
+    for (var t in loaderTypes.json[i]) {
+        shell.ShellString('\n        static get' + loaderTypes.json[i][t].toUpperCase() + '(): string { return \'assets/' + i + '.' + loaderTypes.json[i][t] + '\'; };').toEnd(assetsClassFile);
+    }
+
+    shell.ShellString('\n    }').toEnd(assetsClassFile);
+}
+shell.ShellString('\n}\n\n').toEnd(assetsClassFile);
+
+shell.ShellString('export namespace XML {\n    class IExistSoTheBuildDoesntFailWithAnEmptyNamespace {}').toEnd(assetsClassFile);
+for (var i in loaderTypes.xml) {
+    shell.ShellString('\n\n    export class ' + toPascalCase(i) + ' {').toEnd(assetsClassFile);
+    shell.ShellString('\n        static getName(): string { return \'' + i.split('/').pop() + '\'; };\n').toEnd(assetsClassFile);
+
+    for (var t in loaderTypes.xml[i]) {
+        shell.ShellString('\n        static get' + loaderTypes.xml[i][t].toUpperCase() + '(): string { return \'assets/' + i + '.' + loaderTypes.xml[i][t] + '\'; };').toEnd(assetsClassFile);
+    }
+
+    shell.ShellString('\n    }').toEnd(assetsClassFile);
+}
+shell.ShellString('\n}\n\n').toEnd(assetsClassFile);
+
+shell.ShellString('export namespace Text {\n    class IExistSoTheBuildDoesntFailWithAnEmptyNamespace {}').toEnd(assetsClassFile);
+for (var i in loaderTypes.text) {
+    shell.ShellString('\n\n    export class ' + toPascalCase(i) + ' {').toEnd(assetsClassFile);
+    shell.ShellString('\n        static getName(): string { return \'' + i.split('/').pop() + '\'; };\n').toEnd(assetsClassFile);
+
+    for (var t in loaderTypes.text[i]) {
+        shell.ShellString('\n        static get' + loaderTypes.text[i][t].toUpperCase() + '(): string { return \'assets/' + i + '.' + loaderTypes.text[i][t] + '\'; };').toEnd(assetsClassFile);
+    }
+
+    shell.ShellString('\n    }').toEnd(assetsClassFile);
+}
+shell.ShellString('\n}\n\n').toEnd(assetsClassFile);
+
+shell.ShellString('export namespace Misc {\n    class IExistSoTheBuildDoesntFailWithAnEmptyNamespace {}').toEnd(assetsClassFile);
+for (var i in loaderTypes.misc) {
+    shell.ShellString('\n\n    export class ' + toPascalCase(i) + ' {').toEnd(assetsClassFile);
+    shell.ShellString('\n        static getName(): string { return \'' + i.split('/').pop() + '\'; };\n').toEnd(assetsClassFile);
+
+    for (var t in loaderTypes.misc[i]) {
+        shell.ShellString('\n        static get' + loaderTypes.misc[i][t].toUpperCase() + '(): string { return \'assets/' + i + '.' + loaderTypes.misc[i][t] + '\'; };').toEnd(assetsClassFile);
+    }
+
+    shell.ShellString('\n    }').toEnd(assetsClassFile);
+}
+shell.ShellString('\n}\n').toEnd(assetsClassFile);
