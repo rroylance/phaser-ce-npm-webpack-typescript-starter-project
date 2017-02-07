@@ -22,7 +22,7 @@ module.exports = {
     },
     plugins: [
         new WebpackShellPlugin({
-            onBuildStart: ['node ' + path.join(__dirname, 'scripts') + '/generateAssetsClass.js']
+            onBuildStart: ['npm run generateAssetsClass']
         }),
         new webpack.DefinePlugin({
             'DEBUG': true,
