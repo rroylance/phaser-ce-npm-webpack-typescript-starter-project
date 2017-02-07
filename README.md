@@ -1,5 +1,7 @@
 # Phaser NPM Webpack TypeScript Starter Project (catchy name, isn't it?)
 
+### In active development; anything is subject to change at anytime.
+
 ##### Hit the ground running and make some great games!
 
 ###### If you use this template/starter project in any capacity; I'd love to hear about your experience with it. Whether you continued with it or decided not to (I really want to hear why you made your decision).
