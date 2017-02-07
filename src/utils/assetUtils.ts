@@ -42,7 +42,7 @@ export class Loader {
                     }
                 }
 
-                this.game.load.audio(Assets.Audio[audio].getName(), audioTypeArray);
+                this.game.load.audio(Assets.Audio[audio].getName(), audioTypeArray, true);
             }
         }
     }
@@ -58,7 +58,7 @@ export class Loader {
                     }
                 }
 
-                this.game.load.audio(Assets.Audiosprites[audio].getName(), audioTypeArray, Assets.Audiosprites[audio].getJSON());
+                this.game.load.audiosprite(Assets.Audiosprites[audio].getName(), audioTypeArray, Assets.Audiosprites[audio].getJSON(), null, true);
             }
         }
     }

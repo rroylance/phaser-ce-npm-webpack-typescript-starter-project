@@ -4,8 +4,7 @@ import * as Assets from '../assets';
 export default class Boot extends Phaser.State {
     public preload(): void {
         // Load any assets you need for your preloader state here.
-        this.game.load.image(Assets.Images.ImagesPreloadBar.getName(), Assets.Images.ImagesPreloadBar.getPNG());
-        this.game.load.image(Assets.Images.ImagesPreloadFrame.getName(), Assets.Images.ImagesPreloadFrame.getPNG());
+        this.game.load.atlasJSONHash(Assets.Atlases.AtlasesPreloadSprites.getName(), Assets.Atlases.AtlasesPreloadSprites.getPNG(), Assets.Atlases.AtlasesPreloadSprites.getJSONHash());
     }
 
     public create(): void {
