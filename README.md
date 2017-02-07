@@ -13,6 +13,7 @@
 - Webpack
 - Seperate Development and Distribution builds
 - Live server (builds and reloads the browser on changes)
+- No hassle asset management requiring no code, on your part, to load and parse assets
 - Setting up the game size and scaling through a script that does it all for you
   - Automatic template background
   - Sets up the size the game so that it is scaled only when absolutley necessary 
@@ -20,7 +21,6 @@
 
 ### Features coming soon
 
-- Webpack asset manifest integration
 - Yeoman Generator
 
 ### Features coming eventually (aka when I need it... sooner if there is a demand for it)
@@ -91,6 +91,35 @@ Run:
 This will build the game with a few caveats;
 - The compile time flag, DEBUG, set to false; allowing you to include or not include certain code depending on if it's DEBUG build or not.
 - The resulting game.min.js will be minified and will not include source maps
+
+## Generate Assets Class
+
+This project will manage your assets for you! All you need to do is drop your assets in assets/ (subdirectories do not matter) and run;
+
+```npm run assets```
+
+src/assets.ts will be generated which contains sections for all your asset types (the generator is smart enough to distinguish what assets are what !) and classes for every asset. 
+
+No need to remember keys anymore, which means no more typos resulting in asset not found errors; just use, for example, Assets.Images.ImagesBackgroundTemplate.getName(). This also allows the compiler to warn you if you are trying to use an asset that doesn't exist before you even have to run the game.
+
+The preloader will use this class to load everything, **you don't have to do anything in code to get your assets loading and available**!
+
+Currently supports the following (if you need a new extension or find an issue with one of your assets not exporting correctly, just let me know);
+
+- Images:
+  - bmp, gif, jpg, jpeg, png, webp
+- Atlases
+  - bmp, gif, jpg, jpeg, png, webp
+  - json (the loader figures out if it's a JSONArray or JSONHash, no need to remember or care), xml
+- Audio
+  - aac, flac, mp3, mp4, ogg, wav, webm
+  - json
+- JSON
+  - json
+- XML
+  - xml
+- Text
+  - txt
 
 ## Change the game size and generate a template background
 
