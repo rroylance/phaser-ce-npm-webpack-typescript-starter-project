@@ -95,7 +95,7 @@ This will build the game with a few caveats;
 
 ## Generate Assets Class
 
-This project will manage your assets for you! All you need to do is drop your assets in assets/ (subdirectories do not matter) and run;
+This project will manage your assets for you! All you need to do is drop your assets in assets/ (subdirectories do not matter) and run (you need to run this manually if you change assets while the server is running, otherwise it's run automatically when running a build);
 
 ```npm run assets```
 
