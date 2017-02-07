@@ -63,6 +63,25 @@ export class Loader {
         }
     }
 
+    private static loadBitmapFonts() {
+        for (let font in Assets.BitmapFonts) {
+            if (!this.game.cache.checkBitmapFontKey(Assets.BitmapFonts[font].getName())) {
+                let imageOption = null;
+                let dataOption = null;
+
+                for (let option in Assets.BitmapFonts[font]) {
+                    if (option === 'getXML' || option === 'getFNT') {
+                        dataOption = option;
+                    } else if (option !== 'getName') {
+                        imageOption = option;
+                    }
+                }
+
+                this.game.load.bitmapFont(Assets.BitmapFonts[font].getName(), Assets.BitmapFonts[font][imageOption](), Assets.BitmapFonts[font][dataOption]());
+            }
+        }
+    }
+
     private static loadJSON() {
         for (let json in Assets.JSON) {
             if (!this.game.cache.checkJSONKey(Assets.JSON[json].getName())) {
@@ -98,6 +117,7 @@ export class Loader {
         this.loadAtlases();
         this.loadAudio();
         this.loadAudiosprites();
+        this.loadBitmapFonts();
         this.loadJSON();
         this.loadXML();
         this.loadText();

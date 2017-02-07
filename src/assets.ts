@@ -48,6 +48,24 @@ export namespace Audiosprites {
     }
 }
 
+export namespace BitmapFonts {
+    class IExistSoTheBuildDoesntFailWithAnEmptyNamespace {}
+
+    export class FontsFontFnt {
+        static getName(): string { return 'font_fnt'; };
+
+        static getFNT(): string { return 'assets/fonts/font_fnt.fnt'; };
+        static getPNG(): string { return 'assets/fonts/font_fnt.png'; };
+    }
+
+    export class FontsFontXml {
+        static getName(): string { return 'font_xml'; };
+
+        static getPNG(): string { return 'assets/fonts/font_xml.png'; };
+        static getXML(): string { return 'assets/fonts/font_xml.xml'; };
+    }
+}
+
 export namespace JSON {
     class IExistSoTheBuildDoesntFailWithAnEmptyNamespace {}
 }

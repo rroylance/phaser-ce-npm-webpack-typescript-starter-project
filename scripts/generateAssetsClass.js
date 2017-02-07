@@ -28,7 +28,7 @@ var loaderTypes = {
     atlas: {},
     audio: {},
     audiosprite: {},
-    font: {},
+    bitmap_font: {},
     json: {},
     xml: {},
     text: {},
@@ -38,6 +38,7 @@ var loaderTypes = {
 var audioExtensions = ['aac', 'flac', 'mp3', 'mp4', 'ogg', 'wav', 'webm'];
 var imageExtensions = ['bmp', 'gif', 'jpg', 'jpeg', 'png', 'webp'];
 var fontExtensions = ['eot', 'otf', 'svg', 'ttf', 'woff', 'woff2'];
+var bitmapFontExtensions = ['xml', 'fnt'];
 var jsonExtensions = ['json'];
 var xmlExtensions = ['xml'];
 var textExtensions = ['txt'];
@@ -53,12 +54,26 @@ for (var i in gameAssets) {
     var imageType = findExtension(gameAssets[i], imageExtensions);
     var audioType = findExtension(gameAssets[i], audioExtensions);
     var fontType = findExtension(gameAssets[i], fontExtensions);
+    var bitmapFontType = findExtension(gameAssets[i], bitmapFontExtensions);
     var jsonType = findExtension(gameAssets[i], jsonExtensions);
     var xmlType = findExtension(gameAssets[i], xmlExtensions);
     var textType = findExtension(gameAssets[i], textExtensions);
 
-    if (fontType) {
-        //loaderTypes.font[i] = gameAssets[i];
+    if (bitmapFontType) {
+        var isItActuallyAFont = false;
+
+        for (var ext in gameAssets[i]) {
+            if (((shell.grep(/^[\s\S]*?<font>/g, ('assets/' + i + '.' + gameAssets[i][ext]))).length > 1)) {
+                isItActuallyAFont = true;
+                break;
+            }
+        }
+
+        bitmapFontType = isItActuallyAFont;
+    }
+
+    if (bitmapFontType && imageType) {
+        loaderTypes.bitmap_font[i] = gameAssets[i];
     } else if (audioType) {
         if (jsonType) {
             loaderTypes.audiosprite[i] = gameAssets[i];
@@ -150,21 +165,18 @@ for (var i in loaderTypes.audiosprite) {
 }
 shell.ShellString('\n}\n\n').toEnd(assetsClassFile);
 
-/* Local Fonts not currently supported, use webfonts (set which fonts you want in app.ts) if you can for now.
-
-shell.ShellString('export namespace Fonts {\n    class IExistSoTheBuildDoesntFailWithAnEmptyNamespace {}').toEnd(assetsClassFile);
-for (var i in loaderTypes.font) {
+shell.ShellString('export namespace BitmapFonts {\n    class IExistSoTheBuildDoesntFailWithAnEmptyNamespace {}').toEnd(assetsClassFile);
+for (var i in loaderTypes.bitmap_font) {
     shell.ShellString('\n\n    export class ' + toPascalCase(i) + ' {').toEnd(assetsClassFile);
     shell.ShellString('\n        static getName(): string { return \'' + i.split('/').pop() + '\'; };\n').toEnd(assetsClassFile);
 
-    for (var t in loaderTypes.font[i]) {
-        shell.ShellString('\n        static get' + loaderTypes.font[i][t].toUpperCase() + '(): string { return \'assets/' + i + '.' + loaderTypes.font[i][t] + '\'; };').toEnd(assetsClassFile);
+    for (var t in loaderTypes.bitmap_font[i]) {
+        shell.ShellString('\n        static get' + loaderTypes.bitmap_font[i][t].toUpperCase() + '(): string { return \'assets/' + i + '.' + loaderTypes.bitmap_font[i][t] + '\'; };').toEnd(assetsClassFile);
     }
 
     shell.ShellString('\n    }').toEnd(assetsClassFile);
 }
 shell.ShellString('\n}\n\n').toEnd(assetsClassFile);
-*/
 
 shell.ShellString('export namespace JSON {\n    class IExistSoTheBuildDoesntFailWithAnEmptyNamespace {}').toEnd(assetsClassFile);
 for (var i in loaderTypes.json) {

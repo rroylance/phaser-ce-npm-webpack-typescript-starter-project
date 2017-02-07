@@ -3,6 +3,8 @@ import * as Assets from '../assets';
 export default class Title extends Phaser.State {
     private backgroundTemplateSprite: Phaser.Sprite = null;
     private welcomeText: Phaser.Text = null;
+    private bitmapTextFNT: Phaser.BitmapText = null;
+    private bitmapTextXML: Phaser.BitmapText = null;
     private sfxAudiosprite: Phaser.AudioSprite = null;
 
     public preload(): void {
@@ -13,6 +15,12 @@ export default class Title extends Phaser.State {
             font: '50px Barrio'
         });
         this.welcomeText.anchor.setTo(0.5);
+
+        this.bitmapTextFNT = this.game.add.bitmapText(this.game.world.centerX, this.game.world.centerY + 25, Assets.BitmapFonts.FontsFontFnt.getName(), 'Bitmap Fonts with FNT!', 50);
+        this.bitmapTextFNT.anchor.setTo(0.5);
+
+        this.bitmapTextXML = this.game.add.bitmapText(this.game.world.centerX, this.game.world.centerY + 75, Assets.BitmapFonts.FontsFontXml.getName(), 'Bitmap Fonts with XML!', 50);
+        this.bitmapTextXML.anchor.setTo(0.5);
 
         this.sfxAudiosprite = this.game.add.audioSprite(Assets.Audiosprites.AudiospritesSfx.getName());
     }
