@@ -21,6 +21,7 @@
 
 ### Features coming soon
 
+- Multiple resolution asset loader (@2x, @3x, etc...)
 - Yeoman Generator
 
 ### Features coming eventually (aka when I need it... sooner if there is a demand for it)
@@ -120,6 +121,11 @@ Currently supports the following (if you need a new extension or find an issue w
   - xml
 - Text
   - txt
+  
+Not currently supported;
+
+- Fonts (Bitmap or Local) *Use google webfonts for now (add what fonts you need in app.ts)
+  - Bitmap font will actually get recognized as an atlas at the moment, this will not load properly
 
 ## Change the game size and generate a template background
 
