@@ -9,6 +9,7 @@
     "server:dev": "webpack-dev-server --config webpack.dev.config.js --open",
     "server:dist": "webpack-dev-server --config webpack.dist.config.js --open",
     "setupGameSize": "node ./scripts/setupGameSize.js",
+    "generateAssetsClass": "node ./scripts/generateAssetsClass.js",
     "postinstall": "npm run setupGameSize"
   },
   "repository": {
@@ -37,6 +38,7 @@
     "typescript": "2.1.5",
     "webfontloader": "1.6.27",
     "webpack": "2.2.1",
-    "webpack-dev-server": "1.16.3"
+    "webpack-dev-server": "1.16.3",
+    "webpack-shell-plugin": "0.5.0"
   }
 }

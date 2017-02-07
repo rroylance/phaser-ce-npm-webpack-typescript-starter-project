@@ -1,16 +1,18 @@
+import * as Assets from '../assets';
+
 export default class Preloader extends Phaser.State {
     private preloadBarSprite: Phaser.Sprite = null;
     private preloadFrameSprite: Phaser.Sprite = null;
 
     public preload(): void {
-        this.preloadBarSprite = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'preload_bar');
+        this.preloadBarSprite = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, Assets.Images.ImagesPreloadBar.getName());
         this.preloadBarSprite.anchor.setTo(0, 0.5);
         this.preloadBarSprite.x -= this.preloadBarSprite.width * 0.5;
 
-        this.preloadFrameSprite = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'preload_frame');
+        this.preloadFrameSprite = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, Assets.Images.ImagesPreloadFrame.getName());
         this.preloadFrameSprite.anchor.setTo(0.5);
 
-        this.game.load.image('background_template', 'assets/images/background_template.png');
+        this.game.load.image(Assets.Images.ImagesBackgroundTemplate.getName(), Assets.Images.ImagesBackgroundTemplate.getPNG());
 
         this.game.load.setPreloadSprite(this.preloadBarSprite);
     }

@@ -15,42 +15,121 @@ function toPascalCase(string) {
     return camelCase[0].toUpperCase() + camelCase.substr(1);
 }
 
-var directoryStructure = {};
+function findExtension(haystack, arr) {
+    return arr.some(function (v) {
+        return haystack.indexOf(v) >= 0;
+    });
+};
 
-shell.ls('assets/**/*.*').forEach(function(file) {
-   var splitFilePath = file.split('/');
+var gameAssets = {};
 
-   var directoryStructureParent = directoryStructure;
+var loaderTypes = {
+    image: {},
+    atlas: {},
+    audio: {},
+    audiosprite: {},
+    data: {}
+}
 
-   while(splitFilePath.length > 0) {
-       var filePathSegment = splitFilePath.shift();
-       if (filePathSegment === 'assets') {
-           continue;
-       }
+var audioExtensions = ['aac', 'flac', 'mp3', 'mp4', 'ogg', 'wav', 'webm'];
+var imageExtensions = ['bmp', 'gif', 'jpg', 'jpeg', 'png', 'webp', 'svg'];
+var dataExtensions = ['json'];
 
-       var fileExtension = filePathSegment.split('.');
+shell.ls('assets/**/*.*').forEach(function (file) {
+    var filePath = file.replace('assets/', '').split('.');
 
-       if (fileExtension.length > 1) {
-           fileExtension = fileExtension[fileExtension.length - 1];
-           filePathSegment = filePathSegment.replace('.' + fileExtension, '');
-
-           directoryStructureParent[filePathSegment] = (directoryStructureParent[filePathSegment] || {
-               path: '',
-               extensions: []
-           });
-           directoryStructureParent[filePathSegment].path = file.replace('.' + fileExtension, '');
-           directoryStructureParent[filePathSegment].extensions.push('\'' + fileExtension + '\'');
-       } else {
-           directoryStructureParent[filePathSegment] = (directoryStructureParent[filePathSegment] || {});
-       }
-
-       directoryStructureParent = directoryStructureParent[filePathSegment];
-   }
+    gameAssets[filePath[0]] = gameAssets[filePath[0]] || [];
+    gameAssets[filePath[0]].push(filePath[1]);
 });
 
-shell.ShellString(JSON.stringify(directoryStructure)).to('assets.json');
+for (var i in gameAssets) {
+    var audioType = findExtension(gameAssets[i], audioExtensions);
+    var imageType = findExtension(gameAssets[i], imageExtensions);
+    var dataType = findExtension(gameAssets[i], dataExtensions);
+
+    if (audioType) {
+        if (dataType) {
+            loaderTypes.audiosprite[i] = gameAssets[i];
+        } else {
+            loaderTypes.audio[i] = gameAssets[i];
+        }
+    } else if (imageType) {
+        if (dataType) {
+            loaderTypes.atlas[i] = gameAssets[i];
+        } else {
+            loaderTypes.image[i] = gameAssets[i];
+        }
+    } else if (dataType) {
+        loaderTypes.data[i] = gameAssets[i];
+    }
+}
+
+//shell.ShellString(JSON.stringify(loaderTypes)).to('assets.json');
 
 var assetsClassFile = 'src/assets.ts';
-shell.rm(assetsClassFile);
+shell.rm('-f', assetsClassFile);
 
-//TODO Traverse assets.json and export assets.ts
+shell.ShellString('export namespace Images {').toEnd(assetsClassFile);
+for (var i in loaderTypes.image) {
+    shell.ShellString('\n    export class ' + toPascalCase(i) + ' {').toEnd(assetsClassFile);
+    shell.ShellString('\n        static getName(): string { return \'' + i.split('/').pop() + '\'; };\n').toEnd(assetsClassFile);
+
+    for (var t in loaderTypes.image[i]) {
+        shell.ShellString('\n        static get' + loaderTypes.image[i][t].toUpperCase() + '(): string { return \'assets/' + i + '.' + loaderTypes.image[i][t] + '\'; };').toEnd(assetsClassFile);
+    }
+
+    shell.ShellString('\n    }').toEnd(assetsClassFile);
+}
+shell.ShellString('\n}\n\n').toEnd(assetsClassFile);
+
+shell.ShellString('export namespace Atlases {').toEnd(assetsClassFile);
+for (var i in loaderTypes.atlas) {
+    shell.ShellString('\n    export class ' + toPascalCase(i) + ' {').toEnd(assetsClassFile);
+    shell.ShellString('\n        static getName(): string { return \'' + i.split('/').pop() + '\'; };\n').toEnd(assetsClassFile);
+
+    for (var t in loaderTypes.atlas[i]) {
+        shell.ShellString('\n        static get' + loaderTypes.atlas[i][t].toUpperCase() + '(): string { return \'assets/' + i + '.' + loaderTypes.atlas[i][t] + '\'; };').toEnd(assetsClassFile);
+    }
+
+    shell.ShellString('\n    }').toEnd(assetsClassFile);
+}
+shell.ShellString('\n}\n\n').toEnd(assetsClassFile);
+
+shell.ShellString('export namespace Audio {').toEnd(assetsClassFile);
+for (var i in loaderTypes.audio) {
+    shell.ShellString('\n    export class ' + toPascalCase(i) + ' {').toEnd(assetsClassFile);
+    shell.ShellString('\n        static getName(): string { return \'' + i.split('/').pop() + '\'; };\n').toEnd(assetsClassFile);
+
+    for (var t in loaderTypes.audio[i]) {
+        shell.ShellString('\n        static get' + loaderTypes.audio[i][t].toUpperCase() + '(): string { return \'assets/' + i + '.' + loaderTypes.audio[i][t] + '\'; };').toEnd(assetsClassFile);
+    }
+
+    shell.ShellString('\n    }').toEnd(assetsClassFile);
+}
+shell.ShellString('\n}\n\n').toEnd(assetsClassFile);
+
+shell.ShellString('export namespace Audiosprites {').toEnd(assetsClassFile);
+for (var i in loaderTypes.audiosprite) {
+    shell.ShellString('\n    export class ' + toPascalCase(i) + ' {').toEnd(assetsClassFile);
+    shell.ShellString('\n        static getName(): string { return \'' + i.split('/').pop() + '\'; };\n').toEnd(assetsClassFile);
+
+    for (var t in loaderTypes.audiosprite[i]) {
+        shell.ShellString('\n        static get' + loaderTypes.audiosprite[i][t].toUpperCase() + '(): string { return \'assets/' + i + '.' + loaderTypes.audiosprite[i][t] + '\'; };').toEnd(assetsClassFile);
+    }
+
+    shell.ShellString('\n    }').toEnd(assetsClassFile);
+}
+shell.ShellString('\n}\n\n').toEnd(assetsClassFile);
+
+shell.ShellString('export namespace Data {').toEnd(assetsClassFile);
+for (var i in loaderTypes.data) {
+    shell.ShellString('\n    export class ' + toPascalCase(i) + ' {').toEnd(assetsClassFile);
+    shell.ShellString('\n        static getName(): string { return \'' + i.split('/').pop() + '\'; };\n').toEnd(assetsClassFile);
+
+    for (var t in loaderTypes.data[i]) {
+        shell.ShellString('\n        static get' + loaderTypes.data[i][t].toUpperCase() + '(): string { return \'assets/' + i + '.' + loaderTypes.data[i][t] + '\'; };').toEnd(assetsClassFile);
+    }
+
+    shell.ShellString('\n    }').toEnd(assetsClassFile);
+}
+shell.ShellString('\n}\n\n').toEnd(assetsClassFile);

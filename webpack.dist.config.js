@@ -4,6 +4,7 @@ var GitRevisionPlugin = require('git-revision-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
+var WebpackShellPlugin = require('webpack-shell-plugin');
 
 module.exports = {
     entry: path.join(__dirname, 'src/app.ts'),
@@ -21,6 +22,9 @@ module.exports = {
         }
     },
     plugins: [
+        new WebpackShellPlugin({
+            onBuildStart: ['node ' + path.join(__dirname, 'scripts') + '/generateAssetsClass.js']
+        }),
         new webpack.DefinePlugin({
             'DEBUG': false,
             'GIT_REVISION': JSON.stringify(new GitRevisionPlugin().commithash()),

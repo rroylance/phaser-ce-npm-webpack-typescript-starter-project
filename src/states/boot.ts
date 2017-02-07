@@ -1,10 +1,11 @@
 import * as Utils from '../utils/utils';
+import * as Assets from '../assets';
 
 export default class Boot extends Phaser.State {
     public preload(): void {
         // Load any assets you need for your preloader state here.
-        this.game.load.image('preload_bar', 'assets/images/preload_bar.png');
-        this.game.load.image('preload_frame', 'assets/images/preload_frame.png');
+        this.game.load.image(Assets.Images.ImagesPreloadBar.getName(), Assets.Images.ImagesPreloadBar.getPNG());
+        this.game.load.image(Assets.Images.ImagesPreloadFrame.getName(), Assets.Images.ImagesPreloadFrame.getPNG());
     }
 
     public create(): void {
