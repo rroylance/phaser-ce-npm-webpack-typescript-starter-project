@@ -19,7 +19,7 @@ function findExtension(haystack, arr) {
     return arr.some(function (v) {
         return haystack.indexOf(v) >= 0;
     });
-};
+}
 
 var gameAssets = {};
 
@@ -33,7 +33,7 @@ var loaderTypes = {
     xml: {},
     text: {},
     misc: {}
-}
+};
 
 var audioExtensions = ['aac', 'flac', 'mp3', 'mp4', 'ogg', 'wav', 'webm'];
 var imageExtensions = ['bmp', 'gif', 'jpg', 'jpeg', 'png', 'webp'];

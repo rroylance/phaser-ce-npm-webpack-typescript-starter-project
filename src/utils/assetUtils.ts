@@ -8,7 +8,7 @@ export class Loader {
             if (!this.game.cache.checkImageKey(Assets.Images[image].getName())) {
                 for (let option in Assets.Images[image]) {
                     if (option !== 'getName') {
-                        this.game.load.image(Assets.Audiosprites[image].getName(), Assets.Audiosprites[image][option]());
+                        this.game.load.image(Assets.Images[image].getName(), Assets.Images[image][option]());
                     }
                 }
             }
