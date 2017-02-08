@@ -18,14 +18,23 @@ export class Loader {
     private static loadAtlases() {
         for (let atlas in Assets.Atlases) {
             if (!this.game.cache.checkImageKey(Assets.Atlases[atlas].getName())) {
+                let imageOption = null;
+                let dataOption = null;
+
                 for (let option in Assets.Atlases[atlas]) {
-                    if (option === 'getXML') {
-                        this.game.load.atlasXML(Assets.Atlases[atlas].getName(), Assets.Atlases[atlas].getPNG(), Assets.Atlases[atlas].getXML());
-                    } else if (option === 'getJSONArray') {
-                        this.game.load.atlasJSONArray(Assets.Atlases[atlas].getName(), Assets.Atlases[atlas].getPNG(), Assets.Atlases[atlas].getJSONArray());
-                    } else if (option === 'getJSONHash') {
-                        this.game.load.atlasJSONHash(Assets.Atlases[atlas].getName(), Assets.Atlases[atlas].getPNG(), Assets.Atlases[atlas].getJSONHash());
+                    if (option === 'getXML' || option === 'getJSONArray' || option === 'getJSONHash') {
+                        dataOption = option;
+                    } else if (option !== 'getName') {
+                        imageOption = option;
                     }
+                }
+
+                if (dataOption === 'getXML') {
+                    this.game.load.atlasXML(Assets.Atlases[atlas].getName(), Assets.Atlases[atlas][imageOption](), Assets.Atlases[atlas].getXML());
+                } else if (dataOption === 'getJSONArray') {
+                    this.game.load.atlasJSONArray(Assets.Atlases[atlas].getName(), Assets.Atlases[atlas][imageOption](), Assets.Atlases[atlas].getJSONArray());
+                } else if (dataOption === 'getJSONHash') {
+                    this.game.load.atlasJSONHash(Assets.Atlases[atlas].getName(), Assets.Atlases[atlas][imageOption](), Assets.Atlases[atlas].getJSONHash());
                 }
             }
         }
