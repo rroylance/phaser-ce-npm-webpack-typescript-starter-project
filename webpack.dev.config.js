@@ -2,7 +2,6 @@ var webpack = require('webpack');
 var path = require('path');
 var GitRevisionPlugin = require('git-revision-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-var CopyWebpackPlugin = require('copy-webpack-plugin');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
 var WebpackShellPlugin = require('webpack-shell-plugin');
 
@@ -15,9 +14,10 @@ module.exports = {
     resolve: {
         extensions: ['.ts', '.js'],
         alias: {
-            'pixi': path.join(__dirname, 'node_modules/phaser-ce/build/custom/pixi.js'),
-            'phaser': path.join(__dirname, 'node_modules/phaser-ce/build/custom/phaser-split.js'),
-            'p2': path.join(__dirname, 'node_modules/phaser-ce/build/custom/p2.js')
+            pixi: path.join(__dirname, 'node_modules/phaser-ce/build/custom/pixi.js'),
+            phaser: path.join(__dirname, 'node_modules/phaser-ce/build/custom/phaser-split.js'),
+            p2: path.join(__dirname, 'node_modules/phaser-ce/build/custom/p2.js'),
+            assets: path.join(__dirname, 'assets/')
         }
     },
     plugins: [
@@ -38,11 +38,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             title: 'DEV MODE: Phaser NPM Webpack TypeScript Starter Project!',
             template: path.join(__dirname, 'templates/index.ejs')
-        }),
-        new CopyWebpackPlugin([{
-            from: path.join(__dirname, 'assets'),
-            to: 'assets'
-        }])
+        })
     ],
     devServer: {
         contentBase: path.join(__dirname, 'dist'),
@@ -60,6 +56,7 @@ module.exports = {
             /phaser-ce/
         ],
         rules: [
+            { test: /assets\//, loader: 'file-loader?name=assets/[hash].[ext]' },
             { test: /\.ts$/, enforce: 'pre', loader: 'tslint-loader' },
             { test: /\.ts$/, loader: 'ts-loader' }
         ]

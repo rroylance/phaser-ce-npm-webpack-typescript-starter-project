@@ -35,7 +35,7 @@ var loaderTypes = {
     misc: {}
 };
 
-var audioExtensions = ['aac', 'flac', 'mp3', 'mp4', 'ogg', 'wav', 'webm'];
+var audioExtensions = ['aac', 'ac3', 'caf', 'flac', 'mp3', 'mp4', 'ogg', 'wav', 'webm'];
 var imageExtensions = ['bmp', 'gif', 'jpg', 'jpeg', 'png', 'webp'];
 var fontExtensions = ['eot', 'otf', 'svg', 'ttf', 'woff', 'woff2'];
 var bitmapFontExtensions = ['xml', 'fnt'];
@@ -108,7 +108,7 @@ for (var i in loaderTypes.image) {
     shell.ShellString('\n        static getName(): string { return \'' + i.split('/').pop() + '\'; };\n').toEnd(assetsClassFile);
 
     for (var t in loaderTypes.image[i]) {
-        shell.ShellString('\n        static get' + loaderTypes.image[i][t].toUpperCase() + '(): string { return \'assets/' + i + '.' + loaderTypes.image[i][t] + '\'; };').toEnd(assetsClassFile);
+        shell.ShellString('\n        static get' + loaderTypes.image[i][t].toUpperCase() + '(): string { return require(\'assets/' + i + '.' + loaderTypes.image[i][t] + '\'); };').toEnd(assetsClassFile);
     }
 
     shell.ShellString('\n    }').toEnd(assetsClassFile);
@@ -132,7 +132,7 @@ for (var i in loaderTypes.atlas) {
         } else if (xmlExtensions.indexOf(loaderTypes.atlas[i][t]) !== -1) {
             type = 'XML';
         }
-        shell.ShellString('\n        static get' + loaderTypes.atlas[i][t].toUpperCase() + type + '(): string { return \'assets/' + i + '.' + loaderTypes.atlas[i][t] + '\'; };').toEnd(assetsClassFile);
+        shell.ShellString('\n        static get' + loaderTypes.atlas[i][t].toUpperCase() + type + '(): string { return require(\'assets/' + i + '.' + loaderTypes.atlas[i][t] + '\'); };').toEnd(assetsClassFile);
     }
 
     shell.ShellString('\n    }').toEnd(assetsClassFile);
@@ -145,7 +145,7 @@ for (var i in loaderTypes.audio) {
     shell.ShellString('\n        static getName(): string { return \'' + i.split('/').pop() + '\'; };\n').toEnd(assetsClassFile);
 
     for (var t in loaderTypes.audio[i]) {
-        shell.ShellString('\n        static get' + loaderTypes.audio[i][t].toUpperCase() + '(): string { return \'assets/' + i + '.' + loaderTypes.audio[i][t] + '\'; };').toEnd(assetsClassFile);
+        shell.ShellString('\n        static get' + loaderTypes.audio[i][t].toUpperCase() + '(): string { return require(\'assets/' + i + '.' + loaderTypes.audio[i][t] + '\'); };').toEnd(assetsClassFile);
     }
 
     shell.ShellString('\n    }').toEnd(assetsClassFile);
@@ -158,7 +158,7 @@ for (var i in loaderTypes.audiosprite) {
     shell.ShellString('\n        static getName(): string { return \'' + i.split('/').pop() + '\'; };\n').toEnd(assetsClassFile);
 
     for (var t in loaderTypes.audiosprite[i]) {
-        shell.ShellString('\n        static get' + loaderTypes.audiosprite[i][t].toUpperCase() + '(): string { return \'assets/' + i + '.' + loaderTypes.audiosprite[i][t] + '\'; };').toEnd(assetsClassFile);
+        shell.ShellString('\n        static get' + loaderTypes.audiosprite[i][t].toUpperCase() + '(): string { return require(\'assets/' + i + '.' + loaderTypes.audiosprite[i][t] + '\'); };').toEnd(assetsClassFile);
     }
 
     shell.ShellString('\n    }').toEnd(assetsClassFile);
@@ -171,7 +171,7 @@ for (var i in loaderTypes.bitmap_font) {
     shell.ShellString('\n        static getName(): string { return \'' + i.split('/').pop() + '\'; };\n').toEnd(assetsClassFile);
 
     for (var t in loaderTypes.bitmap_font[i]) {
-        shell.ShellString('\n        static get' + loaderTypes.bitmap_font[i][t].toUpperCase() + '(): string { return \'assets/' + i + '.' + loaderTypes.bitmap_font[i][t] + '\'; };').toEnd(assetsClassFile);
+        shell.ShellString('\n        static get' + loaderTypes.bitmap_font[i][t].toUpperCase() + '(): string { return require(\'assets/' + i + '.' + loaderTypes.bitmap_font[i][t] + '\'); };').toEnd(assetsClassFile);
     }
 
     shell.ShellString('\n    }').toEnd(assetsClassFile);
@@ -184,7 +184,7 @@ for (var i in loaderTypes.json) {
     shell.ShellString('\n        static getName(): string { return \'' + i.split('/').pop() + '\'; };\n').toEnd(assetsClassFile);
 
     for (var t in loaderTypes.json[i]) {
-        shell.ShellString('\n        static get' + loaderTypes.json[i][t].toUpperCase() + '(): string { return \'assets/' + i + '.' + loaderTypes.json[i][t] + '\'; };').toEnd(assetsClassFile);
+        shell.ShellString('\n        static get' + loaderTypes.json[i][t].toUpperCase() + '(): string { return require(\'assets/' + i + '.' + loaderTypes.json[i][t] + '\'); };').toEnd(assetsClassFile);
     }
 
     shell.ShellString('\n    }').toEnd(assetsClassFile);
@@ -197,7 +197,7 @@ for (var i in loaderTypes.xml) {
     shell.ShellString('\n        static getName(): string { return \'' + i.split('/').pop() + '\'; };\n').toEnd(assetsClassFile);
 
     for (var t in loaderTypes.xml[i]) {
-        shell.ShellString('\n        static get' + loaderTypes.xml[i][t].toUpperCase() + '(): string { return \'assets/' + i + '.' + loaderTypes.xml[i][t] + '\'; };').toEnd(assetsClassFile);
+        shell.ShellString('\n        static get' + loaderTypes.xml[i][t].toUpperCase() + '(): string { return require(\'assets/' + i + '.' + loaderTypes.xml[i][t] + '\'); };').toEnd(assetsClassFile);
     }
 
     shell.ShellString('\n    }').toEnd(assetsClassFile);
@@ -210,7 +210,7 @@ for (var i in loaderTypes.text) {
     shell.ShellString('\n        static getName(): string { return \'' + i.split('/').pop() + '\'; };\n').toEnd(assetsClassFile);
 
     for (var t in loaderTypes.text[i]) {
-        shell.ShellString('\n        static get' + loaderTypes.text[i][t].toUpperCase() + '(): string { return \'assets/' + i + '.' + loaderTypes.text[i][t] + '\'; };').toEnd(assetsClassFile);
+        shell.ShellString('\n        static get' + loaderTypes.text[i][t].toUpperCase() + '(): string { return require(\'assets/' + i + '.' + loaderTypes.text[i][t] + '\'); };').toEnd(assetsClassFile);
     }
 
     shell.ShellString('\n    }').toEnd(assetsClassFile);
@@ -223,7 +223,7 @@ for (var i in loaderTypes.misc) {
     shell.ShellString('\n        static getName(): string { return \'' + i.split('/').pop() + '\'; };\n').toEnd(assetsClassFile);
 
     for (var t in loaderTypes.misc[i]) {
-        shell.ShellString('\n        static get' + loaderTypes.misc[i][t].toUpperCase() + '(): string { return \'assets/' + i + '.' + loaderTypes.misc[i][t] + '\'; };').toEnd(assetsClassFile);
+        shell.ShellString('\n        static get' + loaderTypes.misc[i][t].toUpperCase() + '(): string { return require(\'assets/' + i + '.' + loaderTypes.misc[i][t] + '\'); };').toEnd(assetsClassFile);
     }
 
     shell.ShellString('\n    }').toEnd(assetsClassFile);
