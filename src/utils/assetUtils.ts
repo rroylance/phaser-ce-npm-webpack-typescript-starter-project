@@ -62,7 +62,7 @@ export class Loader {
                 let audioTypeArray = [];
 
                 for (let option in Assets.Audiosprites[audio]) {
-                    if (option !== 'getName' && option !== 'getJSON') {
+                    if (option !== 'getName' && option !== 'getJSON' && option !== 'Sprites') {
                         audioTypeArray.push(Assets.Audiosprites[audio][option]());
                     }
                 }

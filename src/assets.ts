@@ -62,6 +62,17 @@ export namespace Audio {
 }
 
 export namespace Audiosprites {
+    enum AudiospritesSfxSprites {
+        Laser1 = <any>'laser1',
+        Laser2 = <any>'laser2',
+        Laser3 = <any>'laser3',
+        Laser4 = <any>'laser4',
+        Laser5 = <any>'laser5',
+        Laser6 = <any>'laser6',
+        Laser7 = <any>'laser7',
+        Laser8 = <any>'laser8',
+        Laser9 = <any>'laser9',
+    }
     export class AudiospritesSfx {
         static getName(): string { return 'sfx'; };
 
@@ -70,6 +81,8 @@ export namespace Audiosprites {
         static getM4A(): string { return require('assets/audiosprites/sfx.m4a'); };
         static getMP3(): string { return require('assets/audiosprites/sfx.mp3'); };
         static getOGG(): string { return require('assets/audiosprites/sfx.ogg'); };
+
+        static Sprites = AudiospritesSfxSprites;
     }
 }
 

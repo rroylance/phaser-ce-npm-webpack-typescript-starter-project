@@ -7,6 +7,10 @@ export default class Title extends Phaser.State {
     private bitmapTextXML: Phaser.BitmapText = null;
     private sfxAudiosprite: Phaser.AudioSprite = null;
 
+    // This is any[] not string[] due to a limitation in TypeScript at the moment;
+    // despite string enums working just fine, they are not officially supported so we trick the compiler into letting us do it anyway.
+    private sfxLaserSounds: any[] = null;
+
     public preload(): void {
         this.backgroundTemplateSprite = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, Assets.Images.ImagesBackgroundTemplate.getName());
         this.backgroundTemplateSprite.anchor.setTo(0.5);
@@ -23,6 +27,20 @@ export default class Title extends Phaser.State {
         this.bitmapTextXML.anchor.setTo(0.5);
 
         this.sfxAudiosprite = this.game.add.audioSprite(Assets.Audiosprites.AudiospritesSfx.getName());
+
+        // This is an example of how you can lessen the verbosity
+        let availableSFX = Assets.Audiosprites.AudiospritesSfx.Sprites;
+        this.sfxLaserSounds = [
+            availableSFX.Laser1,
+            availableSFX.Laser2,
+            availableSFX.Laser3,
+            availableSFX.Laser4,
+            availableSFX.Laser5,
+            availableSFX.Laser6,
+            availableSFX.Laser7,
+            availableSFX.Laser8,
+            availableSFX.Laser9
+        ];
     }
 
     public create(): void {
@@ -32,7 +50,7 @@ export default class Title extends Phaser.State {
 
         this.backgroundTemplateSprite.inputEnabled = true;
         this.backgroundTemplateSprite.events.onInputDown.add(() => {
-            this.sfxAudiosprite.play('laser' + (Math.floor(Math.random() * 9) + 1));
+            this.sfxAudiosprite.play(Phaser.ArrayUtils.getRandomItem(this.sfxLaserSounds));
         });
     }
 }

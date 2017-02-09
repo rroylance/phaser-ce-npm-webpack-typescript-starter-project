@@ -228,13 +228,37 @@ if (!Object.keys(loaderTypes.audiosprite).length) {
 }
 
 for (var i in loaderTypes.audiosprite) {
+    for (var t in loaderTypes.audiosprite[i]) {
+        var dataFile = ('assets/' + i + '.' + loaderTypes.audiosprite[i][t]);
+        var fileData = null;
+        var json = null;
+        var sprite = null;
+
+        if (jsonExtensions.indexOf(loaderTypes.audiosprite[i][t]) !== -1) {
+            shell.ShellString('\n    enum ' + toPascalCase(i) + 'Sprites {').toEnd(assetsClassFile);
+
+            try {
+                fileData = fs.readFileSync(dataFile, 'ascii');
+                json = JSON.parse(fileData);
+
+                for (var h in json['spritemap']) {
+                    sprite = (h);
+                    shell.ShellString('\n        ' + toPascalCase(sprite) + ' = <any>\'' + sprite + '\',').toEnd(assetsClassFile);
+                }
+            } catch (e) {
+                console.log('Audiosprite Data File Error: ', e);
+            }
+
+            shell.ShellString('\n    }').toEnd(assetsClassFile);
+        }
+    }
+
     shell.ShellString('\n    export class ' + toPascalCase(i) + ' {').toEnd(assetsClassFile);
     shell.ShellString('\n        static getName(): string { return \'' + i.split('/').pop() + '\'; };\n').toEnd(assetsClassFile);
-
     for (var t in loaderTypes.audiosprite[i]) {
         shell.ShellString('\n        static get' + loaderTypes.audiosprite[i][t].toUpperCase() + '(): string { return require(\'assets/' + i + '.' + loaderTypes.audiosprite[i][t] + '\'); };').toEnd(assetsClassFile);
     }
-
+    shell.ShellString('\n\n        static Sprites = ' + toPascalCase(i) + 'Sprites;').toEnd(assetsClassFile);
     shell.ShellString('\n    }').toEnd(assetsClassFile);
 }
 shell.ShellString('\n}\n\n').toEnd(assetsClassFile);
