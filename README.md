@@ -1,5 +1,7 @@
 # Phaser NPM Webpack TypeScript Starter Project (catchy name, isn't it?)
 
+![PhaserNPMWebpackTypeScriptStarterProject](https://raw.githubusercontent.com/rroylance/phaser-npm-webpack-typescript-starter-project/master/README_HEADER.png)
+
 ### In active development; anything is subject to change at anytime.
 
 ##### Hit the ground running and make some great games!
