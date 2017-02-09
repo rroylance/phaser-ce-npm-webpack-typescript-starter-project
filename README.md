@@ -87,7 +87,7 @@ Run:
 
 This will build the game with a few caveats;
 - A compile time flag, DEBUG, set to true; allowing you to include or not include certain code depending on if it's DEBUG build or not.
-- The resulting game.js will not be minified and will include source maps
+- The resulting game.js will not be minified
 
 ## Build for release:
 
@@ -97,7 +97,7 @@ Run:
 
 This will build the game with a few caveats;
 - The compile time flag, DEBUG, set to false; allowing you to include or not include certain code depending on if it's DEBUG build or not.
-- The resulting game.min.js will be minified and will not include source maps
+- The resulting game.min.js will be minified
 
 ## Generate Assets Class
 
