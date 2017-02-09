@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TextureAtlas imagePath="preload_sprites_xml.png">
+	<!--
+	Created with ShoeBox
+	http://renderhjs.net/shoebox/
+	-->
+	<SubTexture name="preload_bar.png"	x="0"	y="51"	width="200"	height="50" frameX="-0" frameY="-0" frameWidth="200" frameHeight="50"/>
+	<SubTexture name="preload_frame.png"	x="0"	y="0"	width="200"	height="50" frameX="-0" frameY="-0" frameWidth="200" frameHeight="50"/>
+</TextureAtlas>

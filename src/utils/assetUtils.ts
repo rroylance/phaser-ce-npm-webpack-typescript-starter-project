@@ -24,7 +24,7 @@ export class Loader {
                 for (let option in Assets.Atlases[atlas]) {
                     if (option === 'getXML' || option === 'getJSONArray' || option === 'getJSONHash') {
                         dataOption = option;
-                    } else if (option !== 'getName') {
+                    } else if (option !== 'getName' && option !== 'Frames') {
                         imageOption = option;
                     }
                 }

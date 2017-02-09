@@ -1,8 +1,6 @@
 /* AUTO GENERATED FILE. DO NOT MODIFY. YOU WILL LOSE YOUR CHANGES ON BUILD. */
 
 export namespace Images {
-    class IExistSoTheBuildDoesntFailWithAnEmptyNamespace {}
-
     export class ImagesBackgroundTemplate {
         static getName(): string { return 'background_template'; };
 
@@ -11,19 +9,48 @@ export namespace Images {
 }
 
 export namespace Atlases {
-    class IExistSoTheBuildDoesntFailWithAnEmptyNamespace {}
+    enum AtlasesPreloadSpritesArrayFrames {
+        PreloadBar = <any>'preload_bar.png',
+        PreloadFrame = <any>'preload_frame.png',
+    }
+    export class AtlasesPreloadSpritesArray {
+        static getName(): string { return 'preload_sprites_array'; };
 
-    export class AtlasesPreloadSprites {
-        static getName(): string { return 'preload_sprites'; };
+        static getJSONArray(): string { return require('assets/atlases/preload_sprites_array.json'); };
 
-        static getJSONHash(): string { return require('assets/atlases/preload_sprites.json'); };
-        static getPNG(): string { return require('assets/atlases/preload_sprites.png'); };
+        static getPNG(): string { return require('assets/atlases/preload_sprites_array.png'); };
+
+        static Frames = AtlasesPreloadSpritesArrayFrames;
+    }
+    enum AtlasesPreloadSpritesHashFrames {
+        PreloadBar = <any>'preload_bar.png',
+        PreloadFrame = <any>'preload_frame.png',
+    }
+    export class AtlasesPreloadSpritesHash {
+        static getName(): string { return 'preload_sprites_hash'; };
+
+        static getJSONHash(): string { return require('assets/atlases/preload_sprites_hash.json'); };
+
+        static getPNG(): string { return require('assets/atlases/preload_sprites_hash.png'); };
+
+        static Frames = AtlasesPreloadSpritesHashFrames;
+    }
+    enum AtlasesPreloadSpritesXmlFrames {
+        PreloadBar = <any>'preload_bar.png',
+        PreloadFrame = <any>'preload_frame.png',
+    }
+    export class AtlasesPreloadSpritesXml {
+        static getName(): string { return 'preload_sprites_xml'; };
+
+        static getPNG(): string { return require('assets/atlases/preload_sprites_xml.png'); };
+
+        static getXML(): string { return require('assets/atlases/preload_sprites_xml.xml'); };
+
+        static Frames = AtlasesPreloadSpritesXmlFrames;
     }
 }
 
 export namespace Audio {
-    class IExistSoTheBuildDoesntFailWithAnEmptyNamespace {}
-
     export class AudioMusic {
         static getName(): string { return 'music'; };
 
@@ -35,8 +62,6 @@ export namespace Audio {
 }
 
 export namespace Audiosprites {
-    class IExistSoTheBuildDoesntFailWithAnEmptyNamespace {}
-
     export class AudiospritesSfx {
         static getName(): string { return 'sfx'; };
 
@@ -49,15 +74,12 @@ export namespace Audiosprites {
 }
 
 export namespace BitmapFonts {
-    class IExistSoTheBuildDoesntFailWithAnEmptyNamespace {}
-
     export class FontsFontFnt {
         static getName(): string { return 'font_fnt'; };
 
         static getFNT(): string { return require('assets/fonts/font_fnt.fnt'); };
         static getPNG(): string { return require('assets/fonts/font_fnt.png'); };
     }
-
     export class FontsFontXml {
         static getName(): string { return 'font_xml'; };
 
@@ -67,17 +89,17 @@ export namespace BitmapFonts {
 }
 
 export namespace JSON {
-    class IExistSoTheBuildDoesntFailWithAnEmptyNamespace {}
+    class IExistSoTypeScriptWillNotComplainAboutAnEmptyNamespace {}
 }
 
 export namespace XML {
-    class IExistSoTheBuildDoesntFailWithAnEmptyNamespace {}
+    class IExistSoTypeScriptWillNotComplainAboutAnEmptyNamespace {}
 }
 
 export namespace Text {
-    class IExistSoTheBuildDoesntFailWithAnEmptyNamespace {}
+    class IExistSoTypeScriptWillNotComplainAboutAnEmptyNamespace {}
 }
 
 export namespace Misc {
-    class IExistSoTheBuildDoesntFailWithAnEmptyNamespace {}
+    class IExistSoTypeScriptWillNotComplainAboutAnEmptyNamespace {}
 }

@@ -1,0 +1,20 @@
+{
+"frames": {
+	"preload_bar.png": {
+		"frame": {"x":0, "y":51, "w":200, "h":50},
+		"spriteSourceSize": {"x":0,"y":0,"w":200,"h":50},
+		"sourceSize": {"w":200,"h":50}
+	},
+	"preload_frame.png": {
+		"frame": {"x":0, "y":0, "w":200, "h":50},
+		"spriteSourceSize": {"x":0,"y":0,"w":200,"h":50},
+		"sourceSize": {"w":200,"h":50}
+	}
+
+},
+"meta": {
+	"image": "preload_sprites_hash.png",
+	"size": {"w": 256, "h": 128},
+	"scale": "1"
+}
+}

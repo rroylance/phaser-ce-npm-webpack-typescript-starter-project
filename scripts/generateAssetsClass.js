@@ -1,8 +1,10 @@
 var shell = require('shelljs');
+var fs = require('fs');
+var xml2js = require('xml2js');
 
 function toCamelCase(string) {
     return string.replace(/[^A-Za-z0-9]/g, ' ').replace(/^\w|[A-Z]|\b\w|\s+/g, function (match, index) {
-        if (+match === 0 || match === '-' || match === '.' ) {
+        if (+match === 0 || match === '-' || match === '.') {
             return "";
         }
         return index === 0 ? match.toLowerCase() : match.toUpperCase();
@@ -102,9 +104,13 @@ shell.rm('-f', assetsClassFile);
 
 shell.ShellString('/* AUTO GENERATED FILE. DO NOT MODIFY. YOU WILL LOSE YOUR CHANGES ON BUILD. */\n\n').to(assetsClassFile);
 
-shell.ShellString('export namespace Images {\n    class IExistSoTheBuildDoesntFailWithAnEmptyNamespace {}').toEnd(assetsClassFile);
+shell.ShellString('export namespace Images {').toEnd(assetsClassFile);
+if (!Object.keys(loaderTypes.image).length) {
+    shell.ShellString('\n    class IExistSoTypeScriptWillNotComplainAboutAnEmptyNamespace {}').toEnd(assetsClassFile);
+}
+
 for (var i in loaderTypes.image) {
-    shell.ShellString('\n\n    export class ' + toPascalCase(i) + ' {').toEnd(assetsClassFile);
+    shell.ShellString('\n    export class ' + toPascalCase(i) + ' {').toEnd(assetsClassFile);
     shell.ShellString('\n        static getName(): string { return \'' + i.split('/').pop() + '\'; };\n').toEnd(assetsClassFile);
 
     for (var t in loaderTypes.image[i]) {
@@ -115,33 +121,97 @@ for (var i in loaderTypes.image) {
 }
 shell.ShellString('\n}\n\n').toEnd(assetsClassFile);
 
-shell.ShellString('export namespace Atlases {\n    class IExistSoTheBuildDoesntFailWithAnEmptyNamespace {}').toEnd(assetsClassFile);
+shell.ShellString('export namespace Atlases {').toEnd(assetsClassFile);
+if (!Object.keys(loaderTypes.atlas).length) {
+    shell.ShellString('\n    class IExistSoTypeScriptWillNotComplainAboutAnEmptyNamespace {}').toEnd(assetsClassFile);
+}
+
 for (var i in loaderTypes.atlas) {
-    shell.ShellString('\n\n    export class ' + toPascalCase(i) + ' {').toEnd(assetsClassFile);
-    shell.ShellString('\n        static getName(): string { return \'' + i.split('/').pop() + '\'; };\n').toEnd(assetsClassFile);
+    var dataExtensions = [];
+    var dataTypes = [];
 
     for (var t in loaderTypes.atlas[i]) {
-        var type = '';
+        var dataFile = ('assets/' + i + '.' + loaderTypes.atlas[i][t]);
+        var fileData = null;
+        var json = null;
+        var parser = null;
+        var frameFull = '';
+        var frame = '';
+
+        dataExtensions.push(loaderTypes.atlas[i][t]);
 
         if (jsonExtensions.indexOf(loaderTypes.atlas[i][t]) !== -1) {
-            if (shell.grep(/"frames":\s*(\[)/g, ('assets/' + i + '.' + loaderTypes.atlas[i][t])).length > 1) {
-                type = 'Array';
-            } else if (shell.grep(/"frames":\s*(\{)/g, ('assets/' + i + '.' + loaderTypes.atlas[i][t])).length > 1) {
-                type = 'Hash';
+            shell.ShellString('\n    enum ' + toPascalCase(i) + 'Frames {').toEnd(assetsClassFile);
+
+            try {
+                fileData = fs.readFileSync(dataFile, 'ascii');
+                json = JSON.parse(fileData);
+
+                if (Array.isArray(json['frames'])) {
+                    dataTypes.push('Array');
+
+                    for (var a in json['frames']) {
+                        frameFull = (json['frames'][a]['filename']);
+                        frame = frameFull.substring(0, frameFull.lastIndexOf('.'));
+                        shell.ShellString('\n        ' + toPascalCase(frame) + ' = <any>\'' + frameFull + '\',').toEnd(assetsClassFile);
+                    }
+                } else {
+                    dataTypes.push('Hash');
+
+                    for (var h in json['frames']) {
+                        frameFull = (h);
+                        frame = frameFull.substring(0, frameFull.lastIndexOf('.'));
+                        shell.ShellString('\n        ' + toPascalCase(frame) + ' = <any>\'' + frameFull + '\',').toEnd(assetsClassFile);
+                    }
+                }
+            } catch (e) {
+                console.log('Atlas Data File Error: ', e);
             }
+
+            shell.ShellString('\n    }').toEnd(assetsClassFile);
         } else if (xmlExtensions.indexOf(loaderTypes.atlas[i][t]) !== -1) {
-            type = 'XML';
+            dataTypes.push('');
+
+            shell.ShellString('\n    enum ' + toPascalCase(i) + 'Frames {').toEnd(assetsClassFile);
+
+            try {
+                fileData = fs.readFileSync(dataFile, 'ascii');
+                parser = new xml2js.Parser();
+
+                parser.parseString(fileData.substring(0, fileData.length), function (err, result) {
+                    for (var x in result['TextureAtlas']['SubTexture']) {
+                        frameFull = (result['TextureAtlas']['SubTexture'][x]['$']['name']);
+                        frame = frameFull.substring(0, frameFull.lastIndexOf('.'));
+                        shell.ShellString('\n        ' + toPascalCase(frame) + ' = <any>\'' + frameFull + '\',').toEnd(assetsClassFile);
+                    }
+                });
+            } catch (e) {
+                console.log('Atlas Data File Error: ', e);
+            }
+
+            shell.ShellString('\n    }').toEnd(assetsClassFile);
+        } else {
+            dataTypes.push('');
         }
-        shell.ShellString('\n        static get' + loaderTypes.atlas[i][t].toUpperCase() + type + '(): string { return require(\'assets/' + i + '.' + loaderTypes.atlas[i][t] + '\'); };').toEnd(assetsClassFile);
     }
 
+    shell.ShellString('\n    export class ' + toPascalCase(i) + ' {').toEnd(assetsClassFile);
+    shell.ShellString('\n        static getName(): string { return \'' + i.split('/').pop() + '\'; };').toEnd(assetsClassFile);
+    for (var e in dataExtensions) {
+        shell.ShellString('\n\n        static get' + dataExtensions[e].toUpperCase() + dataTypes[e] + '(): string { return require(\'assets/' + i + '.' + dataExtensions[e] + '\'); };').toEnd(assetsClassFile);
+    }
+    shell.ShellString('\n\n        static Frames = ' + toPascalCase(i) + 'Frames;').toEnd(assetsClassFile);
     shell.ShellString('\n    }').toEnd(assetsClassFile);
 }
 shell.ShellString('\n}\n\n').toEnd(assetsClassFile);
 
-shell.ShellString('export namespace Audio {\n    class IExistSoTheBuildDoesntFailWithAnEmptyNamespace {}').toEnd(assetsClassFile);
+shell.ShellString('export namespace Audio {').toEnd(assetsClassFile);
+if (!Object.keys(loaderTypes.audio).length) {
+    shell.ShellString('\n    class IExistSoTypeScriptWillNotComplainAboutAnEmptyNamespace {}').toEnd(assetsClassFile);
+}
+
 for (var i in loaderTypes.audio) {
-    shell.ShellString('\n\n    export class ' + toPascalCase(i) + ' {').toEnd(assetsClassFile);
+    shell.ShellString('\n    export class ' + toPascalCase(i) + ' {').toEnd(assetsClassFile);
     shell.ShellString('\n        static getName(): string { return \'' + i.split('/').pop() + '\'; };\n').toEnd(assetsClassFile);
 
     for (var t in loaderTypes.audio[i]) {
@@ -152,9 +222,13 @@ for (var i in loaderTypes.audio) {
 }
 shell.ShellString('\n}\n\n').toEnd(assetsClassFile);
 
-shell.ShellString('export namespace Audiosprites {\n    class IExistSoTheBuildDoesntFailWithAnEmptyNamespace {}').toEnd(assetsClassFile);
+shell.ShellString('export namespace Audiosprites {').toEnd(assetsClassFile);
+if (!Object.keys(loaderTypes.audiosprite).length) {
+    shell.ShellString('\n    class IExistSoTypeScriptWillNotComplainAboutAnEmptyNamespace {}').toEnd(assetsClassFile);
+}
+
 for (var i in loaderTypes.audiosprite) {
-    shell.ShellString('\n\n    export class ' + toPascalCase(i) + ' {').toEnd(assetsClassFile);
+    shell.ShellString('\n    export class ' + toPascalCase(i) + ' {').toEnd(assetsClassFile);
     shell.ShellString('\n        static getName(): string { return \'' + i.split('/').pop() + '\'; };\n').toEnd(assetsClassFile);
 
     for (var t in loaderTypes.audiosprite[i]) {
@@ -165,9 +239,13 @@ for (var i in loaderTypes.audiosprite) {
 }
 shell.ShellString('\n}\n\n').toEnd(assetsClassFile);
 
-shell.ShellString('export namespace BitmapFonts {\n    class IExistSoTheBuildDoesntFailWithAnEmptyNamespace {}').toEnd(assetsClassFile);
+shell.ShellString('export namespace BitmapFonts {').toEnd(assetsClassFile);
+if (!Object.keys(loaderTypes.bitmap_font).length) {
+    shell.ShellString('\n    class IExistSoTypeScriptWillNotComplainAboutAnEmptyNamespace {}').toEnd(assetsClassFile);
+}
+
 for (var i in loaderTypes.bitmap_font) {
-    shell.ShellString('\n\n    export class ' + toPascalCase(i) + ' {').toEnd(assetsClassFile);
+    shell.ShellString('\n    export class ' + toPascalCase(i) + ' {').toEnd(assetsClassFile);
     shell.ShellString('\n        static getName(): string { return \'' + i.split('/').pop() + '\'; };\n').toEnd(assetsClassFile);
 
     for (var t in loaderTypes.bitmap_font[i]) {
@@ -178,9 +256,13 @@ for (var i in loaderTypes.bitmap_font) {
 }
 shell.ShellString('\n}\n\n').toEnd(assetsClassFile);
 
-shell.ShellString('export namespace JSON {\n    class IExistSoTheBuildDoesntFailWithAnEmptyNamespace {}').toEnd(assetsClassFile);
+shell.ShellString('export namespace JSON {').toEnd(assetsClassFile);
+if (!Object.keys(loaderTypes.json).length) {
+    shell.ShellString('\n    class IExistSoTypeScriptWillNotComplainAboutAnEmptyNamespace {}').toEnd(assetsClassFile);
+}
+
 for (var i in loaderTypes.json) {
-    shell.ShellString('\n\n    export class ' + toPascalCase(i) + ' {').toEnd(assetsClassFile);
+    shell.ShellString('\n    export class ' + toPascalCase(i) + ' {').toEnd(assetsClassFile);
     shell.ShellString('\n        static getName(): string { return \'' + i.split('/').pop() + '\'; };\n').toEnd(assetsClassFile);
 
     for (var t in loaderTypes.json[i]) {
@@ -191,9 +273,13 @@ for (var i in loaderTypes.json) {
 }
 shell.ShellString('\n}\n\n').toEnd(assetsClassFile);
 
-shell.ShellString('export namespace XML {\n    class IExistSoTheBuildDoesntFailWithAnEmptyNamespace {}').toEnd(assetsClassFile);
+shell.ShellString('export namespace XML {').toEnd(assetsClassFile);
+if (!Object.keys(loaderTypes.xml).length) {
+    shell.ShellString('\n    class IExistSoTypeScriptWillNotComplainAboutAnEmptyNamespace {}').toEnd(assetsClassFile);
+}
+
 for (var i in loaderTypes.xml) {
-    shell.ShellString('\n\n    export class ' + toPascalCase(i) + ' {').toEnd(assetsClassFile);
+    shell.ShellString('\n    export class ' + toPascalCase(i) + ' {').toEnd(assetsClassFile);
     shell.ShellString('\n        static getName(): string { return \'' + i.split('/').pop() + '\'; };\n').toEnd(assetsClassFile);
 
     for (var t in loaderTypes.xml[i]) {
@@ -204,9 +290,13 @@ for (var i in loaderTypes.xml) {
 }
 shell.ShellString('\n}\n\n').toEnd(assetsClassFile);
 
-shell.ShellString('export namespace Text {\n    class IExistSoTheBuildDoesntFailWithAnEmptyNamespace {}').toEnd(assetsClassFile);
+shell.ShellString('export namespace Text {').toEnd(assetsClassFile);
+if (!Object.keys(loaderTypes.text).length) {
+    shell.ShellString('\n    class IExistSoTypeScriptWillNotComplainAboutAnEmptyNamespace {}').toEnd(assetsClassFile);
+}
+
 for (var i in loaderTypes.text) {
-    shell.ShellString('\n\n    export class ' + toPascalCase(i) + ' {').toEnd(assetsClassFile);
+    shell.ShellString('\n    export class ' + toPascalCase(i) + ' {').toEnd(assetsClassFile);
     shell.ShellString('\n        static getName(): string { return \'' + i.split('/').pop() + '\'; };\n').toEnd(assetsClassFile);
 
     for (var t in loaderTypes.text[i]) {
@@ -217,9 +307,13 @@ for (var i in loaderTypes.text) {
 }
 shell.ShellString('\n}\n\n').toEnd(assetsClassFile);
 
-shell.ShellString('export namespace Misc {\n    class IExistSoTheBuildDoesntFailWithAnEmptyNamespace {}').toEnd(assetsClassFile);
+shell.ShellString('export namespace Misc {').toEnd(assetsClassFile);
+if (!Object.keys(loaderTypes.misc).length) {
+    shell.ShellString('\n    class IExistSoTypeScriptWillNotComplainAboutAnEmptyNamespace {}').toEnd(assetsClassFile);
+}
+
 for (var i in loaderTypes.misc) {
-    shell.ShellString('\n\n    export class ' + toPascalCase(i) + ' {').toEnd(assetsClassFile);
+    shell.ShellString('\n    export class ' + toPascalCase(i) + ' {').toEnd(assetsClassFile);
     shell.ShellString('\n        static getName(): string { return \'' + i.split('/').pop() + '\'; };\n').toEnd(assetsClassFile);
 
     for (var t in loaderTypes.misc[i]) {

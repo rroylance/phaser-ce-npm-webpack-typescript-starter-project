@@ -1,6 +1,6 @@
 {
   "name": "phaser-npm-webpack-typescript-starter-project",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "scripts": {
     "webpack:dev": "webpack --config webpack.dev.config.js --progress --colors",
     "webpack:dist": "webpack --config webpack.dist.config.js --progress --colors",
@@ -40,6 +40,7 @@
     "webfontloader": "1.6.27",
     "webpack": "2.2.1",
     "webpack-dev-server": "1.16.3",
-    "webpack-shell-plugin": "0.5.0"
+    "webpack-shell-plugin": "0.5.0",
+    "xml2js": "0.4.17"
   }
 }
