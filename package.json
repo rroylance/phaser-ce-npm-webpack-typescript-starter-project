@@ -1,6 +1,6 @@
 {
   "name": "phaser-npm-webpack-typescript-starter-project",
-  "version": "1.4.3",
+  "version": "1.5.0",
   "scripts": {
     "webpack:dev": "webpack --config webpack.dev.config.js --progress --colors",
     "webpack:dist": "webpack --config webpack.dist.config.js --progress --colors",
