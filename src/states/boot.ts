@@ -15,10 +15,14 @@ export default class Boot extends Phaser.State {
         // Uncomment the following to disable multitouch
         // this.input.maxPointers = 1;
 
-        let screenMetrics: Utils.ScreenMetrics = Utils.ScreenUtils.screenMetrics;
+        this.game.scale.scaleMode = Phaser.ScaleManager[SCALE_MODE];
 
-        this.game.scale.scaleMode = Phaser.ScaleManager.USER_SCALE;
-        this.game.scale.setUserScale(screenMetrics.scaleX, screenMetrics.scaleY);
+        if (SCALE_MODE === 'USER_SCALE') {
+            let screenMetrics: Utils.ScreenMetrics = Utils.ScreenUtils.screenMetrics;
+
+            this.game.scale.setUserScale(screenMetrics.scaleX, screenMetrics.scaleY);
+        }
+
         this.game.scale.pageAlignHorizontally = true;
         this.game.scale.pageAlignVertically = true;
 
@@ -43,6 +47,7 @@ export default class Boot extends Phaser.State {
         console.log(
             `DEBUG............... ${DEBUG} 
            \nGIT_REVISION........ ${GIT_REVISION}
+           \nSCALE_MODE.......... ${SCALE_MODE}
            \nDEFAULT_GAME_WIDTH.. ${DEFAULT_GAME_WIDTH}
            \nDEFAULT_GAME_HEIGHT. ${DEFAULT_GAME_HEIGHT}
            \nMAX_GAME_WIDTH...... ${MAX_GAME_WIDTH}

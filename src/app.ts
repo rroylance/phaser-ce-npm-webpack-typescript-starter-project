@@ -22,12 +22,20 @@ class App extends Phaser.Game {
 }
 
 function startApp(): void {
-    let screenMetrics: Utils.ScreenMetrics = Utils.ScreenUtils.calculateScreenMetrics(DEFAULT_GAME_WIDTH, DEFAULT_GAME_HEIGHT);
+    let gameWidth: number = DEFAULT_GAME_WIDTH;
+    let gameHeight: number = DEFAULT_GAME_HEIGHT;
+
+    if (SCALE_MODE === 'USER_SCALE') {
+        let screenMetrics: Utils.ScreenMetrics = Utils.ScreenUtils.calculateScreenMetrics(gameWidth, gameHeight);
+
+        gameWidth = screenMetrics.gameWidth;
+        gameHeight = screenMetrics.gameHeight;
+    }
 
     // There are a few more options you can set if needed, just take a look at Phaser.IGameCongig
     let gameConfig: Phaser.IGameConfig = {
-        width: screenMetrics.gameWidth,
-        height: screenMetrics.gameHeight,
+        width: gameWidth,
+        height: gameHeight,
         renderer: Phaser.AUTO,
         parent: '',
         resolution: 1
