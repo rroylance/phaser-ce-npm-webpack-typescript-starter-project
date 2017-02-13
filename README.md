@@ -115,21 +115,27 @@ Currently supports the following (if you need a new extension or find an issue w
 
 - Images:
   - bmp, gif, jpg, jpeg, png, webp
-- Atlases
+- Atlases:
   - bmp, gif, jpg, jpeg, png, webp
   - json (the loader figures out if it's a JSONArray or JSONHash, no need to remember or care), xml
-- Audio
-  - aac, ac3, caf, flac, mp3, mp4, ogg, wav, webm
+- Audio:
+  - aac, ac3, caf, flac, m4a, mp3, mp4, ogg, wav, webm
+- Audiosprites:
+  - aac, ac3, caf, flac, m4a, mp3, mp4, ogg, wav, webm
   - json
-- Bitmap Font
+- Bitmap Font:
   - bmp, gif, jpg, jpeg, png, webp
   - xml, fnt
-- JSON
+- JSON:
   - json
-- XML
+- XML:
   - xml
-- Text
+- Text:
   - txt
+  
+Which version of the audio to load is defined in the webpack.dev.config.js and webpack.dist.config.js under the DefinePlugin 'SOUND_EXTENSIONS_PREFERENCE' section;
+- Currently I set the order to: webm, ogg, m4a, mp3, aac, ac3, caf, flac, mp4, wav
+- The loader will load the audio using this as the preference; the first supported file that is found is used using the order of this list as most preferred to least preferred
   
 Not currently supported;
 
@@ -160,6 +166,10 @@ You can either provide the width **and** height (defaults 800 and 500 respective
 Providing --scale-mode will set this.game.scale.scaleMode to the corresponding Phaser.ScaleManager.SCALE_MODE (default USER_SCALE).
 
 If you do not want the background to be created just add the flag --no-png (not putting this will let the background generate).
+
+## Google Web Fonts
+
+Add your desired Google Web Fonts to the webpack.dev.config.js and/or webpack.dist.config.js in the DefinePlugin 'GOOGLE_WEB_FONTS' section.
 
 ## Bugs/Issues?
 

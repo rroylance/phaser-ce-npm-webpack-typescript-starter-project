@@ -45,10 +45,7 @@ function startApp(): void {
 }
 
 window.onload = () => {
-    // Add or remove entries in this array to change which fonts are loaded
-    let webFontsToLoad: string[] = [
-        'Barrio'
-    ];
+    let webFontsToLoad: string[] = GOOGLE_WEB_FONTS;
 
     if (webFontsToLoad.length > 0) {
         // Load the fonts defined in webFontsToLoad from Google Web Fonts then start the game knowing the fonts are available

@@ -19,7 +19,11 @@ export default class Preloader extends Phaser.State {
 
         this.game.load.setPreloadSprite(this.preloadBarSprite);
 
-        AssetUtils.Loader.loadAllAssets(this.game, this.startGame, this);
+        AssetUtils.Loader.loadAllAssets(this.game, this.waitForSoundDecoding, this);
+    }
+
+    private waitForSoundDecoding(): void {
+        AssetUtils.Loader.waitForSoundDecoding(this.startGame, this);
     }
 
     private startGame(): void {

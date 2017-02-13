@@ -2,6 +2,8 @@ import * as Assets from '../assets';
 
 export class Loader {
     private static game: Phaser.Game = null;
+    private static soundKeys: string[] = [];
+    private static soundExtensionsPreference: string[] = SOUND_EXTENSIONS_PREFERENCE;
 
     private static loadImages() {
         for (let image in Assets.Images) {
@@ -40,9 +42,26 @@ export class Loader {
         }
     }
 
+    private static orderAudioSourceArrayBasedOnSoundExtensionPreference(soundSourceArray: string[]): string[] {
+        let orderedSoundSourceArray: string[] = [];
+
+        for (let e in this.soundExtensionsPreference) {
+            let sourcesWithExtension: string[] = soundSourceArray.filter((el) => {
+                return (el.substring(el.lastIndexOf('.') + 1, el.length) === this.soundExtensionsPreference[e]);
+            });
+
+            orderedSoundSourceArray = orderedSoundSourceArray.concat(sourcesWithExtension);
+        }
+
+        return orderedSoundSourceArray;
+    }
+
     private static loadAudio() {
         for (let audio in Assets.Audio) {
-            if (!this.game.cache.checkSoundKey(Assets.Audio[audio].getName())) {
+            let soundName = Assets.Audio[audio].getName();
+            this.soundKeys.push(soundName);
+
+            if (!this.game.cache.checkSoundKey(soundName)) {
                 let audioTypeArray = [];
 
                 for (let option in Assets.Audio[audio]) {
@@ -51,14 +70,19 @@ export class Loader {
                     }
                 }
 
-                this.game.load.audio(Assets.Audio[audio].getName(), audioTypeArray, true);
+                audioTypeArray = this.orderAudioSourceArrayBasedOnSoundExtensionPreference(audioTypeArray);
+
+                this.game.load.audio(soundName, audioTypeArray, true);
             }
         }
     }
 
     private static loadAudiosprites() {
         for (let audio in Assets.Audiosprites) {
-            if (!this.game.cache.checkSoundKey(Assets.Audiosprites[audio].getName())) {
+            let soundName = Assets.Audiosprites[audio].getName();
+            this.soundKeys.push(soundName);
+
+            if (!this.game.cache.checkSoundKey(soundName)) {
                 let audioTypeArray = [];
 
                 for (let option in Assets.Audiosprites[audio]) {
@@ -67,7 +91,9 @@ export class Loader {
                     }
                 }
 
-                this.game.load.audiosprite(Assets.Audiosprites[audio].getName(), audioTypeArray, Assets.Audiosprites[audio].getJSON(), null, true);
+                audioTypeArray = this.orderAudioSourceArrayBasedOnSoundExtensionPreference(audioTypeArray);
+
+                this.game.load.audiosprite(soundName, audioTypeArray, Assets.Audiosprites[audio].getJSON(), null, true);
             }
         }
     }
@@ -130,5 +156,13 @@ export class Loader {
         this.loadJSON();
         this.loadXML();
         this.loadText();
+    }
+
+    public static waitForSoundDecoding(onComplete: Function, onCompleteContext?: any) {
+        if (this.soundKeys.length > 0) {
+            this.game.sound.setDecodedCallback(this.soundKeys, onComplete, onCompleteContext);
+        } else {
+            onComplete.call(onCompleteContext);
+        }
     }
 }
