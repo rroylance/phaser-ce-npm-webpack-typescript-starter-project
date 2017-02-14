@@ -88,6 +88,8 @@ for (var i in gameAssets) {
         } else {
             loaderTypes.image[i] = gameAssets[i];
         }
+    } else if (fontType) {
+        console.log('Local fonts (' + i + ') are not supported yet; please use either a Bitmap Font or Google Web Font.\n');
     } else if (jsonType) {
         loaderTypes.json[i] = gameAssets[i];
     } else if (xmlType) {
