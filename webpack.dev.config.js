@@ -67,7 +67,7 @@ module.exports = {
             /phaser-ce/
         ],
         rules: [
-            { test: /assets\//, loader: 'file-loader?name=assets/[hash].[ext]' },
+            { test: /assets(\/|\\)/, loader: 'file-loader?name=assets/[hash].[ext]' },
             { test: /\.ts$/, enforce: 'pre', loader: 'tslint-loader' },
             { test: /\.ts$/, loader: 'ts-loader' }
         ]
