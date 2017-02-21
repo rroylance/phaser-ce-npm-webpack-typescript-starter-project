@@ -8,6 +8,7 @@ import Boot from './states/boot';
 import Preloader from './states/preloader';
 import Title from './states/title';
 import * as Utils from './utils/utils';
+import * as Assets from './assets';
 
 class App extends Phaser.Game {
     constructor(config: Phaser.IGameConfig) {
@@ -45,18 +46,38 @@ function startApp(): void {
 }
 
 window.onload = () => {
+    let webFontLoaderOptions: any = null;
     let webFontsToLoad: string[] = GOOGLE_WEB_FONTS;
 
     if (webFontsToLoad.length > 0) {
-        // Load the fonts defined in webFontsToLoad from Google Web Fonts then start the game knowing the fonts are available
-        WebFontLoader.load({
-            active: startApp,
-            google: {
-                families: webFontsToLoad
-            }
-        });
-    } else {
+        webFontLoaderOptions = (webFontLoaderOptions || {});
+
+        webFontLoaderOptions.google = {
+            families: webFontsToLoad
+        };
+    }
+
+    if (Object.keys(Assets.CustomWebFonts).length > 0) {
+        webFontLoaderOptions = (webFontLoaderOptions || {});
+
+        webFontLoaderOptions.custom = {
+            families: [],
+            urls: []
+        };
+
+        for (let font in Assets.CustomWebFonts) {
+            webFontLoaderOptions.custom.families.push(Assets.CustomWebFonts[font].getFamily());
+            webFontLoaderOptions.custom.urls.push(Assets.CustomWebFonts[font].getCSS());
+        }
+    }
+
+    if (webFontLoaderOptions === null) {
         // Just start the game, we don't need any additional fonts
         startApp();
+    } else {
+        // Load the fonts defined in webFontsToLoad from Google Web Fonts, and/or any Local Fonts then start the game knowing the fonts are available
+        webFontLoaderOptions.active = startApp;
+
+        WebFontLoader.load(webFontLoaderOptions);
     }
 };

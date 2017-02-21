@@ -86,6 +86,24 @@ export namespace Audiosprites {
     }
 }
 
+export namespace GoogleWebFonts {
+    export const Barrio: string = 'Barrio';
+}
+
+export namespace CustomWebFonts {
+    export class Fonts2DumbWebfont {
+        static getName(): string { return '2Dumb-webfont'; };
+
+        static getFamily(): string { return '2dumbregular'; };
+
+        static getCSS(): string { return require('!file-loader?name=assets/fonts/[name].[ext]!assets/fonts/2Dumb-webfont.css'); };
+        static getEOT(): string { return require('!file-loader?name=assets/fonts/[name].[ext]!assets/fonts/2Dumb-webfont.eot'); };
+        static getSVG(): string { return require('!file-loader?name=assets/fonts/[name].[ext]!assets/fonts/2Dumb-webfont.svg'); };
+        static getTTF(): string { return require('!file-loader?name=assets/fonts/[name].[ext]!assets/fonts/2Dumb-webfont.ttf'); };
+        static getWOFF(): string { return require('!file-loader?name=assets/fonts/[name].[ext]!assets/fonts/2Dumb-webfont.woff'); };
+    }
+}
+
 export namespace BitmapFonts {
     export class FontsFontFnt {
         static getName(): string { return 'font_fnt'; };

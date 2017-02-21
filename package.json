@@ -1,6 +1,6 @@
 {
   "name": "phaser-npm-webpack-typescript-starter-project",
-  "version": "1.6.2",
+  "version": "1.7.0",
   "scripts": {
     "webpack:dev": "webpack --config webpack.dev.config.js --progress --colors",
     "webpack:dist": "webpack --config webpack.dist.config.js --progress --colors",
@@ -9,6 +9,7 @@
     "server:dev": "webpack-dev-server --config webpack.dev.config.js --open",
     "server:dist": "webpack-dev-server --config webpack.dist.config.js --open",
     "setupGameSize": "node ./scripts/setupGameSize.js",
+    "assets:dev": "node ./scripts/generateAssetsClass.js --dev",
     "assets": "node ./scripts/generateAssetsClass.js",
     "postinstall": "npm run setupGameSize"
   },

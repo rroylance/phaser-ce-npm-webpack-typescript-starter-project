@@ -100,3 +100,20 @@ export class ScreenUtils {
         return this.screenMetrics;
     }
 }
+
+export class StringUtils {
+    public static toCamelCase(str: string) {
+        return str.replace(/[^A-Za-z0-9]/g, ' ').replace(/^\w|[A-Z]|\b\w|\s+/g, function (match, index) {
+            if (+match === 0 || match === '-' || match === '.') {
+                return '';
+            }
+            return (index === 0 ? match.toLowerCase() : match.toUpperCase());
+        });
+    }
+
+    public static toPascalCase(str: string) {
+        let camelCase: string = StringUtils.toCamelCase(str);
+
+        return (camelCase[0].toUpperCase() + camelCase.substr(1));
+    }
+}
