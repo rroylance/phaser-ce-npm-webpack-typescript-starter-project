@@ -1,6 +1,7 @@
 {
   "name": "phaser-npm-webpack-typescript-starter-project",
-  "version": "1.7.0",
+  "version": "1.7.1",
+  "main": "electron-main.js",
   "scripts": {
     "webpack:dev": "webpack --config webpack.dev.config.js --progress --colors",
     "webpack:dist": "webpack --config webpack.dist.config.js --progress --colors",
@@ -11,7 +12,9 @@
     "setupGameSize": "node ./scripts/setupGameSize.js",
     "assets:dev": "node ./scripts/generateAssetsClass.js --dev",
     "assets": "node ./scripts/generateAssetsClass.js",
-    "postinstall": "npm run setupGameSize"
+    "postinstall": "npm run setupGameSize",
+    "electron:dev": "npm run build:dev && electron .",
+    "electron:dist": "npm run build:dist && electron ."
   },
   "repository": {
     "type": "git",
@@ -28,6 +31,7 @@
     "commander": "2.9.0",
     "copy-webpack-plugin": "4.0.1",
     "echo-cli": "1.0.8",
+    "electron": "1.4.15",
     "file-loader": "0.10.0",
     "git-revision-webpack-plugin": "2.4.1",
     "html-webpack-plugin": "2.28.0",

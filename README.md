@@ -209,6 +209,22 @@ I recommend one of the following generators for generating your font files;
 - [Font Squirrel Webfont Generator][fontsquirrel]
 - [Everything Fonts font-face generator][everythingfonts]
 
+## Desktop Build via Electron
+
+** Note that I am not, currently, actively using this. So if you do, I'd appreciate if you could pass any changes you make or anything you need out of it. Although I'm not using it, I will still support it as best I can.**
+
+You can test your game via Electron by running;
+
+```npm run electron:dev```
+
+or
+
+```npm run electron:dist```
+
+To build the dev or dist version of your game, respectively, and then open up your game in an Electron instance.
+
+After you're done writing your app, you can create a distribution by following the [Application Distribution][electron-distribution] guide and then executing the packaged app.
+
 ## Bugs/Issues?
 
 If you have any issues please let me know via [GitHub Issues][issues]!
@@ -229,3 +245,4 @@ If you would like to have some of your code included; whether a new feature, a c
 [git-scm]: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
 [nodejs]: https://nodejs.org/en/
 [itchio]: https://rroylance.itch.io/phaser-npm-webpack-typescript-starter-project
+[lectron-distribution]: https://electron.atom.io/docs/tutorial/application-distribution/
