@@ -162,9 +162,11 @@ If you do not want the default 800 x 500 with this scaling style, run the follow
 **DO NOT MODIFY THE (DEFAULT or MAX)\_GAME\_(WIDTH or HEIGHT) OR SCALE_MODE PLUGINS DEFINED IN THE WEBPACK CONFIGS, OR THIS WILL NOT WORK**;
 
 Run the following for descriptions and default values for all possible options;
+
 ```npm run setupGameSize -- -h```
 
 Run the following specifying some or all of the options;
+
 ```npm run setupGameSize -- --width [whatever width you want] --height [whatever height you want] --aspect-ratio [If you want a different default aspect ratio] --scale-mode [one of the Phaser Scale Modes] [--no-png]```
 
 **The '--' after setupGameSize is not a mistake; it is required to pass arguments along to the script.**
