@@ -245,4 +245,4 @@ If you would like to have some of your code included; whether a new feature, a c
 [git-scm]: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
 [nodejs]: https://nodejs.org/en/
 [itchio]: https://rroylance.itch.io/phaser-npm-webpack-typescript-starter-project
-[lectron-distribution]: https://electron.atom.io/docs/tutorial/application-distribution/
+[electron-distribution]: https://electron.atom.io/docs/tutorial/application-distribution/
