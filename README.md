@@ -35,6 +35,24 @@
 - Optional Analytics integration
 - Optional Cordova integration for iOS and Android builds
 
+### Folder Structure:
+- assets/ //This is where your assets that are processed when building goes
+- assets_raw/ //This folder is NOT processed at all and is merely an organizational folder (I use it for things like my individual images that get compiled into a spritesheet, individual sounds that get compiled into an audiosprite, etc...)
+- dist/ //This is where the built game will go
+- node_modules/ //This is where the node modules required for the game will be put with npm install
+- scripts/ //This is where node scripts go
+- src/ //This is where all the games code goes
+- templates/ //This is where the html template that gets built by Webpack goes
+- .gitignore //List of files and folders that are ignored by git
+- .npmrc //List of some project wide npm settings
+- package.json //Node config for the project
+- README.md //This is the README displayed ont he GitHub page
+- README_HEADER.png //This is just the header image for the GitHub README
+- tsconfig.json //List of some TypeScript settings
+- tslint.json //List of some TypeScript Linting rules
+- webpack.dev.config.js //Webpack config for the DEV build
+- webpack.dist.config.js //Webpack config for the DIST build
+
 # Setup:
 To use this you’ll need to install a few things before you have a working copy of the project. But once you have node.js installed it only takes a few seconds and a couple commands to get going.
 
