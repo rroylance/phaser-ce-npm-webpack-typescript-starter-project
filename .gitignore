@@ -6,6 +6,7 @@ node_modules
 
 # Game
 dist
+builds
 
 # OSX
 .DS_Store

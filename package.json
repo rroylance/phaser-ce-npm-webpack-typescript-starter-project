@@ -1,5 +1,6 @@
 {
   "name": "phaser-npm-webpack-typescript-starter-project",
+  "productName": "phaser-npm-webpack-typescript-starter-project",
   "version": "1.7.2",
   "main": "electron-main.js",
   "scripts": {
@@ -15,6 +16,18 @@
     "postinstall": "npm run setupGameSize",
     "electron:dev": "npm run build:dev && electron .",
     "electron:dist": "npm run build:dist && electron .",
+    "electron:pack": "node ./scripts/packageElectronApp.js",
+    "electron:pack:win32": "npm run electron:pack -- --platform win32",
+    "electron:pack:win32:ia32": "npm run electron:pack -- --platform win32 --arch ia32",
+    "electron:pack:win32:x64": "npm run electron:pack -- --platform win32 --arch x64",
+    "electron:pack:osx": "npm run electron:pack -- --platform darwin",
+    "electron:pack:osx:ia32": "npm run electron:pack -- --platform darwin --arch ia32",
+    "electron:pack:osx:x64": "npm run electron:pack -- --platform darwin --arch x64",
+    "electron:pack:linux": "npm run electron:pack -- --platform linux",
+    "electron:pack:linux:ia32": "npm run electron:pack -- --platform linux --arch ia32",
+    "electron:pack:linux:x64": "npm run electron:pack -- --platform linux --arch x64",
+    "electron:pack:linux:arm": "npm run electron:pack -- --platform linux --arch=armv7l",
+    "electron:pack:mas": "npm run electron:pack -- --platform mas",
     "checkDepsVersions": "npm-check --skip-unused -u"
   },
   "repository": {
@@ -33,6 +46,7 @@
     "copy-webpack-plugin": "4.0.1",
     "echo-cli": "1.0.8",
     "electron": "1.4.15",
+    "electron-packager": "8.5.2",
     "file-loader": "0.10.1",
     "git-revision-webpack-plugin": "2.4.1",
     "html-webpack-plugin": "2.28.0",
