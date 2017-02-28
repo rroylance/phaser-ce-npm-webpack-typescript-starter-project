@@ -45,6 +45,7 @@
 - **templates/** – This is where the html template that gets built by Webpack goes
 - **.gitignore** – List of files and folders that are ignored by git
 - **.npmrc** – List of some project wide npm settings
+- **electron-main.js** – Entry point and application life controller for electron builds
 - **package.json** – Node config for the project
 - **README.md** – This is the README displayed ont he GitHub page
 - **README_HEADER.png** – This is just the header image for the GitHub README
