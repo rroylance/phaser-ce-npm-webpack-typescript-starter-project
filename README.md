@@ -226,6 +226,31 @@ To build the dev or dist version of your game, respectively, and then open up yo
 
 After you're done writing your app, you can create a distribution by following the [Application Distribution][electron-distribution] guide and then executing the packaged app.
 
+## Package Desktop App via Electron
+
+** Note that I am not, currently, actively using this. So if you do, I'd appreciate if you could pass any changes you make or anything you need out of it. Although I'm not using it, I will still support it as best I can.**
+
+You can package your game for Windows (win32 ia32/x64), OSX (darwin ia32/x64), Mac App Store (mas ia32/x64), Linux (linux ia32/x64/armv7l) using the following script;
+
+```npm run electron:pack:dev```
+
+or
+
+```npm run electron:pack:dist```
+
+To package the dev or dist version of your game, respectively, for the current platform you are on. You can provide many options to build specific platforms, for specific architectures, provide an icon, etc.
+
+Refer to the [API Documentation][electron-pack-api] for a full list and details; I'm using it kind of oddly in that I'm using the API from the command line and not the command line version... to provide options appaend ' -- ' to the npm run command and then also append '--' to the option name and then either put the value after a space or '=', either way. Examples;
+
+```npm run electron:pack:dist -- --platform win32 --arch=ia32 //32 bit Windows exe```
+```npm run electron:pack:dist -- --platform win32,darwin --arch=ia32,x64 //32 and 64 bit Windows exe and OSX app```
+
+All builds will be in the builds/ folder in appropriately named folders.
+
+###### Note that building for Windows from a non windows device requires a  little bit of extra setup; refer to [Building Windows apps from non-Windows platforms][electron-pack-windows].
+
+###### Also note that for OSX / MAS target bundles: the .app bundle can only be signed when building on a host OSX platform.
+
 ## Bugs/Issues?
 
 If you have any issues please let me know via [GitHub Issues][issues]!
@@ -247,3 +272,5 @@ If you would like to have some of your code included; whether a new feature, a c
 [nodejs]: https://nodejs.org/en/
 [itchio]: https://rroylance.itch.io/phaser-npm-webpack-typescript-starter-project
 [electron-distribution]: https://electron.atom.io/docs/tutorial/application-distribution/
+[electron-pack-windows]: https://github.com/electron-userland/electron-packager#building-windows-apps-from-non-windows-platforms
+[electron-pack-api]: https://github.com/electron-userland/electron-packager/blob/master/docs/api.md

@@ -1,6 +1,7 @@
 {
   "name": "phaser-npm-webpack-typescript-starter-project",
-  "version": "1.7.2",
+  "productName": "phaser-npm-webpack-typescript-starter-project",
+  "version": "1.7.3",
   "main": "electron-main.js",
   "scripts": {
     "webpack:dev": "webpack --config webpack.dev.config.js --progress --colors",
@@ -15,6 +16,8 @@
     "postinstall": "npm run setupGameSize",
     "electron:dev": "npm run build:dev && electron .",
     "electron:dist": "npm run build:dist && electron .",
+    "electron:pack:dev": "npm run build:dev && node ./scripts/packageElectronApp.js",
+    "electron:pack:dist": "npm run build:dist && node ./scripts/packageElectronApp.js",
     "checkDepsVersions": "npm-check --skip-unused -u"
   },
   "repository": {
@@ -33,6 +36,7 @@
     "copy-webpack-plugin": "4.0.1",
     "echo-cli": "1.0.8",
     "electron": "1.4.15",
+    "electron-packager": "8.5.2",
     "file-loader": "0.10.1",
     "git-revision-webpack-plugin": "2.4.1",
     "html-webpack-plugin": "2.28.0",
