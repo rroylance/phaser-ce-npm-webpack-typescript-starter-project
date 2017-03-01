@@ -224,8 +224,6 @@ or
 
 To build the dev or dist version of your game, respectively, and then open up your game in an Electron instance.
 
-After you're done writing your app, you can create a distribution by following the [Application Distribution][electron-distribution] guide and then executing the packaged app.
-
 ## Package Desktop App via Electron
 
 ** Note that I am not, currently, actively using this. So if you do, I'd appreciate if you could pass any changes you make or anything you need out of it. Although I'm not using it, I will still support it as best I can.**
