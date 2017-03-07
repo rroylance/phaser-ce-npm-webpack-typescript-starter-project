@@ -161,6 +161,10 @@ Currently supports the following (if you need a new extension or find an issue w
   - xml
 - Text:
   - txt
+- Scripts:
+  - js
+- Shaders:
+  - frag
   
 Which version of the audio to load is defined in the webpack.dev.config.js and webpack.dist.config.js under the DefinePlugin 'SOUND_EXTENSIONS_PREFERENCE' section;
 - Currently I set the order to: webm, ogg, m4a, mp3, aac, ac3, caf, flac, mp4, wav

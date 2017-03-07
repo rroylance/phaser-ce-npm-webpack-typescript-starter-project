@@ -48,6 +48,8 @@ var loaderTypes = {
     json: {},
     xml: {},
     text: {},
+    script: {},
+    shader: {},
     misc: {}
 };
 
@@ -58,6 +60,8 @@ var bitmapFontExtensions = ['xml', 'fnt'];
 var jsonExtensions = ['json'];
 var xmlExtensions = ['xml'];
 var textExtensions = ['txt'];
+var scriptExtensions = ['js'];
+var shaderExtensions = ['frag'];
 
 shell.ls('assets/**/*.*').forEach(function (file) {
     var filePath = file.replace('assets/', '').split('.');
@@ -74,6 +78,8 @@ for (var i in gameAssets) {
     var jsonType = findExtension(gameAssets[i], jsonExtensions);
     var xmlType = findExtension(gameAssets[i], xmlExtensions);
     var textType = findExtension(gameAssets[i], textExtensions);
+    var scriptType = findExtension(gameAssets[i], scriptExtensions);
+    var shaderType = findExtension(gameAssets[i], shaderExtensions);
 
     if (bitmapFontType) {
         var isItActuallyAFont = false;
@@ -110,6 +116,10 @@ for (var i in gameAssets) {
         loaderTypes.xml[i] = gameAssets[i];
     } else if (textType) {
         loaderTypes.text[i] = gameAssets[i];
+    } else if (scriptType) {
+        loaderTypes.script[i] = gameAssets[i];
+    }  else if (shaderType) {
+        loaderTypes.shader[i] = gameAssets[i];
     } else {
         loaderTypes.misc[i] = gameAssets[i];
     }
@@ -379,6 +389,40 @@ if (!Object.keys(loaderTypes.text).length) {
     }
 }
 shell.ShellString('\n}\n\n').toEnd(assetsClassFile);
+
+shell.ShellString('export namespace Scripts {').toEnd(assetsClassFile);
+if (!Object.keys(loaderTypes.script).length) {
+    shell.ShellString('\n    class IExistSoTypeScriptWillNotComplainAboutAnEmptyNamespace {}').toEnd(assetsClassFile);
+} else {
+    for (var i in loaderTypes.script) {
+        shell.ShellString('\n    export class ' + toPascalCase(i) + ' {').toEnd(assetsClassFile);
+        shell.ShellString('\n        static getName(): string { return \'' + i.split('/').pop() + '\'; };\n').toEnd(assetsClassFile);
+
+        for (var t in loaderTypes.script[i]) {
+            shell.ShellString('\n        static get' + loaderTypes.script[i][t].toUpperCase() + '(): string { return require(\'assets/' + i + '.' + loaderTypes.script[i][t] + '\'); };').toEnd(assetsClassFile);
+        }
+
+        shell.ShellString('\n    }').toEnd(assetsClassFile);
+    }
+}
+shell.ShellString('\n}\n').toEnd(assetsClassFile);
+
+shell.ShellString('export namespace Shaders {').toEnd(assetsClassFile);
+if (!Object.keys(loaderTypes.shader).length) {
+    shell.ShellString('\n    class IExistSoTypeScriptWillNotComplainAboutAnEmptyNamespace {}').toEnd(assetsClassFile);
+} else {
+    for (var i in loaderTypes.shader) {
+        shell.ShellString('\n    export class ' + toPascalCase(i) + ' {').toEnd(assetsClassFile);
+        shell.ShellString('\n        static getName(): string { return \'' + i.split('/').pop() + '\'; };\n').toEnd(assetsClassFile);
+
+        for (var t in loaderTypes.shader[i]) {
+            shell.ShellString('\n        static get' + loaderTypes.shader[i][t].toUpperCase() + '(): string { return require(\'assets/' + i + '.' + loaderTypes.shader[i][t] + '\'); };').toEnd(assetsClassFile);
+        }
+
+        shell.ShellString('\n    }').toEnd(assetsClassFile);
+    }
+}
+shell.ShellString('\n}\n').toEnd(assetsClassFile);
 
 shell.ShellString('export namespace Misc {').toEnd(assetsClassFile);
 if (!Object.keys(loaderTypes.misc).length) {

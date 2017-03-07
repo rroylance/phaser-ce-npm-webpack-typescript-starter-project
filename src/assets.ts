@@ -131,6 +131,25 @@ export namespace Text {
     class IExistSoTypeScriptWillNotComplainAboutAnEmptyNamespace {}
 }
 
+export namespace Scripts {
+    export class ScriptsBlurX {
+        static getName(): string { return 'BlurX'; };
+
+        static getJS(): string { return require('assets/scripts/BlurX.js'); };
+    }
+    export class ScriptsBlurY {
+        static getName(): string { return 'BlurY'; };
+
+        static getJS(): string { return require('assets/scripts/BlurY.js'); };
+    }
+}
+export namespace Shaders {
+    export class ShadersPixelate {
+        static getName(): string { return 'pixelate'; };
+
+        static getFRAG(): string { return require('assets/shaders/pixelate.frag'); };
+    }
+}
 export namespace Misc {
     class IExistSoTypeScriptWillNotComplainAboutAnEmptyNamespace {}
 }
