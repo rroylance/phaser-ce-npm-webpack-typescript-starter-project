@@ -141,6 +141,10 @@ Currently supports the following (if you need a new extension or find an issue w
 
 - Images:
   - bmp, gif, jpg, jpeg, png, webp
+- Spritesheets:
+  - bmp, gif, jpg, jpeg, png, webp
+  - \[frameWidth, frameHeight, frameMax, margin, spacing\] - frameWidth & frameHeight are required.
+  - Example: spritesheet.\[100, 100\].png
 - Atlases:
   - bmp, gif, jpg, jpeg, png, webp
   - json (the loader figures out if it's a JSONArray or JSONHash, no need to remember or care), xml

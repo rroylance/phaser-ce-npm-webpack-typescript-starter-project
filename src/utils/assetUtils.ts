@@ -17,6 +17,22 @@ export class Loader {
         }
     }
 
+    private static loadSpritesheets() {
+        for (let spritesheet in Assets.Spritesheets) {
+            if (!this.game.cache.checkImageKey(Assets.Spritesheets[spritesheet].getName())) {
+                let imageOption = null;
+
+                for (let option in Assets.Spritesheets[spritesheet]) {
+                    if (option !== 'getName' && option !== 'getFrameWidth' && option !== 'getFrameHeight' && option !== 'getFrameMax' && option !== 'getMargin' && option !== 'getSpacing') {
+                        imageOption = option;
+                    }
+                }
+
+                this.game.load.spritesheet(Assets.Spritesheets[spritesheet].getName(), Assets.Spritesheets[spritesheet][imageOption](), Assets.Spritesheets[spritesheet].getFrameWidth(), Assets.Spritesheets[spritesheet].getFrameHeight(), Assets.Spritesheets[spritesheet].getFrameMax(), Assets.Spritesheets[spritesheet].getMargin(), Assets.Spritesheets[spritesheet].getSpacing());
+            }
+        }
+    }
+
     private static loadAtlases() {
         for (let atlas in Assets.Atlases) {
             if (!this.game.cache.checkImageKey(Assets.Atlases[atlas].getName())) {
@@ -163,6 +179,7 @@ export class Loader {
         }
 
         this.loadImages();
+        this.loadSpritesheets();
         this.loadAtlases();
         this.loadAudio();
         this.loadAudiosprites();

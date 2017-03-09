@@ -40,6 +40,7 @@ var gameAssets = {};
 
 var loaderTypes = {
     image: {},
+    spritesheet: {},
     atlas: {},
     audio: {},
     audiosprite: {},
@@ -67,7 +68,7 @@ shell.ls('assets/**/*.*').forEach(function (file) {
     var filePath = file.replace('assets/', '').split('.');
 
     gameAssets[filePath[0]] = gameAssets[filePath[0]] || [];
-    gameAssets[filePath[0]].push(filePath[1]);
+    gameAssets[filePath[0]] = gameAssets[filePath[0]].concat(filePath.slice(1));
 });
 
 for (var i in gameAssets) {
@@ -106,7 +107,12 @@ for (var i in gameAssets) {
         if (jsonType || xmlType) {
             loaderTypes.atlas[i] = gameAssets[i];
         } else {
-            loaderTypes.image[i] = gameAssets[i];
+            var spritesheetData = gameAssets[i][0].match(/\[(-?[0-9],?)*]/);
+            if (spritesheetData && spritesheetData.length > 0) {
+                loaderTypes.spritesheet[i] = gameAssets[i];
+            } else {
+                loaderTypes.image[i] = gameAssets[i];
+            }
         }
     } else if (fontType) {
         loaderTypes.font[i] = gameAssets[i];
@@ -141,6 +147,32 @@ if (!Object.keys(loaderTypes.image).length) {
         for (var t in loaderTypes.image[i]) {
             shell.ShellString('\n        static get' + loaderTypes.image[i][t].toUpperCase() + '(): string { return require(\'assets/' + i + '.' + loaderTypes.image[i][t] + '\'); };').toEnd(assetsClassFile);
         }
+
+        shell.ShellString('\n    }').toEnd(assetsClassFile);
+    }
+}
+shell.ShellString('\n}\n\n').toEnd(assetsClassFile);
+
+shell.ShellString('export namespace Spritesheets {').toEnd(assetsClassFile);
+if (!Object.keys(loaderTypes.spritesheet).length) {
+    shell.ShellString('\n    class IExistSoTypeScriptWillNotComplainAboutAnEmptyNamespace {}').toEnd(assetsClassFile);
+} else {
+    for (var i in loaderTypes.spritesheet) {
+        shell.ShellString('\n    export class ' + toPascalCase(i) + ' {').toEnd(assetsClassFile);
+        shell.ShellString('\n        static getName(): string { return \'' + i.split('/').pop() + '\'; };\n').toEnd(assetsClassFile);
+
+        shell.ShellString('\n        static get' + loaderTypes.spritesheet[i][1].toUpperCase() + '(): string { return require(\'assets/' + i + '.' + loaderTypes.spritesheet[i][0] + '.' + loaderTypes.spritesheet[i][1] + '\'); };').toEnd(assetsClassFile);
+
+        var spritesheetProperties = loaderTypes.spritesheet[i][0].replace('[', '').replace(']', '').split(',');
+        if (spritesheetProperties.length < 2 || spritesheetProperties.length > 5) {
+            console.log('Invalid number of Spritesheet properties provided for \'' + i + '\'. Must have between 2 and 5; [frameWidth, frameHeight, frameMax, margin, spacing] frameWidth and frameHeight are required');
+        }
+
+        shell.ShellString('\n        static getFrameWidth(): number { return ' + parseInt(spritesheetProperties[0] ? spritesheetProperties[0] : -1) + '; };').toEnd(assetsClassFile);
+        shell.ShellString('\n        static getFrameHeight(): number { return ' + parseInt(spritesheetProperties[1] ? spritesheetProperties[1] : -1) + '; };').toEnd(assetsClassFile);
+        shell.ShellString('\n        static getFrameMax(): number { return ' + parseInt(spritesheetProperties[2] ? spritesheetProperties[2] : -1) + '; };').toEnd(assetsClassFile);
+        shell.ShellString('\n        static getMargin(): number { return ' + parseInt(spritesheetProperties[3] ? spritesheetProperties[3] : 0) + '; };').toEnd(assetsClassFile);
+        shell.ShellString('\n        static getSpacing(): number { return ' + parseInt(spritesheetProperties[4] ? spritesheetProperties[4] : 0) + '; };').toEnd(assetsClassFile);
 
         shell.ShellString('\n    }').toEnd(assetsClassFile);
     }
