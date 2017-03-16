@@ -15,7 +15,7 @@ export default class Title extends Phaser.State {
     // despite string enums working just fine, they are not officially supported so we trick the compiler into letting us do it anyway.
     private sfxLaserSounds: any[] = null;
 
-    public preload(): void {
+    public create(): void {
         this.backgroundTemplateSprite = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, Assets.Images.ImagesBackgroundTemplate.getName());
         this.backgroundTemplateSprite.anchor.setTo(0.5);
 
@@ -61,10 +61,6 @@ export default class Title extends Phaser.State {
             availableSFX.Laser8,
             availableSFX.Laser9
         ];
-    }
-
-    public create(): void {
-        this.game.camera.flash(0x000000, 1000);
 
         this.game.sound.play(Assets.Audio.AudioMusic.getName(), 0.2, true);
 
@@ -72,5 +68,7 @@ export default class Title extends Phaser.State {
         this.backgroundTemplateSprite.events.onInputDown.add(() => {
             this.sfxAudiosprite.play(Phaser.ArrayUtils.getRandomItem(this.sfxLaserSounds));
         });
+
+        this.game.camera.flash(0x000000, 1000);
     }
 }
