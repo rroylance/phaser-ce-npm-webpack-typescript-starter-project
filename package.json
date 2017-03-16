@@ -1,7 +1,7 @@
 {
   "name": "phaser-npm-webpack-typescript-starter-project",
   "productName": "phaser-npm-webpack-typescript-starter-project",
-  "version": "1.7.6",
+  "version": "1.7.6.1",
   "main": "electron-main.js",
   "scripts": {
     "webpack:dev": "webpack --config webpack.dev.config.js --progress --colors",
@@ -37,6 +37,7 @@
     "echo-cli": "1.0.8",
     "electron": "1.4.15",
     "electron-packager": "8.5.2",
+    "expose-loader": "0.7.3",
     "file-loader": "0.10.1",
     "git-revision-webpack-plugin": "2.4.1",
     "html-webpack-plugin": "2.28.0",
