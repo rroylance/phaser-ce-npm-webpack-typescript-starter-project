@@ -10,7 +10,7 @@
 
 # Features:
 
-- Phaser-CE 2.7.3 (npm module, no having to download the library separately...)
+- Phaser-CE 2.7.5 (npm module, no having to download the library separately...)
 - TypeScript + TSLint
 - 3 States (Boot, Preloader, Title) showing transition between states and where some things should be done and how a TypeScript state looks
 - Google Web Font loader
