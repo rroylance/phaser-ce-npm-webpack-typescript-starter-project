@@ -65,12 +65,12 @@ module.exports = {
     module: {
         rules: [
             { test: /\.ts$/, enforce: 'pre', loader: 'tslint-loader' },
-
             { test: /assets(\/|\\)/, loader: 'file-loader?name=assets/[hash].[ext]' },
             { test: /pixi\.js$/, loader: 'expose-loader?PIXI' },
             { test: /phaser-split\.js$/, loader: 'expose-loader?Phaser' },
             { test: /p2\.js$/, loader: 'expose-loader?p2' },
             { test: /\.ts$/, loader: 'ts-loader', exclude: '/node_modules/' }
         ]
-    }
+    },
+    devtool: 'source-map'
 };
