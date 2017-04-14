@@ -33,7 +33,7 @@ function startApp(): void {
         gameHeight = screenMetrics.gameHeight;
     }
 
-    // There are a few more options you can set if needed, just take a look at Phaser.IGameCongig
+    // There are a few more options you can set if needed, just take a look at Phaser.IGameConfig
     let gameConfig: Phaser.IGameConfig = {
         width: gameWidth,
         height: gameHeight,
