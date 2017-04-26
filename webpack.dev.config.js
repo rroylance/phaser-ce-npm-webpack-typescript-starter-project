@@ -1,6 +1,5 @@
 var webpack = require('webpack');
 var path = require('path');
-var GitRevisionPlugin = require('git-revision-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
 var WebpackShellPlugin = require('webpack-shell-plugin');
@@ -26,7 +25,6 @@ module.exports = {
         }),
         new webpack.DefinePlugin({
             'DEBUG': true,
-            'GIT_REVISION': JSON.stringify(new GitRevisionPlugin().commithash()),
 
             // Do not modify these manually, you may break things...
             'DEFAULT_GAME_WIDTH': /*[[DEFAULT_GAME_WIDTH*/800/*DEFAULT_GAME_WIDTH]]*/,

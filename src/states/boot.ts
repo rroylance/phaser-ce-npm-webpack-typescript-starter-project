@@ -37,7 +37,6 @@ export default class Boot extends Phaser.State {
         }
 
         // Use DEBUG to wrap code that should only be included in a DEBUG build of the game
-        // Use GIT_REVISION as an identifier when testing builds
         // DEFAULT_GAME_WIDTH is the safe area width of the game
         // DEFAULT_GAME_HEIGHT is the safe area height of the game
         // MAX_GAME_WIDTH is the max width of the game
@@ -48,7 +47,6 @@ export default class Boot extends Phaser.State {
         // SOUND_EXTENSIONS_PREFERENCE is the most preferred to least preferred order to look for audio sources
         console.log(
             `DEBUG....................... ${DEBUG}
-           \nGIT_REVISION................ ${GIT_REVISION}
            \nSCALE_MODE.................. ${SCALE_MODE}
            \nDEFAULT_GAME_WIDTH.......... ${DEFAULT_GAME_WIDTH}
            \nDEFAULT_GAME_HEIGHT......... ${DEFAULT_GAME_HEIGHT}
