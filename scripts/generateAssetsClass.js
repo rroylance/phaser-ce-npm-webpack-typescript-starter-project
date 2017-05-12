@@ -194,6 +194,7 @@ if (!Object.keys(loaderTypes.atlas).length) {
             var parser = null;
             var frameFull = '';
             var frame = '';
+            var indexOfExtension = -1;
 
             dataExtensions.push(loaderTypes.atlas[i][t]);
 
@@ -209,7 +210,12 @@ if (!Object.keys(loaderTypes.atlas).length) {
 
                         for (var a in json['frames']) {
                             frameFull = (json['frames'][a]['filename']);
-                            frame = frameFull.substring(0, frameFull.lastIndexOf('.'));
+                            indexOfExtension = frameFull.lastIndexOf('.');
+                            if (indexOfExtension === -1) {
+                                frame = frameFull;
+                            } else {
+                                frame = frameFull.substring(0, indexOfExtension);
+                            }
                             shell.ShellString('\n        ' + toPascalCase(frame) + ' = <any>\'' + frameFull + '\',').toEnd(assetsClassFile);
                         }
                     } else {
@@ -217,7 +223,12 @@ if (!Object.keys(loaderTypes.atlas).length) {
 
                         for (var h in json['frames']) {
                             frameFull = (h);
-                            frame = frameFull.substring(0, frameFull.lastIndexOf('.'));
+                            indexOfExtension = frameFull.lastIndexOf('.');
+                            if (indexOfExtension === -1) {
+                                frame = frameFull;
+                            } else {
+                                frame = frameFull.substring(0, indexOfExtension);
+                            }
                             shell.ShellString('\n        ' + toPascalCase(frame) + ' = <any>\'' + frameFull + '\',').toEnd(assetsClassFile);
                         }
                     }
@@ -238,7 +249,12 @@ if (!Object.keys(loaderTypes.atlas).length) {
                     parser.parseString(fileData.substring(0, fileData.length), function (err, result) {
                         for (var x in result['TextureAtlas']['SubTexture']) {
                             frameFull = (result['TextureAtlas']['SubTexture'][x]['$']['name']);
-                            frame = frameFull.substring(0, frameFull.lastIndexOf('.'));
+                            indexOfExtension = frameFull.lastIndexOf('.');
+                            if (indexOfExtension === -1) {
+                                frame = frameFull;
+                            } else {
+                                frame = frameFull.substring(0, indexOfExtension);
+                            }
                             shell.ShellString('\n        ' + toPascalCase(frame) + ' = <any>\'' + frameFull + '\',').toEnd(assetsClassFile);
                         }
                     });
