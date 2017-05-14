@@ -152,7 +152,7 @@ export class Loader {
     private static loadText() {
         for (let text in Assets.Text) {
             if (!this.game.cache.checkTextKey(Assets.Text[text].getName())) {
-                this.game.load.xml(Assets.Text[text].getName(), Assets.Text[text].getText(), true);
+                this.game.load.text(Assets.Text[text].getName(), Assets.Text[text].getTXT(), true);
             }
         }
     }
