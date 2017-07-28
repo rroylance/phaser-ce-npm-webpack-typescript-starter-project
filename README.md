@@ -1,4 +1,6 @@
 # Phaser NPM Webpack TypeScript Starter Project (catchy name, isn't it?)
+[![Dependencies](https://david-dm.org/rroylance/phaser-npm-webpack-typescript-starter-project.png?theme=shields.io)](https://david-dm.org/rroylance/phaser-npm-webpack-typescript-starter-project)
+[![devDependency Status](https://david-dm.org/rroylance/phaser-npm-webpack-typescript-starter-project/dev-status.svg)](https://david-dm.org/rroylance/phaser-npm-webpack-typescript-starter-project#info=devDependencies)
 
 ![PhaserNPMWebpackTypeScriptStarterProject](https://raw.githubusercontent.com/rroylance/phaser-npm-webpack-typescript-starter-project/master/README_HEADER.png)
 
@@ -22,7 +24,7 @@
   - Assets class created automatically allowing you to access all the assets and their frames and sprites (in the case of Atlases and Audiosprites) in a compiler validating way!
 - Setting up the game size and scaling through a script that does it all for you
   - Automatic template background
-  - Sets up the size the game so that it is scaled only when absolutely necessary 
+  - Sets up the size the game so that it is scaled only when absolutely necessary
   - Refer to src/utils/utils.ts for an explanation on the background_template and the sizing/scaling style
 
 ### TODO:
@@ -93,7 +95,7 @@ Run to use the dev build while developing:
 
 ```npm run server:dev```
 
-Run to use the dist build while developing 
+Run to use the dist build while developing
 
 ```npm run server:dist```
 
@@ -131,7 +133,7 @@ or (if your dev GOOGLE_WEB_FONTS is different from your dist);
 
 ```npm run assets:dev```
 
-src/assets.ts will be generated which contains sections for all your asset types (the generator is smart enough to distinguish what assets are what !) and classes for every asset, it will also generate an enum containing every frame and sprite in Atlases and AudioSprites respectively! 
+src/assets.ts will be generated which contains sections for all your asset types (the generator is smart enough to distinguish what assets are what !) and classes for every asset, it will also generate an enum containing every frame and sprite in Atlases and AudioSprites respectively!
 
 No need to remember keys, frames, or sprites anymore; which means no more typos resulting in asset not found errors. Just use, for example, Assets.Images.ImagesBackgroundTemplate.getName() or Assets.Audiosprites.AudiospritesSfx.Sprites.Laser1. This also allows the compiler to warn you if you are trying to use an asset that doesn't exist!
 
@@ -169,7 +171,7 @@ Currently supports the following (if you need a new extension or find an issue w
   - js
 - Shaders:
   - frag
-  
+
 Which version of the audio to load is defined in the webpack.dev.config.js and webpack.dist.config.js under the DefinePlugin 'SOUND_EXTENSIONS_PREFERENCE' section;
 - Currently I set the order to: webm, ogg, m4a, mp3, aac, ac3, caf, flac, mp4, wav
 - The loader will load the audio using this as the preference; the first supported file that is found is used using the order of this list as most preferred to least preferred
@@ -198,7 +200,7 @@ Run the following specifying some or all of the options;
 
 **The '--' after setupGameSize is not a mistake; it is required to pass arguments along to the script.**
 
-You can either provide the width **and** height (defaults 800 and 500 respectively) and as long as they result in an aspect ratio of what's set in the script or by --aspect-ratio (default 1.6 or 16:10), or you can provide the width **or** height and the one you didn't provide will be calculated for you. 
+You can either provide the width **and** height (defaults 800 and 500 respectively) and as long as they result in an aspect ratio of what's set in the script or by --aspect-ratio (default 1.6 or 16:10), or you can provide the width **or** height and the one you didn't provide will be calculated for you.
 
 Providing --scale-mode will set this.game.scale.scaleMode to the corresponding Phaser.ScaleManager.SCALE_MODE (default USER_SCALE).
 
