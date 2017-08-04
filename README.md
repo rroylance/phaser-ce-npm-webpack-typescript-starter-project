@@ -220,6 +220,28 @@ I recommend one of the following generators for generating your font files;
 - [Font Squirrel Webfont Generator][fontsquirrel]
 - [Everything Fonts font-face generator][everythingfonts]
 
+## Plugin management:
+
+Drop the .js file (or .min.js) of the plugin in the assets/script folder.
+Your script(s) will be loaded in the Preloader state with the `AssetUtils.Loader.loadAllAssets` call.
+If you want the typescript support, you need to drop the `.d.ts` file somewhere (not in assets) and add it to the `files` array in `tsconfig.json`.
+
+Here is an example of how to include your plugin in a state:
+```
+export default class MyState extends Phaser.State {
+
+    myPlugin: Phaser.Plugin.MyPlugin;
+
+    public preload(): void {
+        this.myPlugin = new Phaser.Plugin.MyPlugin(this.game);
+        this.game.plugins.add(this.myPlugin as any);
+    }
+}
+
+```
+
+
+
 ## Desktop Build via Electron
 
 **Note that I am not, currently, actively using this. So if you do, I'd appreciate if you could pass any changes you make or anything you need out of it. Although I'm not using it, I will still support it as best I can.**
