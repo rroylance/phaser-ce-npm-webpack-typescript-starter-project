@@ -272,6 +272,19 @@ If you have any requests or suggestion for the project please let me know via [G
 
 If you would like to have some of your code included; whether a new feature, a cleaned up feature, a bugfix, or whatever. Please open up a [Pull Request][pulls]!
 
+## Games made with this project (Click the images to play!)
+
+<a href="http://enzotesta.xyz/games/doublepong/index.html">
+  <img src="https://raw.githubusercontent.com/rroylance/phaser-npm-webpack-typescript-starter-project/master/america-first-icon.png" height="160" width="264" align="left" >
+</a>
+Game: America First: The Game
+
+Author: Enzo Testa
+
+Github Repo: https://github.com/Shrakka/DoublePong
+
+Description: This is Enzo's first game! Well done double pong demo.
+
 [issues]: https://github.com/rroylance/phaser-npm-webpack-typescript-starter-project/issues
 [pulls]: https://github.com/rroylance/phaser-npm-webpack-typescript-starter-project/pulls
 [releases]: https://github.com/rroylance/phaser-npm-webpack-typescript-starter-project/releases
