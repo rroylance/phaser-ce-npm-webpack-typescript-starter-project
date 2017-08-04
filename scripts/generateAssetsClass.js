@@ -32,7 +32,7 @@ function toPascalCase(string) {
 
 function findExtension(haystack, arr) {
     return arr.some(function (v) {
-        return haystack.indexOf(v) >= 0;
+        return haystack.lastIndexOf(v) >= 0;
     });
 }
 
@@ -65,10 +65,12 @@ var scriptExtensions = ['js'];
 var shaderExtensions = ['frag'];
 
 shell.ls('assets/**/*.*').forEach(function (file) {
-    var filePath = file.replace('assets/', '').split('.');
+    var filePath = file.replace('assets/', '');
+    var fileName = filePath.substring(0, filePath.lastIndexOf('.'));
+    var extension = filePath.substr(filePath.lastIndexOf('.')+1);
 
-    gameAssets[filePath[0]] = gameAssets[filePath[0]] || [];
-    gameAssets[filePath[0]] = gameAssets[filePath[0]].concat(filePath.slice(1));
+    gameAssets[fileName] = gameAssets[fileName] || [];
+    gameAssets[fileName] = gameAssets[fileName].concat(extension);
 });
 
 for (var i in gameAssets) {
