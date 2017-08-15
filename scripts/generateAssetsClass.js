@@ -109,7 +109,7 @@ for (var i in gameAssets) {
         if (jsonType || xmlType) {
             loaderTypes.atlas[i] = gameAssets[i];
         } else {
-            var spritesheetData = gameAssets[i][0].match(/\[(-?[0-9],?)*]/);
+            var spritesheetData = i.match(/\[(-?[0-9],?)*]/);
             if (spritesheetData && spritesheetData.length > 0) {
                 loaderTypes.spritesheet[i] = gameAssets[i];
             } else {
@@ -163,9 +163,9 @@ if (!Object.keys(loaderTypes.spritesheet).length) {
         shell.ShellString('\n    export class ' + toPascalCase(i) + ' {').toEnd(assetsClassFile);
         shell.ShellString('\n        static getName(): string { return \'' + i.split('/').pop() + '\'; }\n').toEnd(assetsClassFile);
 
-        shell.ShellString('\n        static get' + loaderTypes.spritesheet[i][1].toUpperCase() + '(): string { return require(\'assets/' + i + '.' + loaderTypes.spritesheet[i][0] + '.' + loaderTypes.spritesheet[i][1] + '\'); }').toEnd(assetsClassFile);
+        shell.ShellString('\n        static get' + loaderTypes.spritesheet[i][0].toUpperCase() + '(): string { return require(\'assets/' + i + '.' + loaderTypes.spritesheet[i][0] + '.' + loaderTypes.spritesheet[i][1] + '\'); }').toEnd(assetsClassFile);
 
-        var spritesheetProperties = loaderTypes.spritesheet[i][0].replace('[', '').replace(']', '').split(',');
+        var spritesheetProperties = i.split('.')[1].replace('[', '').replace(']', '').split(',');
         if (spritesheetProperties.length < 2 || spritesheetProperties.length > 5) {
             console.log('Invalid number of Spritesheet properties provided for \'' + i + '\'. Must have between 2 and 5; [frameWidth, frameHeight, frameMax, margin, spacing] frameWidth and frameHeight are required');
         }
