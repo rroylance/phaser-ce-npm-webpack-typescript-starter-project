@@ -8,8 +8,8 @@ export class Loader {
     private static loadImages() {
         for (let image in Assets.Images) {
             if (!this.game.cache.checkImageKey(Assets.Images[image].getName())) {
-                for (let option in Assets.Images[image]) {
-                    if (option !== 'getName') {
+                for (let option of Object.getOwnPropertyNames(Assets.Images[image])) {
+                    if (option !== 'getName' && option.includes('get')) {
                         this.game.load.image(Assets.Images[image].getName(), Assets.Images[image][option]());
                     }
                 }
@@ -22,12 +22,11 @@ export class Loader {
             if (!this.game.cache.checkImageKey(Assets.Spritesheets[spritesheet].getName())) {
                 let imageOption = null;
 
-                for (let option in Assets.Spritesheets[spritesheet]) {
-                    if (option !== 'getName' && option !== 'getFrameWidth' && option !== 'getFrameHeight' && option !== 'getFrameMax' && option !== 'getMargin' && option !== 'getSpacing') {
+                for (let option of Object.getOwnPropertyNames(Assets.Spritesheets[spritesheet])) {
+                    if (option !== 'getName' && option !== 'getFrameWidth' && option !== 'getFrameHeight' && option !== 'getFrameMax' && option !== 'getMargin' && option !== 'getSpacing' && option.includes('get')) {
                         imageOption = option;
                     }
                 }
-
                 this.game.load.spritesheet(Assets.Spritesheets[spritesheet].getName(), Assets.Spritesheets[spritesheet][imageOption](), Assets.Spritesheets[spritesheet].getFrameWidth(), Assets.Spritesheets[spritesheet].getFrameHeight(), Assets.Spritesheets[spritesheet].getFrameMax(), Assets.Spritesheets[spritesheet].getMargin(), Assets.Spritesheets[spritesheet].getSpacing());
             }
         }
@@ -39,10 +38,10 @@ export class Loader {
                 let imageOption = null;
                 let dataOption = null;
 
-                for (let option in Assets.Atlases[atlas]) {
-                    if (option === 'getXML' || option === 'getJSONArray' || option === 'getJSONHash') {
+                for (let option of Object.getOwnPropertyNames(Assets.Atlases[atlas])) {
+                    if ((option === 'getXML' || option === 'getJSONArray' || option === 'getJSONHash') && option.includes('get')) {
                         dataOption = option;
-                    } else if (option !== 'getName' && option !== 'Frames') {
+                    } else if (option !== 'getName' && option !== 'Frames' && option.includes('get')) {
                         imageOption = option;
                     }
                 }
@@ -80,8 +79,8 @@ export class Loader {
             if (!this.game.cache.checkSoundKey(soundName)) {
                 let audioTypeArray = [];
 
-                for (let option in Assets.Audio[audio]) {
-                    if (option !== 'getName') {
+                for (let option of Object.getOwnPropertyNames(Assets.Audio[audio])) {
+                    if (option !== 'getName' && option.includes('get')) {
                         audioTypeArray.push(Assets.Audio[audio][option]());
                     }
                 }
@@ -101,8 +100,8 @@ export class Loader {
             if (!this.game.cache.checkSoundKey(soundName)) {
                 let audioTypeArray = [];
 
-                for (let option in Assets.Audiosprites[audio]) {
-                    if (option !== 'getName' && option !== 'getJSON' && option !== 'Sprites') {
+                for (let option of Object.getOwnPropertyNames(Assets.Audiosprites[audio])) {
+                    if (option !== 'getName' && option !== 'getJSON' && option !== 'Sprites' && option.includes('get')) {
                         audioTypeArray.push(Assets.Audiosprites[audio][option]());
                     }
                 }
@@ -120,10 +119,10 @@ export class Loader {
                 let imageOption = null;
                 let dataOption = null;
 
-                for (let option in Assets.BitmapFonts[font]) {
-                    if (option === 'getXML' || option === 'getFNT') {
+                for (let option of Object.getOwnPropertyNames(Assets.BitmapFonts[font])) {
+                    if ((option === 'getXML' || option === 'getFNT') && option.includes('get')) {
                         dataOption = option;
-                    } else if (option !== 'getName') {
+                    } else if (option !== 'getName' && option.includes('get')) {
                         imageOption = option;
                     }
                 }
