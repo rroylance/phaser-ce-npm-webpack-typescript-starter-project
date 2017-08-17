@@ -9,8 +9,8 @@ export namespace Images {
 }
 
 export namespace Spritesheets {
-    export class SpritesheetsMetalslugMummy {
-        static getName(): string { return 'metalslug_mummy'; }
+    export class SpritesheetsMetalslugMummy374518 {
+        static getName(): string { return 'metalslug_mummy.[37,45,18,0,0]'; }
 
         static getPNG(): string { return require('assets/spritesheets/metalslug_mummy.[37,45,18,0,0].png'); }
         static getFrameWidth(): number { return 37; }
