@@ -42,7 +42,7 @@ export default class Title extends Phaser.State {
 
         this.bitmapFontText.filters = [this.blurXFilter, this.blurYFilter];
 
-        this.mummySpritesheet = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY + 175, Assets.Spritesheets.SpritesheetsMetalslugMummy.getName());
+        this.mummySpritesheet = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY + 175, Assets.Spritesheets.SpritesheetsMetalslugMummy374518.getName());
         this.mummySpritesheet.animations.add('walk');
         this.mummySpritesheet.animations.play('walk', 30, true);
 
