@@ -3,6 +3,7 @@ var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
 var WebpackShellPlugin = require('webpack-shell-plugin');
+const Uglify = require("uglifyjs-webpack-plugin");
 
 module.exports = {
     entry: path.join(__dirname, 'src/app.ts'),
@@ -44,7 +45,7 @@ module.exports = {
         new CleanWebpackPlugin([
             path.join(__dirname, 'dist')
         ]),
-        new webpack.optimize.UglifyJsPlugin({
+        new Uglify({
             compress: {
                 warnings: false
             },
