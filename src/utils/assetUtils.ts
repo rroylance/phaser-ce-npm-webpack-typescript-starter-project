@@ -170,6 +170,14 @@ export class Loader {
         }
     }
 
+    private static loadMisc() {
+        for (let misc in Assets.Misc) {
+            if (!this.game.cache.checkBinaryKey(Assets.Misc[misc].getName())) {
+                this.game.load.binary(Assets.Misc[misc].getName(), Assets.Misc[misc].getFile());
+            }
+        }
+    }
+
     public static loadAllAssets(game: Phaser.Game, onComplete?: Function, onCompleteContext?: any) {
         this.game = game;
 
@@ -188,6 +196,7 @@ export class Loader {
         this.loadText();
         this.loadScripts();
         this.loadShaders();
+        this.loadMisc();
     }
 
     public static waitForSoundDecoding(onComplete: Function, onCompleteContext?: any) {
