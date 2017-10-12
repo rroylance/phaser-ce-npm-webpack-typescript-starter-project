@@ -483,7 +483,7 @@ if (!Object.keys(loaderTypes.misc).length) {
         shell.ShellString('\n        static getName(): string { return \'' + i.split('/').pop() + '\'; }\n').toEnd(assetsClassFile);
 
         for (var t in loaderTypes.misc[i]) {
-            shell.ShellString('\n        static get' + loaderTypes.misc[i][t].toUpperCase() + '(): string { return require(\'assets/' + i + '.' + loaderTypes.misc[i][t] + '\'); }').toEnd(assetsClassFile);
+            shell.ShellString('\n        static getFile(): string { return require(\'assets/' + i + '.' + loaderTypes.misc[i][t] + '\'); }').toEnd(assetsClassFile);
         }
 
         shell.ShellString('\n    }').toEnd(assetsClassFile);
