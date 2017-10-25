@@ -4,8 +4,6 @@
 
 ![PhaserNPMWebpackTypeScriptStarterProject](https://raw.githubusercontent.com/rroylance/phaser-npm-webpack-typescript-starter-project/master/README_HEADER.png)
 
-### [Visit the itch.io page for a live demo!][itchio]
-
 ##### Hit the ground running and make some great games!
 
 ###### If you use this template/starter project in any capacity; I'd love to hear about your experience with it. Whether you continued with it or decided not to (I really want to hear why you made your decision).
@@ -314,7 +312,6 @@ Description: This is Enzo's first game! Well done double pong demo.
 [everythingfonts]: https://everythingfonts.com/font-face
 [git-scm]: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
 [nodejs]: https://nodejs.org/en/
-[itchio]: https://rroylance.itch.io/phaser-npm-webpack-typescript-starter-project
 [electron-distribution]: https://electron.atom.io/docs/tutorial/application-distribution/
 [electron-pack-windows]: https://github.com/electron-userland/electron-packager#building-windows-apps-from-non-windows-platforms
 [electron-pack-api]: https://github.com/electron-userland/electron-packager/blob/master/docs/api.md
