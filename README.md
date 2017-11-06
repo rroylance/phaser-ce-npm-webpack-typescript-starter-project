@@ -295,7 +295,7 @@ If you would like to have some of your code included; whether a new feature, a c
 ## Games made with this project (Click the images to play!)
 
 <a href="http://enzotesta.xyz/games/doublepong/index.html">
-  <img src="https://raw.githubusercontent.com/rroylance/phaser-npm-webpack-typescript-starter-project/master/america-first-icon.png" height="160" width="264" align="left" >
+  <img src="https://raw.githubusercontent.com/rroylance/phaser-npm-webpack-typescript-starter-project/master/america-first-icon.png" height="165" width="264" align="left" >
 </a>
 Game: America First: The Game
 
@@ -304,6 +304,19 @@ Author: Enzo Testa
 Github Repo: https://github.com/Shrakka/DoublePong
 
 Description: This is Enzo's first game! Well done double pong demo.
+
+<br>
+
+<a href="https://codinginspace.github.io/CoffeeConundrum/">
+  <img src="https://raw.githubusercontent.com/rroylance/phaser-npm-webpack-typescript-starter-project/master/coffee-conundrum-icon.png" height="165" width="359" align="left" >
+</a>
+Game: Coffee Conundrum
+
+Author: Jonathan Grangien
+
+Github Repo: https://github.com/codingInSpace/CoffeeConundrum
+
+Description: Cool little SHMUP. Code looks well done and nice and clean and well thought out. Nice job Jonathan!
 
 [issues]: https://github.com/rroylance/phaser-npm-webpack-typescript-starter-project/issues
 [pulls]: https://github.com/rroylance/phaser-npm-webpack-typescript-starter-project/pulls
