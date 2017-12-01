@@ -22,10 +22,10 @@ module.exports = {
     plugins: [
         new WebpackSynchronizableShellPlugin({
             onBuildStart: {
-							scripts: ['npm run assets:dev'],
-							blocking: true,
-							parallel: false
-						}
+                scripts: ['npm run assets:dev'],
+                blocking: true,
+                parallel: false
+            }
         }),
         new webpack.DefinePlugin({
             'DEBUG': true,
