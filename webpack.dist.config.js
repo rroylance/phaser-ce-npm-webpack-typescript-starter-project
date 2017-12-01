@@ -2,7 +2,7 @@ var webpack = require('webpack');
 var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
-var WebpackShellPlugin = require('webpack-shell-plugin');
+var WebpackSynchronizableShellPlugin = require('webpack-synchronizable-shell-plugin');
 const Uglify = require("uglifyjs-webpack-plugin");
 
 module.exports = {
@@ -21,8 +21,12 @@ module.exports = {
         }
     },
     plugins: [
-        new WebpackShellPlugin({
-            onBuildStart: ['npm run assets']
+        new WebpackSynchronizableShellPlugin({
+            onBuildStart: {
+                scripts: ['npm run assets'],
+                blocking: true,
+                parallel: false
+            }
         }),
         new webpack.DefinePlugin({
             'DEBUG': false,

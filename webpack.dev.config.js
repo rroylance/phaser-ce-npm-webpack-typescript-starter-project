@@ -2,7 +2,7 @@ var webpack = require('webpack');
 var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
-var WebpackShellPlugin = require('webpack-shell-plugin');
+var WebpackSynchronizableShellPlugin = require('webpack-synchronizable-shell-plugin');
 
 module.exports = {
     entry: path.join(__dirname, 'src/app.ts'),
@@ -20,8 +20,12 @@ module.exports = {
         }
     },
     plugins: [
-        new WebpackShellPlugin({
-            onBuildStart: ['npm run assets:dev']
+        new WebpackSynchronizableShellPlugin({
+            onBuildStart: {
+                scripts: ['npm run assets:dev'],
+                blocking: true,
+                parallel: false
+            }
         }),
         new webpack.DefinePlugin({
             'DEBUG': true,
