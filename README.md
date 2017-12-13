@@ -63,11 +63,11 @@ To use this you’ll need to install a few things before you have a working copy
 
 ## 1. Download or Clone this repo:
 
-##### Download:
+#### Download:
 
 Download the latest zip/tar.gz from [GitHub Releases][releases], extract it to where you want your project to be.
 
-##### Clone (must've completed Step 0 first):
+#### Clone (must've completed Step 0 first):
 
 Navigate into your workspace directory.
 
