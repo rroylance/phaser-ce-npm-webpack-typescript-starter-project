@@ -10,10 +10,7 @@ export default class Title extends Phaser.State {
     private blurYFilter: Phaser.Filter.BlurY = null;
     private sfxAudiosprite: Phaser.AudioSprite = null;
     private mummySpritesheet: Phaser.Sprite = null;
-
-    // This is any[] not string[] due to a limitation in TypeScript at the moment;
-    // despite string enums working just fine, they are not officially supported so we trick the compiler into letting us do it anyway.
-    private sfxLaserSounds: any[] = null;
+    private sfxLaserSounds: Assets.Audiosprites.AudiospritesSfx.Sprites[] = null;
 
     public create(): void {
         this.backgroundTemplateSprite = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, Assets.Images.ImagesBackgroundTemplate.getName());

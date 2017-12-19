@@ -22,22 +22,18 @@ export namespace Spritesheets {
 }
 
 export namespace Atlases {
-    enum AtlasesPreloadSpritesArrayFrames {
-        PreloadBar = <any>'preload_bar.png',
-        PreloadFrame = <any>'preload_frame.png',
-    }
     export class AtlasesPreloadSpritesArray {
         static getName(): string { return 'preload_sprites_array'; }
 
         static getJSONArray(): string { return require('assets/atlases/preload_sprites_array.json'); }
 
         static getPNG(): string { return require('assets/atlases/preload_sprites_array.png'); }
-
-        static Frames = AtlasesPreloadSpritesArrayFrames;
     }
-    enum AtlasesPreloadSpritesHashFrames {
-        PreloadBar = <any>'preload_bar.png',
-        PreloadFrame = <any>'preload_frame.png',
+    export namespace AtlasesPreloadSpritesArray {
+        export enum Frames {
+            PreloadBar = 'preload_bar.png',
+            PreloadFrame = 'preload_frame.png',
+        }
     }
     export class AtlasesPreloadSpritesHash {
         static getName(): string { return 'preload_sprites_hash'; }
@@ -45,12 +41,12 @@ export namespace Atlases {
         static getJSONHash(): string { return require('assets/atlases/preload_sprites_hash.json'); }
 
         static getPNG(): string { return require('assets/atlases/preload_sprites_hash.png'); }
-
-        static Frames = AtlasesPreloadSpritesHashFrames;
     }
-    enum AtlasesPreloadSpritesXmlFrames {
-        PreloadBar = <any>'preload_bar.png',
-        PreloadFrame = <any>'preload_frame.png',
+    export namespace AtlasesPreloadSpritesHash {
+        export enum Frames {
+            PreloadBar = 'preload_bar.png',
+            PreloadFrame = 'preload_frame.png',
+        }
     }
     export class AtlasesPreloadSpritesXml {
         static getName(): string { return 'preload_sprites_xml'; }
@@ -58,8 +54,12 @@ export namespace Atlases {
         static getPNG(): string { return require('assets/atlases/preload_sprites_xml.png'); }
 
         static getXML(): string { return require('assets/atlases/preload_sprites_xml.xml'); }
-
-        static Frames = AtlasesPreloadSpritesXmlFrames;
+    }
+    export namespace AtlasesPreloadSpritesXml {
+        export enum Frames {
+            PreloadBar = 'preload_bar.png',
+            PreloadFrame = 'preload_frame.png',
+        }
     }
 }
 
@@ -75,17 +75,6 @@ export namespace Audio {
 }
 
 export namespace Audiosprites {
-    enum AudiospritesSfxSprites {
-        Laser1 = <any>'laser1',
-        Laser2 = <any>'laser2',
-        Laser3 = <any>'laser3',
-        Laser4 = <any>'laser4',
-        Laser5 = <any>'laser5',
-        Laser6 = <any>'laser6',
-        Laser7 = <any>'laser7',
-        Laser8 = <any>'laser8',
-        Laser9 = <any>'laser9',
-    }
     export class AudiospritesSfx {
         static getName(): string { return 'sfx'; }
 
@@ -94,8 +83,19 @@ export namespace Audiosprites {
         static getM4A(): string { return require('assets/audiosprites/sfx.m4a'); }
         static getMP3(): string { return require('assets/audiosprites/sfx.mp3'); }
         static getOGG(): string { return require('assets/audiosprites/sfx.ogg'); }
-
-        static Sprites = AudiospritesSfxSprites;
+    }
+    export namespace AudiospritesSfx {
+        export enum Sprites {
+            Laser1 = 'laser1',
+            Laser2 = 'laser2',
+            Laser3 = 'laser3',
+            Laser4 = 'laser4',
+            Laser5 = 'laser5',
+            Laser6 = 'laser6',
+            Laser7 = 'laser7',
+            Laser8 = 'laser8',
+            Laser9 = 'laser9',
+        }
     }
 }
 
