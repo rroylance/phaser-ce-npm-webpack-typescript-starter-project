@@ -29,7 +29,7 @@
     "url": "https://github.com/rroylance/phaser-npm-webpack-typescript-starter-project/issues"
   },
   "homepage": "https://github.com/rroylance/phaser-npm-webpack-typescript-starter-project#readme",
-  "devDependencies": {
+  "dependencies": {
     "@types/node": "8.5.1",
     "@types/webfontloader": "1.6.29",
     "clean-webpack-plugin": "0.1.17",
