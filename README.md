@@ -67,6 +67,8 @@ To use this you’ll need to install a few things before you have a working copy
 
 Download the latest zip/tar.gz from [GitHub Releases][releases], extract it to where you want your project to be.
 
+##### If you want a clean project ready for you to just start your own game and not have to worry about cleaning up the examples and samples from the v1.8.5 release, just download the v1.8.5-fresh release instead.
+
 #### Clone (must've completed Step 0 first):
 
 Navigate into your workspace directory.
@@ -74,6 +76,8 @@ Navigate into your workspace directory.
 Run:
 
 ```git clone https://github.com/rroylance/phaser-npm-webpack-typescript-starter-project.git```
+
+##### If you want a clean project ready for you to just start your own game and not have to worry about cleaning up the examples and samples from the master branch, just pull the 'fresh-start' branch instead of master.
 
 ## 2. Install node.js and npm (npm is included and installed with node.js):
 
