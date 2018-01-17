@@ -197,6 +197,10 @@ export class Loader {
         this.loadScripts();
         this.loadShaders();
         this.loadMisc();
+
+        if ((this.game.load as any)._fileList.length === 0) {
+            this.game.load.onLoadComplete.dispatch();
+        }
     }
 
     public static waitForSoundDecoding(onComplete: Function, onCompleteContext?: any) {
