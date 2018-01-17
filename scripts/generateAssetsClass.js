@@ -64,10 +64,15 @@ var textExtensions = ['txt'];
 var scriptExtensions = ['js'];
 var shaderExtensions = ['frag'];
 
-shell.ls('assets/**/*.*').forEach(function (file) {
-    var filePath = file.replace('assets/', '');
+shell.ls('-R', 'assets/').forEach(function (file) {
+    var filePath = file;
     var fileName = filePath.substring(0, filePath.lastIndexOf('.'));
-    var extension = filePath.substr(filePath.lastIndexOf('.')+1);
+
+    var extensionIndex = filePath.lastIndexOf('.');
+    if (extensionIndex === -1) {
+        return;
+    }
+    var extension = filePath.substr(extensionIndex + 1);
 
     gameAssets[fileName] = gameAssets[fileName] || [];
     gameAssets[fileName] = gameAssets[fileName].concat(extension);
