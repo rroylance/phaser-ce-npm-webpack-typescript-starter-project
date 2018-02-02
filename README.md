@@ -1,10 +1,14 @@
 # Phaser NPM Webpack TypeScript Starter Project (catchy name, isn't it?)
 
 [![GitHub package version](https://img.shields.io/github/package-json/v/rroylance/phaser-npm-webpack-typescript-starter-project.svg?style=for-the-badge)](https://github.com/rroylance/phaser-npm-webpack-typescript-starter-project/releases)
+[![GitHub last commit](https://img.shields.io/github/last-commit/rroylance/phaser-npm-webpack-typescript-starter-project.svg?style=for-the-badge)](https://github.com/rroylance/phaser-npm-webpack-typescript-starter-project/commits/master)
 
+[![GitHub watchers](https://img.shields.io/github/watchers/rroylance/phaser-npm-webpack-typescript-starter-project.svg?style=for-the-badge)](https://github.com/rroylance/phaser-npm-webpack-typescript-starter-project/watchers)
 [![GitHub stars](https://img.shields.io/github/stars/rroylance/phaser-npm-webpack-typescript-starter-project.svg?style=for-the-badge)](https://github.com/rroylance/phaser-npm-webpack-typescript-starter-project/stargazers)
-[![GitHub issues](https://img.shields.io/github/issues/rroylance/phaser-npm-webpack-typescript-starter-project.svg?style=for-the-badge)](https://github.com/rroylance/phaser-npm-webpack-typescript-starter-project/issues)
 [![GitHub forks](https://img.shields.io/github/forks/rroylance/phaser-npm-webpack-typescript-starter-project.svg?style=for-the-badge)](https://github.com/rroylance/phaser-npm-webpack-typescript-starter-project/network)
+
+[![GitHub issues](https://img.shields.io/github/issues/rroylance/phaser-npm-webpack-typescript-starter-project.svg?style=for-the-badge)](https://github.com/rroylance/phaser-npm-webpack-typescript-starter-project/issues)
+[![GitHub pull requests](https://img.shields.io/github/issues-pr/rroylance/phaser-npm-webpack-typescript-starter-project.svg?style=for-the-badge)](https://github.com/rroylance/phaser-npm-webpack-typescript-starter-project/pulls)
 
 [![David](http://img.shields.io/david/rroylance/phaser-npm-webpack-typescript-starter-project.svg?style=for-the-badge)](https://david-dm.org/rroylance/phaser-npm-webpack-typescript-starter-project)
 
