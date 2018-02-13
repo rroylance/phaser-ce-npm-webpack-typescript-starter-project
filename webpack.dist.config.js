@@ -49,7 +49,13 @@ module.exports = {
         new CleanWebpackPlugin([
             path.join(__dirname, 'dist')
         ]),
-        new Uglify(),
+        new Uglify({
+            uglifyOptions: {
+                mangle: {
+                    safari10: true
+                }
+            }
+        }),
         new HtmlWebpackPlugin({
             title: 'Phaser NPM Webpack TypeScript Starter Project!',
             template: path.join(__dirname, 'templates/index.ejs')
