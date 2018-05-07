@@ -322,7 +322,7 @@ Description: This is Enzo's first game! Well done double pong demo.
 <br>
 
 <a href="https://codinginspace.github.io/CoffeeConundrum/">
-  <img src="https://raw.githubusercontent.com/rroylance/phaser-npm-webpack-typescript-starter-project/master/coffee-conundrum-icon.png" height="165" width="359" align="left" >
+  <img src="https://raw.githubusercontent.com/rroylance/phaser-npm-webpack-typescript-starter-project/master/coffee-conundrum-icon.png" height="165" width="264" align="left" >
 </a>
 Game: Coffee Conundrum
 
@@ -344,6 +344,19 @@ Author: ProfitWarning
 Github Repo: https://github.com/ProfitWarning/p0ng
 
 Description: Nice 2-player pong clone.
+
+<br>
+
+<a href="https://robertgirhiny.com/projects/great-run/">
+  <img src="https://raw.githubusercontent.com/rroylance/phaser-npm-webpack-typescript-starter-project/master/dora-great-run-icon.jpg" height="165" width="263" align="left" >
+</a>
+Game: Great Run
+
+Author: Róbert Girhiny
+
+Github Repo: https://github.com/robcaa/great-run
+
+Description: Nice Dora The Explorer themed platformer/runner for kids.
 
 [issues]: https://github.com/rroylance/phaser-npm-webpack-typescript-starter-project/issues
 [pulls]: https://github.com/rroylance/phaser-npm-webpack-typescript-starter-project/pulls
