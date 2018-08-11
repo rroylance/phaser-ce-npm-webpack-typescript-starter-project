@@ -10,14 +10,6 @@
             "label": "(Start) Webpack Dev Server",
             "identifier": "run_server_dev",
             "promptOnClose": true
-        },
-        {
-            "type": "npm",
-            "script": "server:dist",
-            "problemMatcher": [],
-            "label": "(Start) Webpack Dist Server",
-            "identifier": "run_server_dist",
-            "promptOnClose": true
         }
     ]
 }

@@ -15,18 +15,6 @@
             "timeout": 15000,
             "trace": "verbose",
             "preLaunchTask": "run_server_dev",
-        },
-        {
-            "type": "chrome",
-            "request": "launch",
-            "name": "Run Server DIST",
-            "port": 9222,
-            "url": "http://localhost:9000/",
-            "webRoot": "${workspaceRoot}",
-            "sourceMaps": true,
-            "timeout": 15000,
-            "trace": "verbose",
-            "preLaunchTask": "run_server_dist",
         }
     ]
 }
