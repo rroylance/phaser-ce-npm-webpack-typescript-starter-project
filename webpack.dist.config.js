@@ -3,9 +3,9 @@ var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
 var WebpackSynchronizableShellPlugin = require('webpack-synchronizable-shell-plugin');
-const Uglify = require("uglifyjs-webpack-plugin");
 
 module.exports = {
+    mode: 'production',
     entry: path.join(__dirname, 'src/app.ts'),
     output: {
         path: path.join(__dirname, 'dist'),
@@ -49,13 +49,6 @@ module.exports = {
         new CleanWebpackPlugin([
             path.join(__dirname, 'dist')
         ]),
-        new Uglify({
-            uglifyOptions: {
-                mangle: {
-                    safari10: true
-                }
-            }
-        }),
         new HtmlWebpackPlugin({
             title: 'Phaser NPM Webpack TypeScript Starter Project!',
             template: path.join(__dirname, 'templates/index.ejs')
@@ -75,13 +68,15 @@ module.exports = {
     module: {
         rules: [
             { test: /\.ts$/, enforce: 'pre', loader: 'tslint-loader' },
-
-            { test: /assets(\/|\\)/, loader: 'file-loader?name=assets/[hash].[ext]' },
+            { test: /assets(\/|\\)/, type: 'javascript/auto', loader: 'file-loader?name=assets/[hash].[ext]' },
             { test: /pixi\.js$/, loader: 'expose-loader?PIXI' },
             { test: /phaser-split\.js$/, loader: 'expose-loader?Phaser' },
             { test: /p2\.js$/, loader: 'expose-loader?p2' },
             { test: /\.ts$/, loader: 'ts-loader', exclude: '/node_modules/' }
         ]
+    },
+    performance: {
+        hints: false 
     }
 };
 
