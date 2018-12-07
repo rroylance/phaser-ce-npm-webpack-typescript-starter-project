@@ -1,7 +1,9 @@
 var PNGImage = require('pngjs-image');
+var ImageJS = require('imagejs');
 var commander = require('commander');
 var shell = require('shelljs');
 
+var filename = './assets/images/background_template.png';
 var defaultWidth = 800;
 var defaultHeight = 500;
 var defaultAspectRatio = 1.6;
@@ -29,6 +31,8 @@ var baseWidth = Math.round(commander.width);
 var baseHeight = Math.round(commander.height);
 var maxWidth = baseWidth;
 var maxHeight = baseHeight;
+var midHeight = -1;
+var isPortrait = false;
 var scaleMode = commander.scaleMode;
 
 if (scaleMode === null) {
@@ -58,22 +62,45 @@ if (scaleMode === 'USER_SCALE') {
         baseWidth = Math.round(baseHeight * aspectRatio);
     } else if (baseHeight === -1) {
         baseHeight = Math.round(baseWidth / aspectRatio);
-    } else if (baseWidth < baseHeight) {
+    } 
+    
+    if (baseWidth < baseHeight) {
         var temp = baseHeight;
         baseHeight = baseWidth;
         baseWidth = temp;
+
+        isPortrait = true;
     }
 
-    var providedAspectRatio = parseFloat((baseWidth / baseHeight).toFixed(2));
+    var providedAspectRatio = parseFloat((baseWidth / baseHeight).toFixed(3));
+    if (aspectRatio < 1) {
+        aspectRatio = parseFloat((baseWidth / baseHeight).toFixed(3));
+    }
     if (providedAspectRatio !== aspectRatio) {
         throw 'Base width and height must result in a ' + aspectRatio + ' aspect ratio (width / height).\nYou only need to provide either width or height and the other will be calculated for you.';
     }
 
+    var iPhone4Resolution = {
+        width: 960,
+        height: 640
+    };
+    
+    var iPhone5Resolution = {
+        width: 1136,
+        height: 640
+    }
+
+    var iPadResolution = {
+        width: 1024,
+        height: 768
+    }
+
     // Calculated based of the long and narrow (aspect ratio wise) iOS device, the iPhone 5 (1136 x 640)
-    maxWidth = Math.round(1136 * (baseHeight / 640));
+    maxWidth = Math.round(iPhone5Resolution.width * (baseHeight / iPhone5Resolution.height));
     // Calculated based of the short and wide (aspect ratio wise) iOS device, the iPad (1024 x 768)
-    maxHeight = Math.round(768 * (baseWidth / 1024));
-    var midHeight = Math.round(640 * (baseWidth / 960));
+    maxHeight = Math.round(iPadResolution.height * (baseWidth / iPadResolution.width));
+    // Calculated based of the middle (aspect ratio wise) iOS device, the iPhone 4 (960 x 640)
+    midHeight = Math.round(iPhone4Resolution.height * (baseWidth / iPhone4Resolution.width));
 
     image = PNGImage.createImage(maxWidth, maxHeight);
 
@@ -112,8 +139,29 @@ if (scaleMode === 'USER_SCALE') {
         maxHeight = baseHeight;
     }
 
+    if (baseWidth < baseHeight) {
+        var temp = baseHeight;
+        baseHeight = baseWidth;
+        baseWidth = temp;
+
+        maxWidth = baseWidth;
+        maxHeight = baseHeight;
+
+        isPortrait = true;
+    }
+
     image = PNGImage.createImage(maxWidth, maxHeight);
     image.fillRect(0, 0, maxWidth, maxHeight, greenColor);
+}
+
+if (isPortrait) {
+    var temp = baseHeight;
+    baseHeight = baseWidth;
+    baseWidth = temp;
+
+    var temp = maxHeight;
+    maxHeight = maxWidth;
+    maxWidth = temp;
 }
 
 shell.ls('webpack.*.config.js').forEach(function (file) {
@@ -132,9 +180,13 @@ shell.ls('electron-main.js').forEach(function (file) {
 if (!commander.noPng) {
     shell.mkdir('-p', 'assets/images/');
 
-    image.writeImage('./assets/images/background_template.png', function (error) {
-        if (error) {
-            throw error;
+    image.writeImage(filename, function (error) {
+        if (!error && isPortrait) {
+            var bitmap = new ImageJS.Bitmap();
+            bitmap.readFile(filename).then(function() {
+                var rotatedBitmap = bitmap.rotate({ degrees: 90, fit: "custom", width: maxWidth, height: maxHeight });
+                rotatedBitmap.writeFile(filename);
+            });
         }
     });
 }

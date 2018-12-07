@@ -34,8 +34,9 @@
   - Automatic template background
   - Sets up the size the game so that it is scaled only when absolutely necessary
   - Refer to src/utils/utils.ts for an explanation on the background_template and the sizing/scaling style
+  - Landscape and Portrait support
 
-### TODO:
+### TODO (in no particular order):
 
 - Clean up generateAssetsClass.js
 - Get Custom/Local Web Fonts hashed by Webpack (to avoid cache issues)
@@ -214,7 +215,9 @@ Run the following specifying some or all of the options;
 
 **The '--' after setupGameSize is not a mistake; it is required to pass arguments along to the script.**
 
-You can either provide the width **and** height (defaults 800 and 500 respectively) and as long as they result in an aspect ratio of what's set in the script or by --aspect-ratio (default 1.6 or 16:10), or you can provide the width **or** height and the one you didn't provide will be calculated for you.
+You can either provide the width **and** height (defaults 800 and 500 respectively) and as long as they result in an aspect ratio of what's set in the script or by --aspect-ratio, or you can provide the width **or** height and the one you didn't provide will be calculated for you using the aspect ratio of what's set in the script or by --aspect-ratio.
+
+Provide --aspect-ratio to change the desired aspect ratio (default 1.6 or 16:10). The script checks to make sure the width and height match the aspect ratio so you get warned early about an incorrect dimension (maximum precision of 3 decimal places).
 
 Providing --scale-mode will set this.game.scale.scaleMode to the corresponding Phaser.ScaleManager.SCALE_MODE (default USER_SCALE).
 

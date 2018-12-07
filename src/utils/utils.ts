@@ -36,12 +36,12 @@ export class ScreenMetrics {
 export class ScreenUtils {
     public static screenMetrics: ScreenMetrics;
 
-    public static calculateScreenMetrics(defaultWidth: number, defaultHeight: number, orientation: ScreenOrientation = ScreenOrientation.LANDSCAPE, maxGameWidth?: number, maxGameHeight?: number): ScreenMetrics {
+    public static calculateScreenMetrics(defaultWidth: number, defaultHeight: number, maxGameWidth?: number, maxGameHeight?: number): ScreenMetrics {
         // Just to give some explanation as to the numbers and colors in the included background;
         // The GREEN is the safe area and will be displayed fully on any device and is based on 16:10 aspect ratio, build your actual gameplay here
         // The YELLOW is the extra area that will be visible on devices with a 3:2 aspect ratio (iPhone 4S and below)
-        // The BLUE is the extra area that will be visible on devices with a 4:3 aspect ratio (iPads)
-        // The RED is the extra area that will be visible on devices with a 16:9 aspect ratio (iPhone 5 and above) (this is probably the most common ratio overall...)
+        // The RED is the extra area that will be visible on devices with a 4:3 aspect ratio (iPads)
+        // The BLUE is the extra area that will be visible on devices with a 16:9 aspect ratio (iPhone 5 and above) (this is probably the most common ratio overall...)
         // The GREY area will most likely never be seen, unless some device has a really odd aspect ratio (and with Android, I wouldn't be surprised if there is a few out there)
 
         this.screenMetrics = new ScreenMetrics();
@@ -51,6 +51,8 @@ export class ScreenUtils {
 
         this.screenMetrics.defaultGameWidth = defaultWidth;
         this.screenMetrics.defaultGameHeight = defaultHeight;
+
+        let orientation: ScreenOrientation = ((this.screenMetrics.defaultGameWidth < this.screenMetrics.defaultGameHeight) ? ScreenOrientation.PORTRAIT : ScreenOrientation.LANDSCAPE);
 
         // Swap width and height if necessary to match the specified orientation
         let dimensionsOppositeForLandscape: boolean = ((this.screenMetrics.windowWidth < this.screenMetrics.windowHeight) && orientation === ScreenOrientation.LANDSCAPE);
@@ -62,19 +64,14 @@ export class ScreenUtils {
 
         // Calculate the max width and max height if not provided; ratios are based off iPad (4:3) and iPhone 5+ (16:9) as the extremes in both width and height
         if (!maxGameWidth || !maxGameHeight) {
-            if (orientation === ScreenOrientation.LANDSCAPE) {
-                this.screenMetrics.maxGameWidth = Math.round(this.screenMetrics.defaultGameWidth * (MAX_GAME_WIDTH / DEFAULT_GAME_WIDTH));
-                this.screenMetrics.maxGameHeight = Math.round(this.screenMetrics.defaultGameHeight * (MAX_GAME_HEIGHT / DEFAULT_GAME_HEIGHT));
-            } else {
-                this.screenMetrics.maxGameWidth = Math.round(this.screenMetrics.defaultGameWidth * (MAX_GAME_HEIGHT / DEFAULT_GAME_HEIGHT));
-                this.screenMetrics.maxGameHeight = Math.round(this.screenMetrics.defaultGameHeight * (MAX_GAME_WIDTH / DEFAULT_GAME_WIDTH));
-            }
+            this.screenMetrics.maxGameWidth = Math.round(this.screenMetrics.defaultGameWidth * (MAX_GAME_WIDTH / DEFAULT_GAME_WIDTH));
+            this.screenMetrics.maxGameHeight = Math.round(this.screenMetrics.defaultGameHeight * (MAX_GAME_HEIGHT / DEFAULT_GAME_HEIGHT));
         } else {
             this.screenMetrics.maxGameWidth = maxGameWidth;
             this.screenMetrics.maxGameHeight = maxGameHeight;
         }
 
-        let defaultAspectRatio: number = ((orientation === ScreenOrientation.LANDSCAPE) ? (DEFAULT_GAME_WIDTH / DEFAULT_GAME_HEIGHT) : (DEFAULT_GAME_HEIGHT / DEFAULT_GAME_WIDTH));
+        let defaultAspectRatio: number = (DEFAULT_GAME_WIDTH / DEFAULT_GAME_HEIGHT);
         let windowAspectRatio: number = (this.screenMetrics.windowWidth / this.screenMetrics.windowHeight);
 
         if (windowAspectRatio > defaultAspectRatio) {
