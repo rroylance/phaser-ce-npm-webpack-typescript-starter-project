@@ -137,10 +137,10 @@ export namespace JSON {
 }
 
 export namespace TilemapJSON {
-    export class Tilemap {
+    export class TilemapsTilemap {
         static getName(): string { return 'tilemap'; }
 
-        static getJSON(): string { return require('assets/tilemap.json'); }
+        static getJSON(): string { return require('assets/tilemaps/tilemap.json'); }
     }
 }
 
