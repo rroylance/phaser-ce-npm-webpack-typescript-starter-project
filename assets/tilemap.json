@@ -1,0 +1,25 @@
+{
+    "backgroundcolor":"#656667",
+    "height":4,
+    "layers":[ ],
+    "nextobjectid":1,
+    "orientation":"orthogonal",
+    "properties":[
+      {
+        "name":"mapProperty1",
+        "type":"one",
+        "value":"string"
+      },
+      {
+        "name":"mapProperty2",
+        "type":"two",
+        "value":"string"
+      }],
+    "renderorder":"right-down",
+    "tileheight":32,
+    "tilesets":[ ],
+    "tilewidth":32,
+    "version":1,
+    "tiledversion":"1.0.3",
+    "width":4
+  }

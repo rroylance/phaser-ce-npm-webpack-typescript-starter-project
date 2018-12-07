@@ -140,6 +140,14 @@ export class Loader {
         }
     }
 
+    private static loadTilemapJSON() {
+        for (let json in Assets.TilemapJSON) {
+            if (!this.game.cache.checkTilemapKey(Assets.TilemapJSON[json].getName())) {
+                this.game.load.tilemap(Assets.TilemapJSON[json].getName(), Assets.TilemapJSON[json].getJSON(), null, Phaser.Tilemap.TILED_JSON);
+            }
+        }
+    }
+
     private static loadXML() {
         for (let xml in Assets.XML) {
             if (!this.game.cache.checkXMLKey(Assets.XML[xml].getName())) {
@@ -192,6 +200,7 @@ export class Loader {
         this.loadAudiosprites();
         this.loadBitmapFonts();
         this.loadJSON();
+        this.loadTilemapJSON();
         this.loadXML();
         this.loadText();
         this.loadScripts();

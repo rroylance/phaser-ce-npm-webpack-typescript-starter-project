@@ -175,6 +175,8 @@ Currently supports the following (if you need a new extension or find an issue w
   - xml, fnt
 - JSON:
   - json
+- Tilemap JSON:
+  - json
 - XML:
   - xml
 - Text:
