@@ -40,6 +40,14 @@ export namespace JSON {
     class IExistSoTypeScriptWillNotComplainAboutAnEmptyNamespace {}
 }
 
+export namespace TilemapJSON {
+    export class TilemapsTilemap {
+        static getName(): string { return 'tilemap'; }
+
+        static getJSON(): string { return require('assets/tilemaps/tilemap.json'); }
+    }
+}
+
 export namespace XML {
     class IExistSoTypeScriptWillNotComplainAboutAnEmptyNamespace {}
 }

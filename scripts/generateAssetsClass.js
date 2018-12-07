@@ -47,6 +47,7 @@ var loaderTypes = {
     font: {},
     bitmap_font: {},
     json: {},
+    tilemap_json: {},
     xml: {},
     text: {},
     script: {},
@@ -124,7 +125,20 @@ for (var i in gameAssets) {
     } else if (fontType) {
         loaderTypes.font[i] = gameAssets[i];
     } else if (jsonType) {
-        loaderTypes.json[i] = gameAssets[i];
+        var isItATilemap = false;
+
+        for (var ext in gameAssets[i]) {
+            if (((shell.grep(/^[\s\S]*?"tiledversion"/g, ('assets/' + i + '.' + gameAssets[i][ext]))).length > 1) && ((shell.grep(/^[\s\S]*?"tilewidth"/g, ('assets/' + i + '.' + gameAssets[i][ext]))).length > 1) && ((shell.grep(/^[\s\S]*?"tileheight"/g, ('assets/' + i + '.' + gameAssets[i][ext]))).length > 1)) {
+                loaderTypes.tilemap_json[i] = gameAssets[i];
+                
+                isItATilemap = true;
+                break;
+            }
+        }
+
+        if (!isItATilemap) {
+            loaderTypes.json[i] = gameAssets[i];
+        }
     } else if (xmlType) {
         loaderTypes.xml[i] = gameAssets[i];
     } else if (textType) {
@@ -419,6 +433,23 @@ if (!Object.keys(loaderTypes.json).length) {
 
         for (var t in loaderTypes.json[i]) {
             shell.ShellString('\n        static get' + loaderTypes.json[i][t].toUpperCase() + '(): string { return require(\'assets/' + i + '.' + loaderTypes.json[i][t] + '\'); }').toEnd(assetsClassFile);
+        }
+
+        shell.ShellString('\n    }').toEnd(assetsClassFile);
+    }
+}
+shell.ShellString('\n}\n\n').toEnd(assetsClassFile);
+
+shell.ShellString('export namespace TilemapJSON {').toEnd(assetsClassFile);
+if (!Object.keys(loaderTypes.tilemap_json).length) {
+    shell.ShellString('\n    class IExistSoTypeScriptWillNotComplainAboutAnEmptyNamespace {}').toEnd(assetsClassFile);
+} else {
+    for (var i in loaderTypes.tilemap_json) {
+        shell.ShellString('\n    export class ' + toPascalCase(i) + ' {').toEnd(assetsClassFile);
+        shell.ShellString('\n        static getName(): string { return \'' + i.split('/').pop() + '\'; }\n').toEnd(assetsClassFile);
+
+        for (var t in loaderTypes.tilemap_json[i]) {
+            shell.ShellString('\n        static get' + loaderTypes.tilemap_json[i][t].toUpperCase() + '(): string { return require(\'assets/' + i + '.' + loaderTypes.tilemap_json[i][t] + '\'); }').toEnd(assetsClassFile);
         }
 
         shell.ShellString('\n    }').toEnd(assetsClassFile);
