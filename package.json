@@ -1,6 +1,6 @@
 {
-  "name": "phaser-npm-webpack-typescript-starter-project",
-  "productName": "phaser-npm-webpack-typescript-starter-project",
+  "name": "phaser-ce-npm-webpack-typescript-starter-project",
+  "productName": "phaser-ce-npm-webpack-typescript-starter-project",
   "version": "1.11.0",
   "main": "electron-main.js",
   "scripts": {
@@ -22,13 +22,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rroylance/phaser-npm-webpack-typescript-starter-project.git"
+    "url": "git+https://github.com/rroylance/phaser-ce-npm-webpack-typescript-starter-project.git"
   },
   "author": "Richard Roylance <https://github.com/rroylance>",
   "bugs": {
-    "url": "https://github.com/rroylance/phaser-npm-webpack-typescript-starter-project/issues"
+    "url": "https://github.com/rroylance/phaser-ce-npm-webpack-typescript-starter-project/issues"
   },
-  "homepage": "https://github.com/rroylance/phaser-npm-webpack-typescript-starter-project#readme",
+  "homepage": "https://github.com/rroylance/phaser-ce-npm-webpack-typescript-starter-project#readme",
   "dependencies": {
     "@types/node": "^10.12.12",
     "@types/webfontloader": "^1.6.29",

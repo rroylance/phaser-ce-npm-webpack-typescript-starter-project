@@ -1,18 +1,18 @@
 # Phaser NPM Webpack TypeScript Starter Project (catchy name, isn't it?)
 
-[![GitHub package version](https://img.shields.io/github/package-json/v/rroylance/phaser-npm-webpack-typescript-starter-project.svg?style=for-the-badge)](https://github.com/rroylance/phaser-npm-webpack-typescript-starter-project/releases)
-[![GitHub last commit](https://img.shields.io/github/last-commit/rroylance/phaser-npm-webpack-typescript-starter-project.svg?style=for-the-badge)](https://github.com/rroylance/phaser-npm-webpack-typescript-starter-project/commits/master)
+[![GitHub package version](https://img.shields.io/github/package-json/v/rroylance/phaser-ce-npm-webpack-typescript-starter-project.svg?style=for-the-badge)](https://github.com/rroylance/phaser-ce-npm-webpack-typescript-starter-project/releases)
+[![GitHub last commit](https://img.shields.io/github/last-commit/rroylance/phaser-ce-npm-webpack-typescript-starter-project.svg?style=for-the-badge)](https://github.com/rroylance/phaser-ce-npm-webpack-typescript-starter-project/commits/master)
 
-[![GitHub watchers](https://img.shields.io/github/watchers/rroylance/phaser-npm-webpack-typescript-starter-project.svg?style=for-the-badge)](https://github.com/rroylance/phaser-npm-webpack-typescript-starter-project/watchers)
-[![GitHub stars](https://img.shields.io/github/stars/rroylance/phaser-npm-webpack-typescript-starter-project.svg?style=for-the-badge)](https://github.com/rroylance/phaser-npm-webpack-typescript-starter-project/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/rroylance/phaser-npm-webpack-typescript-starter-project.svg?style=for-the-badge)](https://github.com/rroylance/phaser-npm-webpack-typescript-starter-project/network)
+[![GitHub watchers](https://img.shields.io/github/watchers/rroylance/phaser-ce-npm-webpack-typescript-starter-project.svg?style=for-the-badge)](https://github.com/rroylance/phaser-ce-npm-webpack-typescript-starter-project/watchers)
+[![GitHub stars](https://img.shields.io/github/stars/rroylance/phaser-ce-npm-webpack-typescript-starter-project.svg?style=for-the-badge)](https://github.com/rroylance/phaser-ce-npm-webpack-typescript-starter-project/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/rroylance/phaser-ce-npm-webpack-typescript-starter-project.svg?style=for-the-badge)](https://github.com/rroylance/phaser-ce-npm-webpack-typescript-starter-project/network)
 
-[![GitHub issues](https://img.shields.io/github/issues/rroylance/phaser-npm-webpack-typescript-starter-project.svg?style=for-the-badge)](https://github.com/rroylance/phaser-npm-webpack-typescript-starter-project/issues)
-[![GitHub pull requests](https://img.shields.io/github/issues-pr/rroylance/phaser-npm-webpack-typescript-starter-project.svg?style=for-the-badge)](https://github.com/rroylance/phaser-npm-webpack-typescript-starter-project/pulls)
+[![GitHub issues](https://img.shields.io/github/issues/rroylance/phaser-ce-npm-webpack-typescript-starter-project.svg?style=for-the-badge)](https://github.com/rroylance/phaser-ce-npm-webpack-typescript-starter-project/issues)
+[![GitHub pull requests](https://img.shields.io/github/issues-pr/rroylance/phaser-ce-npm-webpack-typescript-starter-project.svg?style=for-the-badge)](https://github.com/rroylance/phaser-ce-npm-webpack-typescript-starter-project/pulls)
 
-[![David](http://img.shields.io/david/rroylance/phaser-npm-webpack-typescript-starter-project.svg?style=for-the-badge)](https://david-dm.org/rroylance/phaser-npm-webpack-typescript-starter-project)
+[![David](http://img.shields.io/david/rroylance/phaser-ce-npm-webpack-typescript-starter-project.svg?style=for-the-badge)](https://david-dm.org/rroylance/phaser-ce-npm-webpack-typescript-starter-project)
 
-![PhaserNPMWebpackTypeScriptStarterProject](https://raw.githubusercontent.com/rroylance/phaser-npm-webpack-typescript-starter-project/master/README_HEADER.png)
+![PhaserNPMWebpackTypeScriptStarterProject](https://raw.githubusercontent.com/rroylance/phaser-ce-npm-webpack-typescript-starter-project/master/README_HEADER.png)
 
 ##### Hit the ground running and make some great games!
 
@@ -86,7 +86,7 @@ Navigate into your workspace directory.
 
 Run:
 
-```git clone https://github.com/rroylance/phaser-npm-webpack-typescript-starter-project.git```
+```git clone https://github.com/rroylance/phaser-ce-npm-webpack-typescript-starter-project.git```
 
 ##### If you want a clean project ready for you to just start your own game and not have to worry about cleaning up the examples and samples from the master branch, just pull the 'fresh-start' branch instead of master.
 
@@ -314,7 +314,7 @@ If you would like to have some of your code included; whether a new feature, a c
 ## Games made with this project (Click the images to play!)
 
 <a href="http://enzotesta.xyz/games/doublepong/index.html">
-  <img src="https://raw.githubusercontent.com/rroylance/phaser-npm-webpack-typescript-starter-project/master/america-first-icon.png" height="165" width="264" align="left" >
+  <img src="https://raw.githubusercontent.com/rroylance/phaser-ce-npm-webpack-typescript-starter-project/master/america-first-icon.png" height="165" width="264" align="left" >
 </a>
 Game: America First: The Game
 
@@ -327,7 +327,7 @@ Description: This is Enzo's first game! Well done double pong demo.
 <br>
 
 <a href="https://codinginspace.github.io/CoffeeConundrum/">
-  <img src="https://raw.githubusercontent.com/rroylance/phaser-npm-webpack-typescript-starter-project/master/coffee-conundrum-icon.png" height="165" width="264" align="left" >
+  <img src="https://raw.githubusercontent.com/rroylance/phaser-ce-npm-webpack-typescript-starter-project/master/coffee-conundrum-icon.png" height="165" width="264" align="left" >
 </a>
 Game: Coffee Conundrum
 
@@ -340,7 +340,7 @@ Description: Cool little SHMUP. Code looks well done and nice and clean and well
 <br>
 
 <a href="http://pong.fastner-it.de/">
-  <img src="https://raw.githubusercontent.com/rroylance/phaser-npm-webpack-typescript-starter-project/master/p0ng-icon.png" height="165" width="263" align="left" >
+  <img src="https://raw.githubusercontent.com/rroylance/phaser-ce-npm-webpack-typescript-starter-project/master/p0ng-icon.png" height="165" width="263" align="left" >
 </a>
 Game: P0ng
 
@@ -353,7 +353,7 @@ Description: Nice 2-player pong clone.
 <br>
 
 <a href="https://robertgirhiny.com/projects/great-run/">
-  <img src="https://raw.githubusercontent.com/rroylance/phaser-npm-webpack-typescript-starter-project/master/dora-great-run-icon.jpg" height="165" width="263" align="left" >
+  <img src="https://raw.githubusercontent.com/rroylance/phaser-ce-npm-webpack-typescript-starter-project/master/dora-great-run-icon.jpg" height="165" width="263" align="left" >
 </a>
 Game: Great Run
 
@@ -363,9 +363,9 @@ Github Repo: https://github.com/robcaa/great-run
 
 Description: Nice Dora The Explorer themed platformer/runner for kids.
 
-[issues]: https://github.com/rroylance/phaser-npm-webpack-typescript-starter-project/issues
-[pulls]: https://github.com/rroylance/phaser-npm-webpack-typescript-starter-project/pulls
-[releases]: https://github.com/rroylance/phaser-npm-webpack-typescript-starter-project/releases
+[issues]: https://github.com/rroylance/phaser-ce-npm-webpack-typescript-starter-project/issues
+[pulls]: https://github.com/rroylance/phaser-ce-npm-webpack-typescript-starter-project/pulls
+[releases]: https://github.com/rroylance/phaser-ce-npm-webpack-typescript-starter-project/releases
 [fontsquirrel]: https://www.fontsquirrel.com/tools/webfont-generator
 [everythingfonts]: https://everythingfonts.com/font-face
 [git-scm]: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
