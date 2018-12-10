@@ -1,4 +1,4 @@
-# Phaser NPM Webpack TypeScript Starter Project (catchy name, isn't it?)
+# Phaser-CE NPM Webpack TypeScript Starter Project (catchy name, isn't it?)
 
 [![GitHub package version](https://img.shields.io/github/package-json/v/rroylance/phaser-ce-npm-webpack-typescript-starter-project.svg?style=for-the-badge)](https://github.com/rroylance/phaser-ce-npm-webpack-typescript-starter-project/releases)
 [![GitHub last commit](https://img.shields.io/github/last-commit/rroylance/phaser-ce-npm-webpack-typescript-starter-project.svg?style=for-the-badge)](https://github.com/rroylance/phaser-ce-npm-webpack-typescript-starter-project/commits/master)
@@ -78,7 +78,7 @@ To use this you’ll need to install a few things before you have a working copy
 
 Download the latest zip/tar.gz from [GitHub Releases][releases], extract it to where you want your project to be.
 
-##### If you want a clean project ready for you to just start your own game and not have to worry about cleaning up the examples and samples from the v1.8.9 release, just download the v1.8.9-fresh release instead.
+##### If you want a clean project ready for you to just start your own game and not have to worry about cleaning up the examples and samples from the v1.11.0 release, just download the v1.11.0-fresh release instead.
 
 #### Clone (must've completed Step 0 first):
 
