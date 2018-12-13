@@ -65,9 +65,11 @@ window.onload = () => {
             urls: []
         };
 
-        for (let font in Assets.CustomWebFonts) {
-            webFontLoaderOptions.custom.families.push(Assets.CustomWebFonts[font].getFamily());
-            webFontLoaderOptions.custom.urls.push(Assets.CustomWebFonts[font].getCSS());
+        let allCustomWebFonts = (Assets.CustomWebFonts as any);
+
+        for (let font in allCustomWebFonts) {
+            webFontLoaderOptions.custom.families.push(allCustomWebFonts[font].getFamily());
+            webFontLoaderOptions.custom.urls.push(allCustomWebFonts[font].getCSS());
         }
     }
 

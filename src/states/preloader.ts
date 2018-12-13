@@ -2,8 +2,8 @@ import * as Assets from '../assets';
 import * as AssetUtils from '../utils/assetUtils';
 
 export default class Preloader extends Phaser.State {
-    private preloadBarSprite: Phaser.Sprite = null;
-    private preloadFrameSprite: Phaser.Sprite = null;
+    private preloadBarSprite!: Phaser.Sprite;
+    private preloadFrameSprite!: Phaser.Sprite;
 
     public preload(): void {
         // Setup your loading screen and preload sprite (if you want a loading progress indicator) here
