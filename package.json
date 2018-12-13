@@ -1,7 +1,7 @@
 {
   "name": "phaser-ce-npm-webpack-typescript-starter-project",
   "productName": "phaser-ce-npm-webpack-typescript-starter-project",
-  "version": "1.11.0",
+  "version": "1.11.1",
   "main": "electron-main.js",
   "scripts": {
     "webpack:dev": "webpack --config webpack.dev.config.js --progress --colors",

@@ -14,23 +14,23 @@ export enum ScreenOrientation {
 }
 
 export class ScreenMetrics {
-    windowWidth: number;
-    windowHeight: number;
+    windowWidth!: number;
+    windowHeight!: number;
 
-    defaultGameWidth: number;
-    defaultGameHeight: number;
+    defaultGameWidth!: number;
+    defaultGameHeight!: number;
 
-    maxGameWidth: number;
-    maxGameHeight: number;
+    maxGameWidth!: number;
+    maxGameHeight!: number;
 
-    gameWidth: number;
-    gameHeight: number;
+    gameWidth!: number;
+    gameHeight!: number;
 
-    scaleX: number;
-    scaleY: number;
+    scaleX!: number;
+    scaleY!: number;
 
-    offsetX: number;
-    offsetY: number;
+    offsetX!: number;
+    offsetY!: number;
 }
 
 export class ScreenUtils {
