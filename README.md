@@ -363,6 +363,19 @@ Github Repo: https://github.com/robcaa/great-run
 
 Description: Nice Dora The Explorer themed platformer/runner for kids.
 
+<br>
+
+<a href="https://github.com/j3soon/TakeBackTheColors/">
+  <img src="take-back-the-colors.png" height="165" width="263" align="left" >
+</a>
+Game: Take Back the Colors
+
+Author: j3soon
+
+Github Repo: https://github.com/j3soon/TakeBackTheColors
+
+Description: 2D platformer game with swinging ability.
+
 [issues]: https://github.com/rroylance/phaser-ce-npm-webpack-typescript-starter-project/issues
 [pulls]: https://github.com/rroylance/phaser-ce-npm-webpack-typescript-starter-project/pulls
 [releases]: https://github.com/rroylance/phaser-ce-npm-webpack-typescript-starter-project/releases
