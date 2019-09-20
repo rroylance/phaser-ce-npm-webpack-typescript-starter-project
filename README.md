@@ -376,6 +376,19 @@ Github Repo: https://github.com/j3soon/TakeBackTheColors
 
 Description: 2D platformer game with swinging ability.
 
+<br>
+
+<a href="https://tuskat.itch.io/r0d3nt">
+  <img src="r0d3nt-icon.png" height="165" width="263" align="left" >
+</a>
+Game: R0d3nt
+
+Author: tuskat
+
+Github Repo: https://github.com/tuskat/R0d3nt
+
+Description: Futur1st1c P3st C0ntr0l
+
 [issues]: https://github.com/rroylance/phaser-ce-npm-webpack-typescript-starter-project/issues
 [pulls]: https://github.com/rroylance/phaser-ce-npm-webpack-typescript-starter-project/pulls
 [releases]: https://github.com/rroylance/phaser-ce-npm-webpack-typescript-starter-project/releases
