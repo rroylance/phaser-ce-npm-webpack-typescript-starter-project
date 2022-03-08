@@ -2,7 +2,7 @@ var webpack = require('webpack');
 var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-var WebpackSynchronizableShellPlugin = require('webpack-synchronizable-shell-plugin');
+const WebpackShellPluginNext = require('webpack-shell-plugin-next');
 
 module.exports = {
     mode: 'development',
@@ -22,7 +22,7 @@ module.exports = {
         }
     },
     plugins: [
-        new WebpackSynchronizableShellPlugin({
+        new WebpackShellPluginNext({
             onBuildStart: {
                 scripts: ['npm run assets:dev'],
                 blocking: true,
