@@ -1,8 +1,8 @@
 var webpack = require('webpack');
 var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-var CleanWebpackPlugin = require('clean-webpack-plugin');
-var WebpackSynchronizableShellPlugin = require('webpack-synchronizable-shell-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const WebpackShellPluginNext = require('webpack-shell-plugin-next');
 
 module.exports = {
     mode: 'production',
@@ -21,7 +21,7 @@ module.exports = {
         }
     },
     plugins: [
-        new WebpackSynchronizableShellPlugin({
+        new WebpackShellPluginNext({
             onBuildStart: {
                 scripts: ['npm run assets'],
                 blocking: true,
@@ -46,32 +46,33 @@ module.exports = {
                 'webm', 'ogg', 'm4a', 'mp3', 'aac', 'ac3', 'caf', 'flac', 'mp4', 'wav'
             ])
         }),
-        new CleanWebpackPlugin([
-            path.join(__dirname, 'dist')
-        ]),
+        new CleanWebpackPlugin({
+            cleanAfterEveryBuildPatterns: [path.join(__dirname, 'dist')]
+        }),
         new HtmlWebpackPlugin({
             title: 'Phaser NPM Webpack TypeScript Starter Project!',
             template: path.join(__dirname, 'templates/index.ejs')
         })
     ],
     devServer: {
-        contentBase: path.join(__dirname, 'dist'),
+        static: {
+            directory: path.join(__dirname, 'dist'),
+        },
         compress: true,
         port: 9000,
-        inline: true,
-        watchOptions: {
-            aggregateTimeout: 300,
-            poll: true,
-            ignored: /node_modules/
-        }
+    },
+    watchOptions: {
+        aggregateTimeout: 300,
+        poll: true,
+        ignored: /node_modules/
     },
     module: {
         rules: [
             { test: /\.ts$/, enforce: 'pre', loader: 'tslint-loader' },
-            { test: /assets(\/|\\)/, type: 'javascript/auto', loader: 'file-loader?name=assets/[hash].[ext]' },
-            { test: /pixi\.js$/, loader: 'expose-loader?PIXI' },
-            { test: /phaser-split\.js$/, loader: 'expose-loader?Phaser' },
-            { test: /p2\.js$/, loader: 'expose-loader?p2' },
+            { test: /assets(\/|\\)/, type: 'javascript/auto', use: [{ loader: 'file-loader', options: { name: 'assets/[hash].[ext]' }}]},
+            { test: /pixi\.js$/, use: [{loader: 'expose-loader', options: { exposes: 'PIXI' }}]},
+            { test: /phaser-split\.js$/, use: [{loader: 'expose-loader', options: { exposes: 'Phaser' }}]},
+            { test: /p2\.js$/, use: [{loader: 'expose-loader', options: { exposes: 'p2' }}]},
             { test: /\.ts$/, loader: 'ts-loader', exclude: '/node_modules/' }
         ]
     },
