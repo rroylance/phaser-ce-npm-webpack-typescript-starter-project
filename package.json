@@ -4,8 +4,8 @@
   "version": "1.11.1",
   "main": "electron-main.js",
   "scripts": {
-    "webpack:dev": "webpack --config webpack.dev.config.js --progress --colors",
-    "webpack:dist": "webpack --config webpack.dist.config.js --progress --colors",
+    "webpack:dev": "webpack --config webpack.dev.config.js --progress",
+    "webpack:dist": "webpack --config webpack.dist.config.js --progress",
     "build:dev": "echo-cli 'Building DEV ...' && npm run webpack:dev && echo-cli 'Build Complete ✔'",
     "build:dist": "echo-cli 'Building DIST ...' && npm run webpack:dist && echo-cli 'Build Complete ✔'",
     "server:dev": "webpack-dev-server --config webpack.dev.config.js --open",
