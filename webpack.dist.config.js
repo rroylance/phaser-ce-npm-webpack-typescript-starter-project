@@ -1,7 +1,7 @@
 var webpack = require('webpack');
 var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-var CleanWebpackPlugin = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 var WebpackSynchronizableShellPlugin = require('webpack-synchronizable-shell-plugin');
 
 module.exports = {
@@ -46,9 +46,9 @@ module.exports = {
                 'webm', 'ogg', 'm4a', 'mp3', 'aac', 'ac3', 'caf', 'flac', 'mp4', 'wav'
             ])
         }),
-        new CleanWebpackPlugin([
-            path.join(__dirname, 'dist')
-        ]),
+        new CleanWebpackPlugin({
+            cleanAfterEveryBuildPatterns: [path.join(__dirname, 'dist')]
+        }),
         new HtmlWebpackPlugin({
             title: 'Phaser NPM Webpack TypeScript Starter Project!',
             template: path.join(__dirname, 'templates/index.ejs')
